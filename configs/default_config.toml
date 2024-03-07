@@ -1,0 +1,8 @@
+[dataset_manager]
+dataset_type = "subtitles"
+output_path = "data/outputs/"
+input_path = "data/inputs/"
+
+num_characters = 4
+time_interval = 5
+
