@@ -38,6 +38,7 @@ For the case of creating labeled data, the user inputs are: Subs file, video fil
 We could remove the subtitle functionality and make all the functions take as input the str, then internally convert it.
 We should leave only 3 buttons, one for starting to label(this converts the sub file, creates the temp folder with the audios), the second button should be the save annotations(save the updates csv and also removes the temp folder), finally, the last button should be create the embedds.
 
+The path of the audios for labeling should be simple to make it easier to copy paste them.
 
 # Webui_finder
 ## Subtitles

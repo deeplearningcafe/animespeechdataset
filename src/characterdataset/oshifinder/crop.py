@@ -327,12 +327,15 @@ class data_processor:
 
             audio_output = f'{temp_folder}/{filename}/{self.voice_dir}/{name}.wav'
             ffmpeg_extract_audio(video_path,audio_output,start_time,end_time)
-            
-    def extract_audios_for_labeling(self, annotate_csv:str=None, video_path:str=None, 
+    
+    @staticmethod        
+    def extract_audios_for_labeling(annotate_csv:str=None, video_path:str=None, 
                                temp_folder:str="tmp", iscropping:bool=False) -> None:
         """From a csv with format [start_time,end_time,text] and a video,
-        clip audios given the subtitles. Create a folder for the video name in temp_folder directory
+        clip audios given the subtitles. Create a folder for the video name in temp_folder directory.
+        Updates the csv file adding the column with the paths of the audios.
 
+        As the folder and files should be deleted after labeling, the names can be simple.
         Args:
             annotate_csv (str): path to the annotations csv file.
             video_path (str): path to the video file.
@@ -344,8 +347,9 @@ class data_processor:
             df = df.dropna()
         file = os.path.basename(video_path)
         filename, format = os.path.splitext(file)
-        os.makedirs(f'{temp_folder}/{filename}/{self.voice_dir}', exist_ok=True)
-        log.info(f'{temp_folder}/{filename}/{self.voice_dir}')
+        # should be already created in finder.py
+        # os.makedirs(f'{temp_folder}', exist_ok=True)
+        log.info(f'Salving audio files at {temp_folder}')
 
         file_names = []
         num_trials = 3
@@ -364,10 +368,11 @@ class data_processor:
             ss = srt_format_timestamp(start_time)
             ee = srt_format_timestamp(end_time)
             
-            
-            name = f'{index}_{ss}_{ee}_{text}'.replace(':', '.')
+            # make it simpler
+            # name = f'{index}_{ss}_{ee}_{text}'.replace(':', '.')
+            name = f'{index}_{text}'
 
-            audio_output = f'{temp_folder}/{filename}/{self.voice_dir}/{name}.wav'
+            audio_output = f'{temp_folder}/{name}.wav'
             actual_trial = 0
             exists = os.path.exists(audio_output)
             while not exists and actual_trial < num_trials:

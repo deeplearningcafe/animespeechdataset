@@ -115,8 +115,30 @@ def save_df(df: pd.DataFrame=None, csv_path: str=None) -> str:
     except Exception as e:
         log.warning(f"Could not remove the temp folder {e}")
         
-    return filename
+    return filename, "Base de datos actualizada!"
     
+def create_labeling_data() -> tuple:
+    """It calls 3 function, the inputs should be already updated in their classes.
+    First transforms .str file to csv file, then clips audios for labeling and finally re
+
+    Returns:
+        tuple: (result of the function, the path of the file for annotations, the dataframe from that file)
+    """
+    
+    # 1. Transform subs
+    result = "Error"
+    result, annotation_file = call_function()
+    
+
+    # 2. Crop audios, the filename does not change
+    result = finder.crop_for_labeling(annotation_file)
+
+    # 3. Load the csv file
+    df = load_df(annotation_file)
+    
+    return result, annotation_file, df
+    
+
 
 def create_ui():
 
@@ -143,8 +165,10 @@ def create_ui():
                                 info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
                             )
         with gr.Row():
+            # This file should not be visible
             annotation_file = gr.Textbox(label="Nombre del archivo de anotaciones.",
                                         info="No rellenar nunca.", visible=True)
+            result = gr.Textbox(label="Resultado")
             
         # For the crop given the subs
         with gr.Tab("Crear personajes"):
@@ -163,18 +187,18 @@ def create_ui():
                                     label="Mínimo número de caracteres para usar la frase.",
                                     interactive=True
                                 )
-                    with gr.Row():
-                        with gr.Column():
-                            with gr.Row():
-                                transcribe_button = gr.Button("Transformar")
-                            with gr.Row():
-                                result_subs = gr.Textbox(label="Resultado")
+                    # with gr.Row():
+                    #     with gr.Column():
+                    #         with gr.Row():
+                    #             transcribe_button = gr.Button("Transformar")
+                            # with gr.Row():
+                            #     result_subs = gr.Textbox(label="Resultado")
                     
                 # with gr.Row():
                 #     annotation_file = gr.Textbox(label="Directorio del archivo con las anotaciones", visible=True)
                 
-            with gr.Accordion(label="Anotaciones", open=False):
-                with gr.Column(visible=True) as crop_labeling:
+            # with gr.Accordion(label="Anotaciones", open=False):
+            #     with gr.Column(visible=True) as crop_labeling:
                     # with gr.Row():
                     #     with gr.Column():
                             
@@ -192,13 +216,13 @@ def create_ui():
                             #     placeholder="Nombre-de-tu-archivo",
                             #     info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
                             # )
-                    with gr.Row():
-                        with gr.Column():
-                            with gr.Row():
-                                with gr.Column():
-                                    crop_label_button = gr.Button("Audios para anotaciones")
-                                with gr.Column():
-                                    result_crop_label = gr.Textbox(label="Resultado del crop para anotaciones")
+                    # with gr.Row():
+                    #     with gr.Column():
+                    #         with gr.Row():
+                    #             with gr.Column():
+                    #                 crop_label_button = gr.Button("Audios para anotaciones")
+                                # with gr.Column():
+                                #     result_crop_label = gr.Textbox(label="Resultado del crop para anotaciones")
 
                         
             # For the audios
@@ -233,7 +257,7 @@ def create_ui():
                     #                 interactive=True
                     #             )
                         with gr.Column(min_width=640):
-                            load_data = gr.Button("Cargar el df")
+                            load_data = gr.Button("Crear base de datos")
                             dataframe = gr.DataFrame(interactive=True, row_count=100)
                             
                     
@@ -291,7 +315,7 @@ def create_ui():
                                     
                         with gr.Row():
                             embedds_button = gr.Button("Crear representaciones de los personajes")
-                            result_embedds = gr.Textbox(label="Resultado")
+                            # result_embedds = gr.Textbox(label="Resultado")
                 
 
         # For the predict given the subs
@@ -335,21 +359,21 @@ def create_ui():
                             
             with gr.Row():
                 predict_button = gr.Button("Predecir los personajes")
-                predict_result = gr.Textbox(label="Resultado")
+                # predict_result = gr.Textbox(label="Resultado")
         
         
-        transcribe_button.click(
-            call_function,
-            # inputs=[
-            #     dataset_type
-            # ],
-            outputs=[result_subs, annotation_file],
-        )
+        # transcribe_button.click(
+        #     call_function,
+        #     # inputs=[
+        #     #     dataset_type
+        #     # ],
+        #     outputs=[result_subs, annotation_file],
+        # )
         
         # we will update the values of the dataset_manager class when the elements change
-        result_subs.change(
-            update_visibility, inputs=[result_subs], outputs=[crop_labeling]
-        ).then()
+        # result_subs.change(
+        #     update_visibility, inputs=[result_subs], outputs=[crop_labeling]
+        # ).then()
         
         subtitles_file.change(
             dataset_manager.update_subtitles_file,
@@ -386,14 +410,17 @@ def create_ui():
         #     inputs=[device],   
         # )
         
-        crop_label_button.click(
-            finder.crop_for_labeling,
-            # inputs=[path_labeling], 
-            outputs=[result_crop_label]
-        )
+        # crop_label_button.click(
+        #     finder.crop_for_labeling,
+        #     # inputs=[path_labeling], 
+        #     outputs=[result_crop_label]
+        # )
+        # load_data.click(
+        #     load_df,
+        #     inputs=[annotation_file], outputs=[dataframe]
+        # )
         load_data.click(
-            load_df,
-            inputs=[annotation_file], outputs=[dataframe]
+            create_labeling_data, outputs=[result, annotation_file, dataframe]
         )
         audio_button.click(
             load_audio,
@@ -402,7 +429,7 @@ def create_ui():
         
         save_button.click(
             save_df,
-            inputs=[dataframe, annotation_file], outputs=[annotation_file]
+            inputs=[dataframe, annotation_file], outputs=[annotation_file, result]
         )
         num_characters.change(
             dataset_manager.update_num_characters,
@@ -412,13 +439,13 @@ def create_ui():
         embedds_button.click(
             finder.crop_files,
             inputs=[model, device],
-            outputs=[result_embedds]
+            outputs=[result]
         )
         
         predict_button.click(
             finder.make_predictions,
             inputs=[model, device],
-            outputs=[predict_result]
+            outputs=[result]
         )
         
         

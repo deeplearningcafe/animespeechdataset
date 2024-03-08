@@ -3,6 +3,7 @@ import os
 from .crop import crop, prepare_labeling
 from common.log import log
 from .predict import recognize
+from .crop import data_processor
 
 
 class Finder:
@@ -27,10 +28,20 @@ class Finder:
         self.output_path_labeling = output_path_labeling
         self.character_folder = character_folder
 
-    def crop_for_labeling(self, ) -> str:
+    def crop_for_labeling(self, annotation_file:str=None) -> str:
+        """Given the csv file, str converted, it adds a new column with the path of the created audios.
+
+        Args:
+            annotation_file (str, optional): path to the annotations file(character, start, end, text). Defaults to None.
+
+        Returns:
+            str: returns a message with the result, completed or error
+        """
         # Check the inputs
         # output_path = os.path.join(self.output_path, output_path_labeling)
         # check if annotate_map is a file
+        
+        self.update_annotation_file(annotation_file)
         if not os.path.isfile(self.annotation_file):
             log.info(f'annotate_map {self.annotation_file} does not exist')
             return
@@ -41,16 +52,22 @@ class Finder:
             # create role_audios folder
             os.mkdir(self.output_path_labeling)
            
-        try: 
-            prepare_labeling(annotation_file=self.annotation_file,
-            save_folder=self.output_path_labeling,
-            video_path=self.video_path,
-            )
+        try:
+            data_processor.extract_audios_for_labeling(
+                    annotate_csv=self.annotation_file,
+                    temp_folder=self.output_path_labeling,
+                    video_path=self.video_path, 
+                    iscropping=True)
+            
+            # prepare_labeling(annotation_file=self.annotation_file,
+            # save_folder=self.output_path_labeling,
+            # video_path=self.video_path,
+            # )
         
         except Exception as e:
             log.warning(f"Error when cropping for labeling. {e}")
             return "Error"
-        return "Completado", 
+        return "Completado"
     
     
     def crop_files(self, 
@@ -89,6 +106,7 @@ class Finder:
             log.warning(f"Error when cropping. {e}")
             return "Error"
         
+        return "Representaciones de personajes creadas!"
         
     def make_predictions(self,
                     # character_folder:str="tmp",
