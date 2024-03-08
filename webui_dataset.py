@@ -24,7 +24,7 @@ config = load_global_config()
 
 
 dataset_manager = DatasetManager(
-    dataset_type=config.dataset_manager.dataset_type,
+    dataset_type="dialogs",
     input_path=config.dataset_manager.input_path,
     output_path=config.dataset_manager.output_path,
     num_characters=config.dataset_manager.num_characters,
@@ -101,100 +101,102 @@ def create_ui():
 
     with gr.Blocks() as dataset_app:
         
-        # select the function we want to use
-        dataset_type = gr.Dropdown(
-            choices=DatasetManager.dataset_types,
-            label="Tipo de archivo para procesar",
-            value=dataset_manager.dataset_type
-        )
         
-        # Base case
-        with gr.Row() as base:
-            with gr.Column():
-                subtitles_file = gr.Textbox(
-                        label="Nombre del archivo de subtítulos.",
-                        placeholder="Nombre-de-tu-archivo",
-                        info="Inserte el nombre del archivo str, que está en la carpeta data/inputs",
-                    )
-                # output_path = gr.Textbox(
-                #         label="Nombre del archivo de subtítulos.",
-                #         placeholder="Nombre-de-tu-archivo",
-                #         info="Inserte el nombre del archivo str, que está en la carpeta data/inputs",
-                #     )
-                
-            with gr.Column():
-                annotation_file = gr.Textbox(
-                        label="Nombre del archivo de anotaciones.",
-                        placeholder="Nombre-de-tu-archivo",
-                        info="Inserte el nombre del archivo csv, que está en la carpeta data/outputs",
-                    )
-        
-        # For the dialogs
-        with gr.Column(visible=False) as dialogs:
-            with gr.Row():
+        with gr.Tab("Exportar para entrenamiento"):
+            # select the function we want to use
+            dataset_type = gr.Dropdown(
+                choices=DatasetManager.dataset_types,
+                label="Tipo de archivo para procesar",
+                value=dataset_manager.dataset_type
+            )
+            
+            # Base case
+            with gr.Row() as base:
+                # with gr.Column():
+                #     subtitles_file = gr.Textbox(
+                #             label="Nombre del archivo de subtítulos.",
+                #             placeholder="Nombre-de-tu-archivo",
+                #             info="Inserte el nombre del archivo str, que está en la carpeta data/inputs",
+                #         )
+                    # output_path = gr.Textbox(
+                    #         label="Nombre del archivo de subtítulos.",
+                    #         placeholder="Nombre-de-tu-archivo",
+                    #         info="Inserte el nombre del archivo str, que está en la carpeta data/inputs",
+                    #     )
+                    
                 with gr.Column():
-                    first_character = gr.Textbox(
-                            label="Personaje uno, rol usuario.",
+                    annotation_file = gr.Textbox(
+                            label="Nombre del archivo de anotaciones.",
                             placeholder="Nombre-de-tu-archivo",
-                            info="Nombre del personaje que hace las preguntas, en el prompt el rol de usuario",
+                            info="Inserte el nombre del archivo csv, que está en la carpeta data/outputs",
                         )
-                with gr.Column():
-                    second_character = gr.Textbox(
-                            label="Personaje dos, rol sistema.",
-                            placeholder="Nombre-de-tu-archivo",
-                            info="Nombre del personaje que responde, en el prompt el rol de sistema.",
-                        )
-            with gr.Row():
-                with gr.Accordion("Opciones avanzadas", open=False):
+            
+            # For the dialogs
+            with gr.Column(visible=True) as dialogs:
+                with gr.Row():
                     with gr.Column():
-                        time_interval = gr.Slider(
-                            minimum=1,
-                            maximum=10,
-                            value=5,
-                            step=1,
-                            label="Intervalo máximo entre diálogos, segundos",
-                            interactive=True
-                        )
+                        first_character = gr.Textbox(
+                                label="Personaje uno, rol usuario.",
+                                placeholder="Nombre-de-tu-archivo",
+                                info="Nombre del personaje que hace las preguntas, en el prompt el rol de usuario",
+                            )
                     with gr.Column():
-                        num_characters = gr.Slider(
-                            minimum=1,
-                            maximum=10,
-                            value=4,
-                            step=1,
-                            label="Mínimo número de caracteres para usar la frase.",
-                            interactive=True
-                        )
-        # For the audios
-        with gr.Column(visible=False) as audios:
-            with gr.Row():
-                with gr.Column():
-                    audios_path = gr.Textbox(
-                            label="Nombre de la carpeta de los audios.",
-                            placeholder="Nombre-de-tu-archivo",
-                            info="En la carpeta de outputs, al hacer las predicciones la carpeta donde se guardan las representaciones y los audios.",
-                        )
-                with gr.Column():
-                    character = gr.Textbox(
-                            label="Personaje del que tomar los audios",
-                            placeholder="Nombre-de-tu-archivo",
-                            info="Nombre del personaje que responde, en el prompt el rol de sistema.",
-                        )
-            with gr.Row():
-                with gr.Accordion("Opciones avanzadas", open=False):
+                        second_character = gr.Textbox(
+                                label="Personaje dos, rol sistema.",
+                                placeholder="Nombre-de-tu-archivo",
+                                info="Nombre del personaje que responde, en el prompt el rol de sistema.",
+                            )
+                with gr.Row():
+                    with gr.Accordion("Opciones avanzadas", open=False):
+                        with gr.Column():
+                            time_interval = gr.Slider(
+                                minimum=1,
+                                maximum=10,
+                                value=5,
+                                step=1,
+                                label="Intervalo máximo entre diálogos, segundos",
+                                interactive=True
+                            )
+                        with gr.Column():
+                            num_characters = gr.Slider(
+                                minimum=1,
+                                maximum=10,
+                                value=4,
+                                step=1,
+                                label="Mínimo número de caracteres para usar la frase.",
+                                interactive=True
+                            )
+            # For the audios
+            with gr.Column(visible=False) as audios:
+                with gr.Row():
+                    # with gr.Column():
+                    #     audios_path = gr.Textbox(
+                    #             label="Nombre de la carpeta de los audios.",
+                    #             placeholder="Nombre-de-tu-archivo",
+                    #             info="En la carpeta de outputs, al hacer las predicciones la carpeta donde se guardan las representaciones y los audios.",
+                    #         )
                     with gr.Column():
-                        num_characters = gr.Slider(
-                            minimum=1,
-                            maximum=10,
-                            value=4,
-                            step=1,
-                            label="Mínimo número de caracteres para usar la frase.",
-                            interactive=True
-                        )
-                
-                
-        with gr.Row():
-            result = gr.Textbox(label="Resultado")
-            transcribe_button = gr.Button("Transformar")
+                        character = gr.Textbox(
+                                label="Personaje del que tomar los audios",
+                                placeholder="Nombre-de-tu-archivo",
+                                info="Nombre del personaje que responde, en el prompt el rol de sistema.",
+                            )
+                with gr.Row():
+                    with gr.Accordion("Opciones avanzadas", open=False):
+                        with gr.Column():
+                            num_characters = gr.Slider(
+                                minimum=1,
+                                maximum=10,
+                                value=4,
+                                step=1,
+                                label="Mínimo número de caracteres para usar la frase.",
+                                interactive=True
+                            )
+                    
+                    
+            with gr.Row():
+                result = gr.Textbox(label="Resultado")
+                transcribe_button = gr.Button("Transformar")
         
         
         transcribe_button.click(
@@ -211,10 +213,10 @@ def create_ui():
             inputs=[dataset_type],   
         ).then(update_visibility, inputs=[dataset_type], outputs=[dialogs, audios])
         
-        subtitles_file.change(
-            dataset_manager.update_subtitles_file,
-            inputs=[subtitles_file],   
-        )
+        # subtitles_file.change(
+        #     dataset_manager.update_subtitles_file,
+        #     inputs=[subtitles_file],   
+        # )
         annotation_file.change(
             dataset_manager.update_annotation_file,
             inputs=[annotation_file],   
@@ -235,10 +237,10 @@ def create_ui():
             dataset_manager.update_num_characters,
             inputs=[num_characters],   
         )
-        audios_path.change(
-            dataset_manager.update_audios_path,
-            inputs=[audios_path],   
-        )
+        # audios_path.change(
+        #     dataset_manager.update_audios_path,
+        #     inputs=[audios_path],   
+        # )
         character.change(
             dataset_manager.update_character,
             inputs=[character],   

@@ -497,7 +497,7 @@ class DatasetManager:
         self.dataset_type = dataset_type
         self.input_path = input_path
         self.subtitles_file = subtitles_file
-        self.annoation_file = annotation_file
+        self.annotation_file = annotation_file
         self.output_path = output_path
         self.num_characters = num_characters
         self.time_interval = time_interval
@@ -613,32 +613,57 @@ class DatasetManager:
             csv_2_dialoges(csv_path=self.annotation_file, output_path=self.output_path,
                             time_interval=self.time_interval, num_characters=self.num_characters,
                             first_character=self.first_character, second_character=self.second_character)
+            
+        return f"Creados dialogos"
 
     def create_audio_files(self, dataset_type:str="audios",
                          annotation_file:str=None, 
                          output_path:str=None,
-                         audios_path:str=None, 
+                        #  audios_path:str=None, 
                          num_characters:str=None,
                          character:str=None, 
                          ):
+        """This function copys the audio files from the clipped audios that were used for predicting,
+        then it creates a text file with the path of the copied audios and their texts, for training
+        tts.
+
+        Args:
+            dataset_type (str, optional): _description_. Defaults to "audios".
+            annotation_file (str, optional): _description_. Defaults to None.
+            output_path (str, optional): _description_. Defaults to None.
+            audios_path (str, optional): path of the original audios, the ones used for predicting
+            the characters. Defaults to None.
+            num_characters (str, optional): _description_. Defaults to None.
+            character (str, optional): _description_. Defaults to None.
+        """
 
         # Check inputs
         self.update_dataset_type(dataset_type)
         self.update_annotation_file(annotation_file)
         self.update_output_path(output_path)
-        self.update_audios_path(audios_path)
+        # self.update_audios_path(audios_path)
         self.update_num_characters(num_characters)
         self.update_character(character)
 
 
+        # for the audios path, from the annotation file we should be able to get the folder
+        file = os.path.basename(os.path.normpath(self.annotation_file))
+        filename, format = os.path.splitext(file)
+        
+        # the annotation file format is VIDEO-FILE-NAME_updated.csv so remove the updated
+        *filename, _ = filename.split('_')
+        # paste all the list together
+        folder_name = "".join(filename)
 
+        self.update_audios_path(os.path.join(folder_name, "voice"))
         checks = self.inputs_check()
         
         if checks == "Success":
             csv_2_audios(csv_path=self.annotation_file, character=self.character,
                             num_characters=self.num_characters, output_path=self.output_path,
-                            audios_path=self.audios_path)
-
+                            audios_path=self.audios_path
+                            )
+        return f"Creados audios de {self.character}"
 
     def update_dataset_type(self, dataset_type:str=None):
         if dataset_type != None:

@@ -54,20 +54,22 @@ def character_audios_old(df_path:str=None, output_path:str=None, audios_path:str
     print("CSV created!")
     print("Completed")
 
-def copy_file(input_path:str=None, output_path:str=None, index:str=None) -> str:
+def copy_file(input_path:str=None, output_path:str=None, index:str=None, text:str=None) -> str:
     """Copies a given file to a given location and returns the new file path
 
     Args:
         input_path (str, optional): path of the file. Defaults to None.
         output_path (str, optional): directory to copy the file. Defaults to None.
-
+        index (str, optional): index for the name. Defaults to None.
+        text (str, optional): text for the name. Defaults to None.
     Returns:
         str: new file path
     """
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     
-    new_filename = index + '.wav'
+    # update the names to include text, to add audios from other annotations
+    new_filename = index + text + '.wav'
     # ファイルをコピーして、名前を変更する
     shutil.copy2(input_path, os.path.join(output_path, new_filename))
     
@@ -154,6 +156,7 @@ def character_audios(csv_path:str=None, character:str=None, num_characters:int=4
     """
     df = audio_dataset_from_csv(csv_path, character, num_characters)
     
+    log.info(f"Looking for audios at {audios_path}")
     audio_list = os.listdir(audios_path)
     filenames = df["filename"]
     new_names = []
@@ -175,7 +178,7 @@ def character_audios(csv_path:str=None, character:str=None, num_characters:int=4
             index_audio, start_time, end_time, _ = id_str.split('_')
             
             if index == index_audio:
-                new_file = copy_file(os.path.join(audios_path, audio_list[i]), audio_output_path, index_audio)
+                new_file = copy_file(os.path.join(audios_path, audio_list[i]), audio_output_path, index_audio, text)
                 new_names.append(new_file)
                 texts.append(text)
     
@@ -184,7 +187,7 @@ def character_audios(csv_path:str=None, character:str=None, num_characters:int=4
     df = pd.DataFrame({"filename": new_names, "text": texts})
     df_out = os.path.join(output_path, "text.list")
     df.to_csv(df_out, index=False)
-    log.info(f"CSV created at {df_out} with {len(df_out)} elements!")
+    log.info(f"CSV created at {df_out} with {len(df)} elements!")
     log.info("Completed")
 
     

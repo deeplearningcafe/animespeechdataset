@@ -40,6 +40,21 @@ We should leave only 3 buttons, one for starting to label(this converts the sub 
 
 The path of the audios for labeling should be simple to make it easier to copy paste them.
 
+There is an error that we can't select models and device for the embedds, probably because it is not "interactive".
+
+## Webui_dataset
+We should unify all the webui in only one, but we can develop them alone and then just merge.
+For creating dialogs the user needs to introduce the annotation file, character 1 (user role) and character 2 (system role).
+For creating the audios the user needs to introduce the annotation file, character name and the audios folder.
+The audios folder should be automatically created, we can include it in outputs with the name of the character. But there is a problem if after getting the audios we use other annotation file, then the previous audios will get removed. Because the index is the same, so we need to manage the index part. We can create a folder with the annotation file name inside the character folder. That shouldn't be a problem for the tts.
+Creating audio folder for each annotation file is good, but we should append to just 1 text file. Other better option is to get the last index and just continue adding. But it is difficult because the index is used for looking for the audio file. 
+We can use as name for the audios the index and the text.
+
+The preds file is already in the same folder as the audios so we can get the audios_path from there. 
+There is a problem, as the preds is in the folder of the video, we need to include that folder name as well.
+
+We need to solve the problem of including the folder of the annotation file, as the folder name should be the same as the csv file, we can get it from there as well as we did with the audios paths.
+
 # Webui_finder
 ## Subtitles
 Given the str file with the subtitles, transform that file to csv file format.
