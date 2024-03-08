@@ -15,7 +15,8 @@ class Finder:
                  video_path:str=None,
                  model:str=None,
                  device:str=None,
-                #  output_path_labeling:str=None,
+                 output_path_labeling:str=None,
+                 character_folder:str=None,
             ) -> None:
         self.input_path = input_path
         self.annotation_file = annotation_file
@@ -23,25 +24,26 @@ class Finder:
         self.video_path = video_path
         self.model = model
         self.device = device
-        # self.output_path_labeling = output_path_labeling
+        self.output_path_labeling = output_path_labeling
+        self.character_folder = character_folder
 
-    def crop_for_labeling(self, output_path_labeling:str="tmp",) -> str:
+    def crop_for_labeling(self, ) -> str:
         # Check the inputs
-        output_path = os.path.join(self.output_path, output_path_labeling)
+        # output_path = os.path.join(self.output_path, output_path_labeling)
         # check if annotate_map is a file
         if not os.path.isfile(self.annotation_file):
             log.info(f'annotate_map {self.annotation_file} does not exist')
             return
 
         # check if role_audios is a folder
-        if not os.path.isdir(output_path):
-            log.info(f'temp folder to save clips {output_path} does not exist')
+        if not os.path.isdir(self.output_path_labeling):
+            log.info(f'temp folder to save clips {self.output_path_labeling} does not exist')
             # create role_audios folder
-            os.mkdir(output_path)
+            os.mkdir(self.output_path_labeling)
            
         try: 
             prepare_labeling(annotation_file=self.annotation_file,
-            save_folder=output_path,
+            save_folder=self.output_path_labeling,
             video_path=self.video_path,
             )
         
@@ -51,7 +53,8 @@ class Finder:
         return "Completado", 
     
     
-    def crop_files(self, output_path_labeling:str="tmp",
+    def crop_files(self, 
+                #    output_path_labeling:str="tmp",
                     model:str=None,
                     device:str=None,
                     ) -> str:
@@ -63,11 +66,11 @@ class Finder:
             return
 
         # check if role_audios is a folder
-        output_path = os.path.join(self.output_path, output_path_labeling)
-        if not os.path.isdir(output_path):
-            log.info(f'role_audios {output_path} does not exist')
+        # output_path = os.path.join(self.output_path, output_path_labeling)
+        if not os.path.isdir(self.character_folder):
+            log.info(f'character embeddings folder {self.character_folder} does not exist')
             # create role_audios folder
-            os.mkdir(output_path)
+            os.mkdir(self.character_folder)
             
         if device == True:
             device = "cuda"
@@ -76,7 +79,7 @@ class Finder:
            
         try: 
             crop(annotation_file=self.annotation_file,
-            output_path=output_path,
+            output_path=self.character_folder,
             video_path=self.video_path,
             model=model,
             device=device,
@@ -88,7 +91,7 @@ class Finder:
         
         
     def make_predictions(self,
-                    character_folder:str="tmp",
+                    # character_folder:str="tmp",
                     model:str=None,
                     device:str=None,) -> str:
         # Check the inputs
@@ -105,9 +108,9 @@ class Finder:
             os.mkdir(self.output_path)
         
         # check if role_audios is a folder
-        character_folder = os.path.join(self.output_path, character_folder)
-        if not os.path.isdir(character_folder):
-            log.info(f'role_audios {character_folder} does not exist')
+        # character_folder = os.path.join(self.output_path, character_folder)
+        if not os.path.isdir(self.character_folder):
+            log.info(f'role_audios {self.character_folder} does not exist')
 
             return
         
@@ -120,7 +123,7 @@ class Finder:
             recognize(annotation_file=self.annotation_file,
             output_path=self.output_path,
             video_path=self.video_path,
-            character_folder=character_folder,
+            character_folder=self.character_folder,
             model=model,
             device=device,)
         

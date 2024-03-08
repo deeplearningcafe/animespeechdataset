@@ -32,6 +32,13 @@ Improve the labeling part.
 Solve the error in cropping for labels. -> When there are several elements with the same name, only the last one counts for updating.
 As there are 3 annotation files variables, only the last one is used to update.
 
+Clean the innecesary stuf, repeated variables are problematic so only unique ones.
+For the case of creating labeled data, the user inputs are: Subs file, video file (the output folder for labeling should be automatically created and then removed), name for the character embeddings folder probably should be automatic as well.
+
+We could remove the subtitle functionality and make all the functions take as input the str, then internally convert it.
+We should leave only 3 buttons, one for starting to label(this converts the sub file, creates the temp folder with the audios), the second button should be the save annotations(save the updates csv and also removes the temp folder), finally, the last button should be create the embedds.
+
+
 # Webui_finder
 ## Subtitles
 Given the str file with the subtitles, transform that file to csv file format.

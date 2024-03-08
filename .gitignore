@@ -11,6 +11,7 @@ common/logs/dataset_manager.log
 wataoshi_1.mkv
 data/inputs/*
 data/outputs/*
+data/character_embedds/*
 datasets/
 dataset.py
 recognize.py

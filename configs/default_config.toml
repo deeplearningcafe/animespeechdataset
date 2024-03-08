@@ -6,3 +6,7 @@ input_path = "data/inputs/"
 num_characters = 4
 time_interval = 5
 
+[finder]
+temp_folder = "data/outputs/tmp"
+character_embedds = "data/character_embedds"
+

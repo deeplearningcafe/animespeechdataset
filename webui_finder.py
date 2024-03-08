@@ -4,6 +4,7 @@ import gradio as gr
 import subprocess
 import sys
 import pandas as pd
+import shutil
 
 
 import logging
@@ -34,6 +35,8 @@ dataset_manager = DatasetManager(
 finder = Finder(
     input_path=config.dataset_manager.input_path,
     output_path=config.dataset_manager.output_path,
+    output_path_labeling=config.finder.temp_folder,
+    character_folder=config.finder.character_embedds,
 )
 
 def call_function(dataset_type:str="subtitles") -> str:
@@ -83,7 +86,7 @@ def load_audio(audio_path: str=None, audio_component: gr.Audio=None) -> gr.Audio
     return audio_component
 
 def save_df(df: pd.DataFrame=None, csv_path: str=None) -> str:
-    """Saves the new df and returns the new path
+    """Saves the new df and returns the new path. Also remove the folder created for the clipped audios.
 
     Args:
         csv_path (str, optional): _description_. Defaults to None.
@@ -104,6 +107,14 @@ def save_df(df: pd.DataFrame=None, csv_path: str=None) -> str:
     df_original = df_original.dropna()
     df_original.to_csv(filename, index=False)
     log.info(f'CSVファイル "{filename}" にデータを保存しました。')
+    
+    # delete the temp folder
+    try:
+        shutil.rmtree(finder.output_path_labeling)
+        log.info(f"Deleted the audios folder at {finder.output_path_labeling}")
+    except Exception as e:
+        log.warning(f"Could not remove the temp folder {e}")
+        
     return filename
     
 
@@ -118,17 +129,30 @@ def create_ui():
         #     value=dataset_manager.dataset_type
         # )
         
+        with gr.Row():
+            with gr.Column():
+                subtitles_file = gr.Textbox(
+                                label="Nombre del archivo de subtítulos.",
+                                placeholder="Nombre-de-tu-archivo",
+                                info="Inserte el nombre del archivo str, que está en la carpeta data/inputs",
+                            )
+            with gr.Column():
+                video_path = gr.Textbox(
+                                label="Nombre del archivo de video.",
+                                placeholder="Nombre-de-tu-archivo",
+                                info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
+                            )
+        with gr.Row():
+            annotation_file = gr.Textbox(label="Nombre del archivo de anotaciones.",
+                                        info="No rellenar nunca.", visible=True)
+            
         # For the crop given the subs
         with gr.Tab("Crear personajes"):
             # Base case
             with gr.Accordion(label="Subtítulos", open=True):
                 with gr.Row() as base:
                     with gr.Column():
-                        subtitles_file = gr.Textbox(
-                                label="Nombre del archivo de subtítulos.",
-                                placeholder="Nombre-de-tu-archivo",
-                                info="Inserte el nombre del archivo str, que está en la carpeta data/inputs",
-                            )
+                        
                         is_crop = gr.Checkbox(label="cropping", info="En el caso de usar el archivo para classificar personajes manualmente",
                                             value=False)
                         num_characters = gr.Slider(
@@ -151,22 +175,18 @@ def create_ui():
                 
             with gr.Accordion(label="Anotaciones", open=False):
                 with gr.Column(visible=True) as crop_labeling:
-                    with gr.Row():
-                        with gr.Column():
-                            video_path_annotations = gr.Textbox(
-                                label="Nombre del archivo de video.",
-                                placeholder="Nombre-de-tu-archivo",
-                                info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
-                            )
+                    # with gr.Row():
+                    #     with gr.Column():
+                            
                             
                         # this is really not necessary, as we can use tmp here, this files should be deleted after completing the 
                         # annotations anyway.
-                        with gr.Column():
-                            path_labeling = gr.Textbox(
-                                label="Nombre de la carpeta para guardar los clips.",
-                                placeholder="Nombre-de-tu-carpeta",
-                                info="Inserte el nombre de la carpeta, en la que guardar los audios",
-                            )
+                        # with gr.Column():
+                            # path_labeling = gr.Textbox(
+                            #     label="Nombre de la carpeta para guardar los clips.",
+                            #     placeholder="Nombre-de-tu-carpeta",
+                            #     info="Inserte el nombre de la carpeta, en la que guardar los audios",
+                            # )
                             # annotation_file = gr.Textbox(
                             #     label="Nombre del archivo de video.",
                             #     placeholder="Nombre-de-tu-archivo",
@@ -241,20 +261,20 @@ def create_ui():
                     #             info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
                     #         )
                     with gr.Accordion(label="Crear representaciones", open=False):
-                        with gr.Row():
-                            with gr.Column():
-                                video_path_dataset = gr.Textbox(
-                                    label="Nombre del archivo de video.",
-                                    placeholder="Nombre-de-tu-archivo",
-                                    info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
-                                )
-                                annotation_file = gr.Textbox(label="Nombre del archivo de anotaciones.",
-                                    visible=True)
-                                path_embedds = gr.Textbox(
-                                    label="Nombre de la carpeta para guardar los personajes.",
-                                    placeholder="Nombre-de-tu-carpeta",
-                                    info="Inserte el nombre de la carpeta en la que guardar las representatciones de los personajes, luego será usada para predicir",
-                                    )
+                        # with gr.Row():
+                        #     with gr.Column():
+                        #         video_path_dataset = gr.Textbox(
+                        #             label="Nombre del archivo de video.",
+                        #             placeholder="Nombre-de-tu-archivo",
+                        #             info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
+                        #         )
+                                # annotation_file = gr.Textbox(label="Nombre del archivo de anotaciones.",
+                                #     visible=True)
+                                # path_embedds = gr.Textbox(
+                                #     label="Nombre de la carpeta para guardar los personajes.",
+                                #     placeholder="Nombre-de-tu-carpeta",
+                                #     info="Inserte el nombre de la carpeta en la que guardar las representatciones de los personajes, luego será usada para predicir",
+                                #     )
                                 
                         with gr.Row():
                             with gr.Accordion("Opciones avanzadas", open=False):
@@ -286,20 +306,19 @@ def create_ui():
                 #             info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
                 #         )
 
-                with gr.Row():
-                    with gr.Column():
-                        video_path = gr.Textbox(
-                            label="Nombre del archivo de video.",
-                            placeholder="Nombre-de-tu-archivo",
-                            info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
-                        )
-                        annotation_file = gr.Textbox(label="Nombre del archivo de anotaciones.",
-                            visible=True)
-                        path_embedds_preds = gr.Textbox(
-                            label="Nombre de la carpeta donde están las representaciones de los personajes.",
-                            placeholder="Nombre-de-tu-carpeta",
-                            info="Inserte el nombre de la carpeta, que está en la carpeta data/outputs",
-                            )
+                # with gr.Row():
+                #     with gr.Column():
+                #         video_path = gr.Textbox(
+                #             label="Nombre del archivo de video.",
+                #             placeholder="Nombre-de-tu-archivo",
+                #             info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
+                #         )
+                        
+                #         path_embedds_preds = gr.Textbox(
+                #             label="Nombre de la carpeta donde están las representaciones de los personajes.",
+                #             placeholder="Nombre-de-tu-carpeta",
+                #             info="Inserte el nombre de la carpeta, que está en la carpeta data/outputs",
+                #             )
                         
                 with gr.Row():
                     with gr.Accordion("Opciones avanzadas", open=False):
@@ -350,14 +369,14 @@ def create_ui():
             finder.update_video_path,
             inputs=[video_path],   
         )
-        video_path_annotations.change(
-            finder.update_video_path,
-            inputs=[video_path_annotations],   
-        )
-        video_path_dataset.change(
-            finder.update_video_path,
-            inputs=[video_path_dataset],   
-        )
+        # video_path_annotations.change(
+        #     finder.update_video_path,
+        #     inputs=[video_path_annotations],   
+        # )
+        # video_path_dataset.change(
+        #     finder.update_video_path,
+        #     inputs=[video_path_dataset],   
+        # )
         # model.change(
         #     finder.update_model,
         #     inputs=[model],   
@@ -369,7 +388,8 @@ def create_ui():
         
         crop_label_button.click(
             finder.crop_for_labeling,
-            inputs=[path_labeling], outputs=[result_crop_label]
+            # inputs=[path_labeling], 
+            outputs=[result_crop_label]
         )
         load_data.click(
             load_df,
@@ -391,13 +411,13 @@ def create_ui():
         
         embedds_button.click(
             finder.crop_files,
-            inputs=[path_embedds, model, device],
+            inputs=[model, device],
             outputs=[result_embedds]
         )
         
         predict_button.click(
             finder.make_predictions,
-            inputs=[path_embedds_preds, model, device],
+            inputs=[model, device],
             outputs=[predict_result]
         )
         
