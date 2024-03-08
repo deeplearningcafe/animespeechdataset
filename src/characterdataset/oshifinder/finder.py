@@ -4,7 +4,7 @@ from .crop import crop, prepare_labeling
 from common.log import log
 from .predict import recognize
 from .crop import data_processor
-
+import asyncio
 
 class Finder:
     model_opts = ["speechbrain", "wavlm"]
@@ -108,10 +108,13 @@ class Finder:
         
         return "Representaciones de personajes creadas!"
         
-    def make_predictions(self,
+    async def make_predictions(self,
                     # character_folder:str="tmp",
                     model:str=None,
                     device:str=None,) -> str:
+        # as we need the annotation file to be updated, we need to wait to avoid none in the annotation_file
+        await asyncio.sleep(0.2)
+        
         # Check the inputs
         log.info("Starting predictions")
         # check if annotate_map is a file
@@ -149,7 +152,7 @@ class Finder:
             log.warning(f"Error when predicting. {e}")
             return "Error"
         
-        return "Completado"
+        return "Creadas predicciones!"
         
     def update_video_path(self, video_path:str=None):
         if video_path != None:

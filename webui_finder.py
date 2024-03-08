@@ -443,10 +443,10 @@ def create_ui():
         )
         
         predict_button.click(
-            finder.make_predictions,
+            call_function, outputs=[result, annotation_file]
+        ).then(finder.make_predictions,
             inputs=[model, device],
-            outputs=[result]
-        )
+            outputs=[result])
         
         
     return dataset_app

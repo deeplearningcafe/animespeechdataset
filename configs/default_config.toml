@@ -8,5 +8,5 @@ time_interval = 5
 
 [finder]
 temp_folder = "data/outputs/tmp"
-character_embedds = "data/character_embedds"
+character_embedds = "data/character_embedds/embeddings"
 
