@@ -243,7 +243,15 @@ def dialoges_from_csv(csv_path:str=None, output_path:str=None, time_interval:int
 
 # parse segments from asr
 def segments_2_annotations(segments: list[dict], file_path:str=None, num_characters:int=4, iscropping:bool=False) -> None:
-    
+    """From the segments of transcribing audio, it creates a csv file with the start time, end time and
+    text of each line in the audio. In the case of using for labeling, iscropping option adds the character column
+
+    Args:
+        segments (list[dict]): _description_
+        file_path (str, optional): _description_. Defaults to None.
+        num_characters (int, optional): _description_. Defaults to 4.
+        iscropping (bool, optional): _description_. Defaults to False.
+    """
     start_times = []
     end_times = []
     texts = []

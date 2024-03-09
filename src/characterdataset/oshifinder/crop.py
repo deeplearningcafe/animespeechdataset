@@ -9,8 +9,11 @@ import torchaudio.transforms as T
 import torch.nn.functional as F
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
+import requests
+import json
 
 from common.log import log
+from ..datasetmanager.text_dataset import segments_2_annotations
 
 from .utils import (ffmpeg_extract_audio,
                     make_filename_safe,
@@ -433,9 +436,37 @@ class data_processor:
                 continue
 
         log.info("録音データから埋め込みを作成しました。")
+    
+    @staticmethod
+    def request_transcription(audio_path:str=None) -> dict:
+        url = 'http://127.0.0.1:8001/api/media-file'
+        #    curl -X 'POST' \
+        #   'http://127.0.0.1:8001/api/media-file' \
+        #   -H 'accept: application/json' \
+        #   -H 'Content-Type: multipart/form-data' \
+        #   -F 'file=@output.wav;type=audio/wav'
+        headers = {
+            'accept': 'application/json',
+            # requests won't add a boundary if this header is set when you pass files=
+            # 'Content-Type': 'multipart/form-data',
+        }
+        try:
+            # we have a problem when reading files because of the \0
+            files = {
+                'file': (audio_path, open(audio_path, 'rb'), 'audio/wav'),
+            }
+        except Exception as e:
+            print(f"When calling api {e}")
 
+        response = requests.post('http://127.0.0.1:8001/api/media-file', headers=headers, files=files)
 
-
+        if response.status_code == 200:
+            # it is a bytes object so first decode, then we change to json
+            response_json = response.content.decode("utf-8")
+            data = json.loads(response_json)
+            return data
+        else:
+            log.warning(f"Bad request {response.status_code}")
 
 
 
@@ -516,7 +547,8 @@ def prepare_labeling(annotation_file:str=None,
     
     # TODO: add a function like the predict_2_csv of the predict.py that add the column with the file paths
 
-def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False, device:str="cuda") -> str:
+def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False, device:str="cuda",
+                      num_characters:int=4) -> str:
     """First convert the video to audio. Second transcribe the audio. Third create a csv file from the results.
     As nemo asr does not work in windows, we will use a api for the transcribing.
     
@@ -531,12 +563,31 @@ def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool
     """
     # 1. Convert video to audio
     # the audio file will be deleted after
-    audio_path = "temp.wav"
+    audio_path = f"{output_path}/temp.wav"
     ffmpeg_video_2_audio(video_path, audio_path)
     
     # 2. Transcribe audio, here we call the api, the response is a json file with a list of segments
+    segments = data_processor.request_transcription(audio_path)
     
+    # 3. Create a csv from the segments
+    file = os.path.basename(video_path)
+    filename, format = os.path.splitext(file)
     
+    filename = f"{output_path}/{filename}.csv"
+    
+    try:
+        segments_2_annotations(segments, filename, num_characters, iscropping)
+    except Exception as e:
+        log.error(f"Error when creating annotations from segments. {e}")
+    
+    # delete the audio file
+    try:
+        os.remove(audio_path)
+    except:
+        log.warning(f"Could not remove the temp audio file {e}")
+    
+    return filename
+        
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='動画とcsvファイルから埋め込みと録音データを取得する'
