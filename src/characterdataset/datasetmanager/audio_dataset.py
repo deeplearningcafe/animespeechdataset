@@ -51,8 +51,8 @@ def character_audios_old(df_path:str=None, output_path:str=None, audios_path:str
     df = pd.DataFrame({"filename": new_names, "text": texts})
     df_out = os.path.join(output_path, "text.list")
     df.to_csv(df_out, index=False)
-    print("CSV created!")
-    print("Completed")
+    log.info("CSV created!")
+    log.info("Completed")
 
 def copy_file(input_path:str=None, output_path:str=None, index:str=None, text:str=None) -> str:
     """Copies a given file to a given location and returns the new file path

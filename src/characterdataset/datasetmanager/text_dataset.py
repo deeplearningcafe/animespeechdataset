@@ -238,3 +238,37 @@ def dialoges_from_csv(csv_path:str=None, output_path:str=None, time_interval:int
         writer.writerows(rows)  # 行を書き込む
 
     log.info(f'CSVファイル "{csv_filename}" にデータを保存しました。')
+    
+    
+
+# parse segments from asr
+def segments_2_annotations(segments: list[dict], file_path:str=None, num_characters:int=4, iscropping:bool=False) -> None:
+    
+    start_times = []
+    end_times = []
+    texts = []
+    
+    for segment in tqdm(segments, "convert segments to annotations"):
+        start = segment['start_seconds']
+        end = segment['end_seconds']
+        text = segment['text']
+
+        if len(text) > num_characters:
+            
+            start_times.append(round(start, 3))
+            end_times.append(round(end, 3))
+            texts.append(text)
+    
+    df = pd.DataFrame({ 'start_time': start_times, 'end_time': end_times, "text": texts})
+    
+    if iscropping:
+        df['character'] = []
+        
+        # reorder to have ['character', 'start_time', 'end_time', "text"]
+        cols = df.columns.tolist()
+        cols = cols[-1:] + cols[:-1]
+        df = df[cols]
+    
+    df.to_csv(file_path, index=False)
+    log.info(f"CSV created at {file_path} with {len(df)} elements!")
+    log.info("Completed")

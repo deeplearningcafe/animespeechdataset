@@ -16,7 +16,8 @@ from .utils import (ffmpeg_extract_audio,
                     make_filename_safe,
                     get_subdir,
                     get_filename,
-                    srt_format_timestamp)
+                    srt_format_timestamp,
+                    ffmpeg_video_2_audio)
 
 def clip_audio_bycsv(annotate_csv,video_pth,role_audios):
         annotate_csv = annotate_csv
@@ -515,6 +516,26 @@ def prepare_labeling(annotation_file:str=None,
     
     # TODO: add a function like the predict_2_csv of the predict.py that add the column with the file paths
 
+def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False, device:str="cuda") -> str:
+    """First convert the video to audio. Second transcribe the audio. Third create a csv file from the results.
+    As nemo asr does not work in windows, we will use a api for the transcribing.
+    
+    Args:
+        video_path (str, optional): _description_. Defaults to None.
+        output_path (str, optional): _description_. Defaults to None.
+        iscropping (bool, optional): _description_. Defaults to False.
+        device (str, optional): _description_. Defaults to "cuda".
+
+    Returns:
+        str: _description_
+    """
+    # 1. Convert video to audio
+    # the audio file will be deleted after
+    audio_path = "temp.wav"
+    ffmpeg_video_2_audio(video_path, audio_path)
+    
+    # 2. Transcribe audio, here we call the api, the response is a json file with a list of segments
+    
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(

@@ -11,6 +11,14 @@ def ffmpeg_extract_audio(video_input, audio_output, start_time, end_time):
                    '-c:a', 'pcm_s16le','-y', audio_output, '-loglevel', 'quiet']
     
     subprocess.run(command)
+    
+def ffmpeg_video_2_audio(video_input, audio_output):
+    
+    command = ['ffmpeg', '-i', f'{video_input}', "-q:a", "0",
+                   '-map', '0', audio_output, '-loglevel', 'quiet']
+    
+    subprocess.run(command)
+    
 
 def make_filename_safe(filename):
     filename = re.sub(r'[\\/:*?"<>|_]', '', filename)

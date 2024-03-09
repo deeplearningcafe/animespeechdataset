@@ -74,3 +74,6 @@ Probably this is the best option I think.
 
 The folder of character_embedds should be in data, but not in inputs nor in outputs. We could specify from the beggning the folder to save the embedds.
 
+
+
+We could processes the response of the api, in json format, in the text_dataset.py, so that we have the text processing in only one file.
