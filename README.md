@@ -74,6 +74,8 @@ Probably this is the best option I think.
 
 The folder of character_embedds should be in data, but not in inputs nor in outputs. We could specify from the beggning the folder to save the embedds.
 
+The create labeling data could be done as the predict button, first call the call_function and then use the updated annotation file.
 
+Should the transcribe logic be all in the dataset_manager? In that class we have alredy stored the "iscropping" and "num_characters". Also the segments_2_annotations is in the text_dataset.py. We can move the utils.py in common to have there ffmpeg functions and that stuf.
 
 We could processes the response of the api, in json format, in the text_dataset.py, so that we have the text processing in only one file.

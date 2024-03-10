@@ -547,7 +547,7 @@ def prepare_labeling(annotation_file:str=None,
     
     # TODO: add a function like the predict_2_csv of the predict.py that add the column with the file paths
 
-def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False, device:str="cuda",
+def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False,
                       num_characters:int=4) -> str:
     """First convert the video to audio. Second transcribe the audio. Third create a csv file from the results.
     As nemo asr does not work in windows, we will use a api for the transcribing.
@@ -556,7 +556,6 @@ def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool
         video_path (str, optional): _description_. Defaults to None.
         output_path (str, optional): _description_. Defaults to None.
         iscropping (bool, optional): _description_. Defaults to False.
-        device (str, optional): _description_. Defaults to "cuda".
 
     Returns:
         str: _description_

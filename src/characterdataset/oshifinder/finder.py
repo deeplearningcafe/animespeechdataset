@@ -3,7 +3,7 @@ import os
 from .crop import crop, prepare_labeling
 from common.log import log
 from .predict import recognize
-from .crop import data_processor
+from .crop import data_processor, extract_subtitles
 import asyncio
 
 class Finder:
@@ -18,6 +18,7 @@ class Finder:
                  device:str=None,
                  output_path_labeling:str=None,
                  character_folder:str=None,
+                 crop:bool=False
             ) -> None:
         self.input_path = input_path
         self.annotation_file = annotation_file
@@ -27,6 +28,7 @@ class Finder:
         self.device = device
         self.output_path_labeling = output_path_labeling
         self.character_folder = character_folder
+        self.crop = crop
 
     def crop_for_labeling(self, annotation_file:str=None) -> str:
         """Given the csv file, str converted, it adds a new column with the path of the created audios.
@@ -153,6 +155,37 @@ class Finder:
             return "Error"
         
         return "Creadas predicciones!"
+    
+    def transcribe_video(self, video_path:str=None, output_path:str=None, 
+                         iscropping:bool=None, 
+                         num_characters:int=4):
+        
+        self.update_crop(iscropping)
+        
+        # Check the inputs
+        log.info("Starting predictions")
+        # check if annotate_map is a file
+        if not os.path.isfile(self.video_path):
+            log.info(f'annotate_map {self.video_path} does not exist')
+            return
+
+        # check if role_audios is a folder
+        if not os.path.isdir(self.output_path):
+            log.info(f'output folder {self.output_path} does not exist')
+            # create role_audios folder
+            os.mkdir(self.output_path)
+        
+        try: 
+            filename = extract_subtitles(output_path=self.output_path,
+            video_path=self.video_path, iscropping=iscropping,
+            num_characters=num_characters,)
+        
+        except Exception as e:
+            log.error(f"Error when transcribing. {e}")
+            return "Error"
+        
+        return "Transcrito audios!", filename
+        
         
     def update_video_path(self, video_path:str=None):
         if video_path != None:
@@ -179,6 +212,10 @@ class Finder:
         else:
             self.device = "cpu"    
         
+    def update_crop(self, crop:bool=None):
+        if crop != None:
+            self.crop = crop
+            
     # def update_output_path(self, output_path_labeling:str=None):
     #     if output_path_labeling != None:
     #         self.output_path_labeling = output_path_labeling

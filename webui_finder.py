@@ -39,17 +39,22 @@ finder = Finder(
     character_folder=config.finder.character_embedds,
 )
 
-def call_function(dataset_type:str="subtitles") -> str:
+def call_function(dataset_type:str="subtitles", transcribe:bool=False) -> str:
     log.info(f"Calling function of {dataset_type}")
-    if dataset_type == DatasetManager.dataset_types[0]:
-        result = dataset_manager.create_csv()
-    elif dataset_type == DatasetManager.dataset_types[1]:
-        result = dataset_manager.create_dialogues()
-    elif dataset_type == DatasetManager.dataset_types[2]:
-        result = dataset_manager.create_audio_files()
+    
+    if not transcribe:
+        if dataset_type == DatasetManager.dataset_types[0]:
+            result = dataset_manager.create_csv()
+        elif dataset_type == DatasetManager.dataset_types[1]:
+            result = dataset_manager.create_dialogues()
+        elif dataset_type == DatasetManager.dataset_types[2]:
+            result = dataset_manager.create_audio_files()
 
+        else:
+            return "Función desconocida"
     else:
-        return "Función desconocida"
+        log.info("Transcribing video")
+        result = finder.transcribe_video()
 
     return result  
     
@@ -117,7 +122,7 @@ def save_df(df: pd.DataFrame=None, csv_path: str=None) -> str:
         
     return filename, "Base de datos actualizada!"
     
-def create_labeling_data() -> tuple:
+def create_labeling_data(transcribe:bool=False) -> tuple:
     """It calls 3 function, the inputs should be already updated in their classes.
     First transforms .str file to csv file, then clips audios for labeling and finally re
 
@@ -127,7 +132,7 @@ def create_labeling_data() -> tuple:
     
     # 1. Transform subs
     result = "Error"
-    result, annotation_file = call_function()
+    result, annotation_file = call_function(transcribe)
     
 
     # 2. Crop audios, the filename does not change
@@ -179,6 +184,10 @@ def create_ui():
                         
                         is_crop = gr.Checkbox(label="cropping", info="En el caso de usar el archivo para classificar personajes manualmente",
                                             value=False)
+                        
+                        transcribe = gr.Checkbox(label="Transcribir", info="En el caso de no tener subtítulos, a partir del video se crean las anotaciones",
+                                            value=False)
+                        
                         num_characters = gr.Slider(
                                     minimum=1,
                                     maximum=10,
@@ -382,6 +391,8 @@ def create_ui():
         is_crop.change(
             dataset_manager.update_crop,
             inputs=[is_crop],   
+        ).then(
+            finder.update_crop, inputs=[is_crop]
         )
         
         # this is not updating well so there are errors, it may updates only in the first one, not in the last one
@@ -420,7 +431,8 @@ def create_ui():
         #     inputs=[annotation_file], outputs=[dataframe]
         # )
         load_data.click(
-            create_labeling_data, outputs=[result, annotation_file, dataframe]
+            create_labeling_data, inputs=[transcribe],
+            outputs=[result, annotation_file, dataframe]
         )
         audio_button.click(
             load_audio,
@@ -443,7 +455,8 @@ def create_ui():
         )
         
         predict_button.click(
-            call_function, outputs=[result, annotation_file]
+            call_function, inputs=[transcribe],
+            outputs=[result, annotation_file]
         ).then(finder.make_predictions,
             inputs=[model, device],
             outputs=[result])
