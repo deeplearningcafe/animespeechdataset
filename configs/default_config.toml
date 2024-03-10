@@ -1,5 +1,5 @@
 [dataset_manager]
-dataset_type = "subtitles"
+dataset_type = "dialogs"
 output_path = "data/outputs/"
 input_path = "data/inputs/"
 

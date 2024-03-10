@@ -27,9 +27,12 @@ config = load_global_config()
 
 
 dataset_manager = DatasetManager(
-    dataset_type=config.dataset_manager.dataset_type,
+    dataset_type="dialogs",
     input_path=config.dataset_manager.input_path,
     output_path=config.dataset_manager.output_path,
+    num_characters=config.dataset_manager.num_characters,
+    time_interval=config.dataset_manager.time_interval,
+
     )
 
 finder = Finder(
@@ -39,8 +42,7 @@ finder = Finder(
     character_folder=config.finder.character_embedds,
 )
 
-def call_function(transcribe:bool=False) -> str:
-    dataset_type="subtitles"
+def call_function(dataset_type:str, transcribe:bool=False) -> str:
     log.info(f"Calling function of {dataset_type}")
     
     if not transcribe:
@@ -61,10 +63,14 @@ def call_function(transcribe:bool=False) -> str:
     return result  
     
 
-def update_visibility(result:str) -> None:
-    if result == "Completado":
-        return gr.Column(visible=True)
-    
+# def update_visibility(result:str) -> None:
+#     if result == "Completado":
+#         return gr.Column(visible=True)
+def update_visibility(dataset_type:str) -> None:
+    if dataset_type == DatasetManager.dataset_types[1]:
+        return gr.Column(visible=True), gr.Column(visible=False)
+    elif dataset_type == DatasetManager.dataset_types[2]:
+        return gr.Column(visible=False), gr.Column(visible=True) 
 
 def load_df(csv_path: str=None) -> None:
     """Given a csv path, it reads it and creates a dataframe
@@ -134,7 +140,7 @@ def create_labeling_data(transcribe:bool=False) -> tuple:
     
     # 1. Transform subs
     result = "Error"
-    result, annotation_file = call_function(transcribe)
+    result, annotation_file = call_function("subtitles", transcribe)
     
 
     # 2. Crop audios, the filename does not change
@@ -371,6 +377,70 @@ def create_ui():
                 predict_button = gr.Button("Predecir los personajes")
                 # predict_result = gr.Textbox(label="Resultado")
         
+        # For creating dialogs and audio datasets
+        with gr.Tab("Exportar para entrenamiento"):
+            # select the function we want to use
+            dataset_type = gr.Dropdown(
+                choices=DatasetManager.dataset_types,
+                label="Tipo de archivo para procesar",
+                value=dataset_manager.dataset_type
+            )
+            # For the dialogs
+            with gr.Column(visible=True) as dialogs:
+                with gr.Row():
+                    with gr.Column():
+                        first_character = gr.Textbox(
+                                label="Personaje uno, rol usuario.",
+                                placeholder="Nombre-de-tu-archivo",
+                                info="Nombre del personaje que hace las preguntas, en el prompt el rol de usuario",
+                            )
+                    with gr.Column():
+                        second_character = gr.Textbox(
+                                label="Personaje dos, rol sistema.",
+                                placeholder="Nombre-de-tu-archivo",
+                                info="Nombre del personaje que responde, en el prompt el rol de sistema.",
+                            )
+            # For the audios
+            with gr.Column(visible=False) as audios:
+                with gr.Row():
+                    # with gr.Column():
+                    #     audios_path = gr.Textbox(
+                    #             label="Nombre de la carpeta de los audios.",
+                    #             placeholder="Nombre-de-tu-archivo",
+                    #             info="En la carpeta de outputs, al hacer las predicciones la carpeta donde se guardan las representaciones y los audios.",
+                    #         )
+                    with gr.Column():
+                        character = gr.Textbox(
+                                label="Personaje del que tomar los audios",
+                                placeholder="Nombre-de-tu-archivo",
+                                info="Nombre del personaje que responde, en el prompt el rol de sistema.",
+                            )
+            
+            with gr.Row():
+                with gr.Accordion("Opciones avanzadas", open=False):
+                    with gr.Column():
+                        time_interval = gr.Slider(
+                            minimum=1,
+                            maximum=10,
+                            value=5,
+                            step=1,
+                            label="Intervalo máximo entre diálogos, segundos",
+                            interactive=True
+                        )
+                    with gr.Column():
+                        num_characters = gr.Slider(
+                            minimum=1,
+                            maximum=10,
+                            value=4,
+                            step=1,
+                            label="Mínimo número de caracteres para usar la frase.",
+                            interactive=True
+                        )
+            with gr.Row():
+                transcribe_button = gr.Button("Transformar")
+        
+        subtitles_type = gr.Textbox(visible=False, label="subtitles")
+        
         
         # transcribe_button.click(
         #     call_function,
@@ -379,11 +449,23 @@ def create_ui():
         #     # ],
         #     outputs=[result_subs, annotation_file],
         # )
+        transcribe_button.click(
+            call_function,
+            inputs=[
+                dataset_type, transcribe
+            ],
+            outputs=[result],
+        )
         
         # we will update the values of the dataset_manager class when the elements change
         # result_subs.change(
         #     update_visibility, inputs=[result_subs], outputs=[crop_labeling]
         # ).then()
+        dataset_type.change(
+            dataset_manager.update_dataset_type,
+            inputs=[dataset_type],   
+        ).then(update_visibility, inputs=[dataset_type], outputs=[dialogs, audios])
+
         
         subtitles_file.change(
             dataset_manager.update_subtitles_file,
@@ -398,7 +480,10 @@ def create_ui():
         annotation_file.change(
             finder.update_annotation_file,
             inputs=[annotation_file],   
-        )
+        ).then(dataset_manager.update_annotation_file,
+            inputs=[annotation_file],
+            )
+        
         video_path.change(
             finder.update_video_path,
             inputs=[video_path],   
@@ -454,11 +539,30 @@ def create_ui():
         )
         
         predict_button.click(
-            call_function, inputs=[transcribe],
+            call_function, inputs=[subtitles_type, transcribe],
             outputs=[result, annotation_file]
         ).then(finder.make_predictions,
             inputs=[model, device],
             outputs=[result])
+        
+        # audios and dialogs
+        first_character.change(
+            dataset_manager.update_first_character,
+            inputs=[first_character],   
+        )
+        second_character.change(
+            dataset_manager.update_second_character,
+            inputs=[second_character],   
+        )
+        time_interval.change(
+            dataset_manager.update_time_interval,
+            inputs=[time_interval],   
+        )
+        character.change(
+            dataset_manager.update_character,
+            inputs=[character],   
+        )
+        
         
         
     return dataset_app

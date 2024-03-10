@@ -83,3 +83,7 @@ We could processes the response of the api, in json format, in the text_dataset.
 We need to normalize the path of the audio when sending to the API
 
 The common and config part should be included in the src probably, as there is an error when importing.
+
+
+
+There is an error that when creating the dialogs, it only takes the character wroten, not the (可能) as well.
