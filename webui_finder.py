@@ -27,7 +27,7 @@ config = load_global_config()
 
 
 dataset_manager = DatasetManager(
-    dataset_type="dialogs",
+    dataset_type=config.dataset_manager.dataset_type,
     input_path=config.dataset_manager.input_path,
     output_path=config.dataset_manager.output_path,
     num_characters=config.dataset_manager.num_characters,
