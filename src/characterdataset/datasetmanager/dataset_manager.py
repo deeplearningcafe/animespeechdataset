@@ -7,12 +7,15 @@ import logging
 from datetime import datetime
 import os
 import shutil
+import requests
+import json
 
-from .utils import time_to_seconds, extract_main_text, convert_time
+from .utils import time_to_seconds, extract_main_text, convert_time, ffmpeg_video_2_audio
 from common.log import log
 
 from .text_dataset import str_2_csv as subtitle_2_csv
 from .text_dataset import dialoges_from_csv as csv_2_dialoges
+from .text_dataset import segments_2_annotations
 from .audio_dataset import character_audios as csv_2_audios
 
 # log_filename = "common\logs\dataset_manager.log"
@@ -401,7 +404,85 @@ def character_audios(csv_path:str=None, character:str=None, num_characters:int=4
     df.to_csv(df_out, index=False)
     log.info(f"CSV created at {df_out}!")
     log.info("Completed")
-            
+
+
+def request_transcription(audio_path:str=None) -> dict:
+    url = 'http://127.0.0.1:8001/api/media-file'
+    #    curl -X 'POST' \
+    #   'http://127.0.0.1:8001/api/media-file' \
+    #   -H 'accept: application/json' \
+    #   -H 'Content-Type: multipart/form-data' \
+    #   -F 'file=@output.wav;type=audio/wav'
+    headers = {
+        'accept': 'application/json',
+        # requests won't add a boundary if this header is set when you pass files=
+        # 'Content-Type': 'multipart/form-data',
+    }
+    try:
+        # we have a problem when reading files because of the \0
+        files = {
+            'file': (audio_path, open(audio_path, 'rb'), 'audio/wav'),
+        }
+    except Exception as e:
+        print(f"When calling api {e}")
+
+    response = requests.post(url, headers=headers, files=files)
+
+    if response.status_code == 200:
+        # it is a bytes object so first decode, then we change to json
+        response_json = response.content.decode("utf-8")
+        data = json.loads(response_json)
+        return data
+    else:
+        log.warning(f"Bad request {response.status_code}")
+
+
+def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False,
+                      num_characters:int=4) -> str:
+    """First convert the video to audio. Second transcribe the audio. Third create a csv file from the results.
+    As nemo asr does not work in windows, we will use a api for the transcribing.
+    
+    Args:
+        video_path (str, optional): _description_. Defaults to None.
+        output_path (str, optional): _description_. Defaults to None.
+        iscropping (bool, optional): _description_. Defaults to False.
+
+    Returns:
+        str: _description_
+    """
+    # 1. Convert video to audio
+    # the audio file will be deleted after
+    audio_path = f"{output_path}/temp.wav"
+    ffmpeg_video_2_audio(video_path, audio_path)
+    if os.path.exists(audio_path):
+        log.info(f"Extracted audio at {audio_path}")
+    else:
+        log.error(f"Could not extract audio at {audio_path}")
+    
+    # 2. Transcribe audio, here we call the api, the response is a json file with a list of segments
+    segments = request_transcription(audio_path)
+    
+    # 3. Create a csv from the segments
+    file = os.path.basename(video_path)
+    filename, format = os.path.splitext(file)
+    
+    filename = f"{output_path}/{filename}.csv"
+    
+    try:
+        segments_2_annotations(segments, filename, num_characters, iscropping)
+        log.info(f"Created annotation file from transcriptions at {filename}")
+    except Exception as e:
+        log.error(f"Error when creating annotations from segments. {e}")
+    
+    # delete the audio file
+    try:
+        os.remove(audio_path)
+    except:
+        log.warning(f"Could not remove the temp audio file {e}")
+    
+    return filename
+
+
 
 def dataset_manager(args):
     
@@ -664,6 +745,42 @@ class DatasetManager:
                             audios_path=self.audios_path
                             )
         return f"Creados audios de {self.character}"
+    
+    
+    def transcribe_video(self, video_path:str=None, output_path:str=None, 
+                         iscropping:bool=None, 
+                         num_characters:int=4):
+        
+        self.update_crop(iscropping)
+        self.update_num_characters(num_characters)
+        self.update_output_path(output_path)
+
+        # Check the inputs
+        log.info("Starting transcription")
+        # check if annotate_map is a file
+        if not os.path.isfile(video_path):
+            log.info(f'annotate_map {video_path} does not exist')
+            return
+
+        # check if role_audios is a folder
+        if not os.path.isdir(self.output_path):
+            log.info(f'output folder {self.output_path} does not exist')
+            # create role_audios folder
+            os.mkdir(self.output_path)
+        
+        try: 
+            filename = extract_subtitles(output_path=self.output_path,
+            video_path=video_path, iscropping=self.crop,
+            num_characters=self.num_characters,)
+        
+        except Exception as e:
+            log.error(f"Error when transcribing. {e}")
+            return "Error", None
+        
+        return "Transcrito audios!", filename
+
+    
+    
 
     def update_dataset_type(self, dataset_type:str=None):
         if dataset_type != None:

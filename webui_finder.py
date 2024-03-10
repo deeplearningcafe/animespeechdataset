@@ -39,7 +39,8 @@ finder = Finder(
     character_folder=config.finder.character_embedds,
 )
 
-def call_function(dataset_type:str="subtitles", transcribe:bool=False) -> str:
+def call_function(transcribe:bool=False) -> str:
+    dataset_type="subtitles"
     log.info(f"Calling function of {dataset_type}")
     
     if not transcribe:
@@ -54,7 +55,8 @@ def call_function(dataset_type:str="subtitles", transcribe:bool=False) -> str:
             return "Función desconocida"
     else:
         log.info("Transcribing video")
-        result = finder.transcribe_video()
+        # this is probably really bad but maybe it works
+        result = dataset_manager.transcribe_video(finder.video_path)
 
     return result  
     
@@ -169,6 +171,8 @@ def create_ui():
                                 placeholder="Nombre-de-tu-archivo",
                                 info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
                             )
+                transcribe = gr.Checkbox(label="Transcribir", info="En el caso de no tener subtítulos, a partir del video se crean las anotaciones",
+                    value=False)
         with gr.Row():
             # This file should not be visible
             annotation_file = gr.Textbox(label="Nombre del archivo de anotaciones.",
@@ -183,9 +187,6 @@ def create_ui():
                     with gr.Column():
                         
                         is_crop = gr.Checkbox(label="cropping", info="En el caso de usar el archivo para classificar personajes manualmente",
-                                            value=False)
-                        
-                        transcribe = gr.Checkbox(label="Transcribir", info="En el caso de no tener subtítulos, a partir del video se crean las anotaciones",
                                             value=False)
                         
                         num_characters = gr.Slider(
@@ -391,8 +392,6 @@ def create_ui():
         is_crop.change(
             dataset_manager.update_crop,
             inputs=[is_crop],   
-        ).then(
-            finder.update_crop, inputs=[is_crop]
         )
         
         # this is not updating well so there are errors, it may updates only in the first one, not in the last one

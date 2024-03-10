@@ -1,6 +1,7 @@
 import demoji
 import neologdn
 import re
+import subprocess
 
 def convert_time(timestamp:str=None) -> float:
     """Convert time of this format 00:01:42,930, to seconds and miliseconds.
@@ -71,3 +72,23 @@ def extract_main_text(line:str=None) -> str:
     cleaned_text = re.sub(pattern, "", text)
     
     return cleaned_text
+
+def ffmpeg_video_2_audio(video_input, audio_output):
+    
+    # command = ['ffmpeg', '-i', f'{video_input}', "-q:a", "0",
+    #                '-map', '0', audio_output, 
+    #             #    '-loglevel', 'quiet'
+    #                ]
+    # command = ['ffmpeg', '-i', f'{video_input}', "-vn", "-acodec",
+    #                'copy', audio_output, 
+    #             #    '-loglevel', 'quiet'
+    #                ]
+    # command = ['ffmpeg', '-i', f'{video_input}', '-map', '0:a', 
+    #                '-c', 'copy', audio_output, 
+    #             #    '-loglevel', 'quiet'
+    #                ]
+    command = ['ffmpeg', '-i', f'{video_input}', "-vn",
+                   '-c:a', 'pcm_s16le','-y', audio_output, 
+                   '-loglevel', 'quiet']
+    
+    subprocess.run(command)
