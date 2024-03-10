@@ -424,7 +424,7 @@ def request_transcription(audio_path:str=None) -> dict:
             'file': (audio_path, open(audio_path, 'rb'), 'audio/wav'),
         }
     except Exception as e:
-        print(f"When calling api {e}")
+        log.info(f"Error when calling api {e}")
 
     response = requests.post(url, headers=headers, files=files)
 
@@ -460,7 +460,7 @@ def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool
         log.error(f"Could not extract audio at {audio_path}")
     
     # 2. Transcribe audio, here we call the api, the response is a json file with a list of segments
-    segments = request_transcription(audio_path)
+    segments = request_transcription(os.path.normpath(audio_path))
     
     # 3. Create a csv from the segments
     file = os.path.basename(video_path)

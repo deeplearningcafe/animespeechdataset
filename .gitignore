@@ -20,3 +20,5 @@ emotion.py
 src/characterdataset/characterdataset.egg-info/
 src/characterdataset/DatasetManager.egg-info/
 src/characterdataset.egg-info
+tests/
+test_api.py

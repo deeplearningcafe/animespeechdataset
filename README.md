@@ -79,3 +79,7 @@ The create labeling data could be done as the predict button, first call the cal
 Should the transcribe logic be all in the dataset_manager? In that class we have alredy stored the "iscropping" and "num_characters". Also the segments_2_annotations is in the text_dataset.py. We can move the utils.py in common to have there ffmpeg functions and that stuf.
 
 We could processes the response of the api, in json format, in the text_dataset.py, so that we have the text processing in only one file.
+
+We need to normalize the path of the audio when sending to the API
+
+The common and config part should be included in the src probably, as there is an error when importing.
