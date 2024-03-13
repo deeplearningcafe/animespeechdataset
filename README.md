@@ -103,5 +103,13 @@ Include a script that creates the folder if they not exists?
 
 The min characters is not working. It can't be updated.
 
+There was a problem with the predict when saving the csv because of the csv filename, so make it just preds.csv.
+
+What is the objective of min length text in the dialogs and audios? This functions use the predictions, which use the sub transformed. So the min characters should only be used for the subtitles transform.
+
+We should change the log warnings to raise value error?
+
+The implementation of update annotation_file is differenct for finder and for dataset_manager. But as the one in finder should be automatic, there is not problem with the actual implementation.
+
 # Installation
 We need to include the soundfile.

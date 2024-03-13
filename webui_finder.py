@@ -68,9 +68,9 @@ def call_function(dataset_type:str, transcribe:bool=False, ) -> str:
 #     if result == "Completado":
 #         return gr.Column(visible=True)
 def update_visibility(dataset_type:str) -> None:
-    if dataset_type == DatasetManager.dataset_types[1]:
+    if dataset_type == DatasetManager.dataset_types[0]:
         return gr.Column(visible=True), gr.Column(visible=False)
-    elif dataset_type == DatasetManager.dataset_types[2]:
+    elif dataset_type == DatasetManager.dataset_types[1]:
         return gr.Column(visible=False), gr.Column(visible=True) 
 
 def load_df(csv_path: str=None) -> None:
@@ -112,12 +112,16 @@ def save_df(df: pd.DataFrame=None, csv_path: str=None) -> str:
     filename = f'{"".join(filename)}_updated.csv'
     log.info(filename)
     
+    
+
     # remove the rows without annotation
     df_original = pd.read_csv(csv_path, header=0)
     for i in range(len(df)):
         if len(df.iloc[i, 0]) > 0:
             df_original.iloc[i, 0] = df.iloc[i, 0]
     
+    # remove the filename column
+    df_original = df_original.drop("filename", axis=1)
     df_original = df_original.dropna()
     df_original.to_csv(filename, index=False)
     log.info(f'CSVファイル "{filename}" にデータを保存しました。')
@@ -143,7 +147,12 @@ def create_labeling_data(transcribe:bool=False) -> tuple:
     result = "Error"
     # result, annotation_file = call_function("subtitles", transcribe)
     # dataset_manager.update_crop(crop=True)
-    result, annotation_file = dataset_manager.create_csv(crop=True)
+    if transcribe:
+        log.info("Transcribing video")
+        # this is probably really bad but maybe it works
+        result, annotation_file = dataset_manager.transcribe_video(finder.video_path)
+    else:
+        result, annotation_file = dataset_manager.create_csv(crop=True)
     
 
     # 2. Crop audios, the filename does not change
@@ -231,6 +240,31 @@ def create_ui():
                 transcribe = gr.Checkbox(label="Transcribir", info="En el caso de no tener subtítulos, a partir del video se crean las anotaciones",
                     value=False)
         with gr.Row():
+            with gr.Accordion("Opciones avanzadas", open=False):
+                with gr.Column():
+                        
+                    # is_crop = gr.Checkbox(label="cropping", info="En el caso de usar el archivo para classificar personajes manualmente",
+                    #                     value=False, visible=False)         
+                    num_characters = gr.Slider(
+                                minimum=1,
+                                maximum=10,
+                                value=4,
+                                step=1,
+                                label="Mínimo número de caracteres para usar la frase.",
+                                interactive=True
+                            )
+                with gr.Column():
+                    model = gr.Dropdown(
+                        choices=Finder.model_opts,
+                        label="Tipo de modelo para crear representaciones del personaje.",
+                        value=Finder.model_opts[0]
+                    )
+                with gr.Column():
+                    device = gr.Checkbox(
+                        label="cuda", info="En el caso de usar la gpu.(Recomendado)", value=True
+                    )
+
+        with gr.Row():
             # This file should not be visible
             annotation_file = gr.Textbox(label="Nombre del archivo de anotaciones.",
                                         info="No rellenar nunca.", visible=True)
@@ -239,21 +273,9 @@ def create_ui():
         # For the crop given the subs
         with gr.Tab("Crear personajes"):
             # Base case
-            with gr.Accordion(label="Subtítulos", open=True):
-                with gr.Row() as base:
-                    with gr.Column():
-                        
-                        # is_crop = gr.Checkbox(label="cropping", info="En el caso de usar el archivo para classificar personajes manualmente",
-                        #                     value=False, visible=False)
-                        
-                        num_characters = gr.Slider(
-                                    minimum=1,
-                                    maximum=10,
-                                    value=4,
-                                    step=1,
-                                    label="Mínimo número de caracteres para usar la frase.",
-                                    interactive=True
-                                )
+            # with gr.Accordion(label="Subtítulos", open=True):
+            #     with gr.Row() as base:
+
                     # with gr.Row():
                     #     with gr.Column():
                     #         with gr.Row():
@@ -367,18 +389,18 @@ def create_ui():
                                 #     info="Inserte el nombre de la carpeta en la que guardar las representatciones de los personajes, luego será usada para predicir",
                                 #     )
                                 
-                        with gr.Row():
-                            with gr.Accordion("Opciones avanzadas", open=False):
-                                with gr.Column():
-                                    model = gr.Dropdown(
-                                        choices=Finder.model_opts,
-                                        label="Tipo de modelo para crear representaciones del personaje.",
-                                        value=Finder.model_opts[0]
-                                    )
-                                with gr.Column():
-                                    device = gr.Checkbox(
-                                        label="cuda", info="En el caso de usar la gpu.(Recomendado)", value=True
-                                    )
+                        # with gr.Row():
+                        #     with gr.Accordion("Opciones avanzadas", open=False):
+                        #         with gr.Column():
+                        #             model = gr.Dropdown(
+                        #                 choices=Finder.model_opts,
+                        #                 label="Tipo de modelo para crear representaciones del personaje.",
+                        #                 value=Finder.model_opts[0]
+                        #             )
+                        #         with gr.Column():
+                        #             device = gr.Checkbox(
+                        #                 label="cuda", info="En el caso de usar la gpu.(Recomendado)", value=True
+                        #             )
                                     
                         with gr.Row():
                             embedds_button = gr.Button("Crear representaciones de los personajes")
@@ -411,20 +433,8 @@ def create_ui():
                 #             info="Inserte el nombre de la carpeta, que está en la carpeta data/outputs",
                 #             )
                         
-                with gr.Row():
-                    with gr.Accordion("Opciones avanzadas", open=False):
-                        with gr.Column():
-                            model = gr.Dropdown(
-                                choices=Finder.model_opts,
-                                label="Tipo de modelo para crear representaciones del personaje.",
-                                value=Finder.model_opts[0]
-                            )
-                        with gr.Column():
-                            device = gr.Checkbox(
-                                label="cuda", info="En el caso de usar la gpu.(Recomendado)", value=True
-                            )
                             
-            with gr.Row():
+            # with gr.Row():
                 predict_button = gr.Button("Predecir los personajes")
                 # predict_result = gr.Textbox(label="Resultado")
         
@@ -478,19 +488,19 @@ def create_ui():
                             label="Intervalo máximo entre diálogos, segundos",
                             interactive=True
                         )
-                    with gr.Column():
-                        num_characters = gr.Slider(
-                            minimum=1,
-                            maximum=10,
-                            value=4,
-                            step=1,
-                            label="Mínimo número de caracteres para usar la frase.",
-                            interactive=True
-                        )
+                    # with gr.Column():
+                    #     num_characters = gr.Slider(
+                    #         minimum=1,
+                    #         maximum=10,
+                    #         value=4,
+                    #         step=1,
+                    #         label="Mínimo número de caracteres para usar la frase.",
+                    #         interactive=True
+                    #     )
             with gr.Row():
                 transcribe_button = gr.Button("Transformar")
         
-        subtitles_type = gr.Textbox(visible=False, label="subtitles")
+        # subtitles_type = gr.Textbox(visible=False, label="subtitles")
         
         
         # transcribe_button.click(

@@ -573,7 +573,8 @@ class DatasetManager:
                  first_character:str=None,
                  second_character:str=None,
                  character:str=None,
-                 crop:bool=False) -> None:
+                #  crop:bool=False
+                 ) -> None:
         
         self.dataset_type = dataset_type
         self.input_path = input_path
@@ -585,7 +586,7 @@ class DatasetManager:
         self.first_character = first_character
         self.second_character = second_character
         self.character = character
-        self.crop = crop
+        # self.crop = crop
         
     def inputs_check(self) -> str:
         log.info("Checking inputs")
@@ -654,19 +655,21 @@ class DatasetManager:
         # log.info(f"The function {self.dataset_type} has been completed!")
         return "Success"
     
-    def create_csv(self, dataset_type:str="subtitles", subtitles_file:str=None, output_path:str=None,crop:bool=None):
+    def create_csv(self, dataset_type:str="subtitles", subtitles_file:str=None, output_path:str=None,
+                   crop:bool=None, num_characters:int=None):
         # Check inputs
         self.update_dataset_type(dataset_type)
         self.update_subtitles_file(subtitles_file)
         self.update_output_path(output_path)
-        self.update_crop(crop)
+        # self.update_crop(crop)
+        self.update_num_characters(num_characters)
         checks = self.inputs_check()
         
         
         # TODO: add min length to the subtitles as we have to label after
         if checks == "Success":
             filename = subtitle_2_csv(input_path=self.subtitles_file, output_path=self.output_path,
-                           cropping=self.crop, num_characters=25)
+                           cropping=crop, num_characters=self.num_characters)
             return "Completado", filename
 
         return "Error", None
@@ -728,13 +731,19 @@ class DatasetManager:
 
 
         # for the audios path, from the annotation file we should be able to get the folder
-        file = os.path.basename(os.path.normpath(self.annotation_file))
-        filename, format = os.path.splitext(file)
+        # file = os.path.basename(os.path.normpath(self.annotation_file))
+        # filename, format = os.path.splitext(file)
         
-        # the annotation file format is VIDEO-FILE-NAME_updated.csv so remove the updated
-        *filename, _ = filename.split('_')
-        # paste all the list together
-        folder_name = "".join(filename)
+        # # the annotation file format is VIDEO-FILE-NAME_updated.csv so remove the updated
+        # *filename, _ = filename.split('_')
+        # # paste all the list together
+        # folder_name = "".join(filename)
+
+        # just get the folder name of the prediction file, it is easier and as the name in the csv file 
+        # is getting errors, we changed it to preds for now.
+        folder_path = os.path.dirname(os.path.normpath(self.annotation_file))
+        folder_name = os.path.basename(folder_path)
+
 
         self.update_audios_path(os.path.join(folder_name, "voice"))
         checks = self.inputs_check()
@@ -822,9 +831,9 @@ class DatasetManager:
         if character != None:
             self.character = character
         
-    def update_crop(self, crop:bool=None):
-        if crop != None:
-            self.crop = crop
+    # def update_crop(self, crop:bool=None):
+    #     if crop != None:
+    #         self.crop = crop
             
             
             
