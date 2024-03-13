@@ -42,15 +42,16 @@ finder = Finder(
     character_folder=config.finder.character_embedds,
 )
 
-def call_function(dataset_type:str, transcribe:bool=False) -> str:
+def call_function(dataset_type:str, transcribe:bool=False, ) -> str:
     log.info(f"Calling function of {dataset_type}")
     
     if not transcribe:
+        # if dataset_type == DatasetManager.dataset_types[0]:
+        #     dataset_manager.update_crop(crop=True)
+        #     result = dataset_manager.create_csv()
         if dataset_type == DatasetManager.dataset_types[0]:
-            result = dataset_manager.create_csv()
-        elif dataset_type == DatasetManager.dataset_types[1]:
             result = dataset_manager.create_dialogues()
-        elif dataset_type == DatasetManager.dataset_types[2]:
+        elif dataset_type == DatasetManager.dataset_types[1]:
             result = dataset_manager.create_audio_files()
 
         else:
@@ -140,7 +141,9 @@ def create_labeling_data(transcribe:bool=False) -> tuple:
     
     # 1. Transform subs
     result = "Error"
-    result, annotation_file = call_function("subtitles", transcribe)
+    # result, annotation_file = call_function("subtitles", transcribe)
+    # dataset_manager.update_crop(crop=True)
+    result, annotation_file = dataset_manager.create_csv(crop=True)
     
 
     # 2. Crop audios, the filename does not change
@@ -150,12 +153,58 @@ def create_labeling_data(transcribe:bool=False) -> tuple:
     df = load_df(annotation_file)
     
     return result, annotation_file, df
-    
 
+def csv_for_predictions() -> str:
+    dataset_manager.update_crop(False)
+    result = dataset_manager.create_csv()
+    return result
+
+
+
+GRADIO_THEME: str = "NoCrypt/miku"
+
+initial_msg = """
+# AnimeSpeech: Dataset Generation for Language Model Training and Text-to-Speech Synthesis from Anime Subtitles
+From animes extract the dialogs between desired characters for training LLM, and extract the audios of one character to train TTS.
+
+## Inputs
+- Video file: the video from which take the audios and the dialogs.
+- Subtitles file: the .str file containing the subtitles of the video.
+Both of them should be placed at the data/inputs folder. In the textbox just include the name, the full path is not needed.
+
+## Funcionalities
+### Create annotations
+Inputs should be the subtitles and the video.
+- Character creation: user labels the data to create representations of the desired characters.
+The converted subtitles become tabular data(like excel). 
+
+- Character prediction: predict the character of each line. The desired character representations(embeddings) should be already created, 
+it only predicts characters that have representations.
+
+### Create datasets
+Input should be the annotations file.
+- Dialogues dataset: create conversational dataset for training LLM, user can choose the characters from whom take the dialogs.
+
+- Audios dataset: extract all the audios of the desired character and create a folder with those and the text for TTS training.
+
+## Directories form
+```
+├── data
+│   ├── inputs
+│   │   ├── subtitle-file.str
+│   │   ├── video-file
+│   ├── outputs
+│   │   ├── subtitle-file.csv
+│   │   ├── video-file
+│   │   │   ├── voice
+│   │   │   ├── embeddings
+
+```
+"""
 
 def create_ui():
 
-    with gr.Blocks() as dataset_app:
+    with gr.Blocks(theme=GRADIO_THEME) as dataset_app:
         
         # select the function we want to use
         # dataset_type = gr.Dropdown(
@@ -163,7 +212,9 @@ def create_ui():
         #     label="Tipo de archivo para procesar",
         #     value=dataset_manager.dataset_type
         # )
-        
+        gr.Markdown(initial_msg)
+
+
         with gr.Row():
             with gr.Column():
                 subtitles_file = gr.Textbox(
@@ -192,8 +243,8 @@ def create_ui():
                 with gr.Row() as base:
                     with gr.Column():
                         
-                        is_crop = gr.Checkbox(label="cropping", info="En el caso de usar el archivo para classificar personajes manualmente",
-                                            value=False)
+                        # is_crop = gr.Checkbox(label="cropping", info="En el caso de usar el archivo para classificar personajes manualmente",
+                        #                     value=False, visible=False)
                         
                         num_characters = gr.Slider(
                                     minimum=1,
@@ -449,6 +500,8 @@ def create_ui():
         #     # ],
         #     outputs=[result_subs, annotation_file],
         # )
+
+        # this is for the dialgs and audios
         transcribe_button.click(
             call_function,
             inputs=[
@@ -471,10 +524,10 @@ def create_ui():
             dataset_manager.update_subtitles_file,
             inputs=[subtitles_file],   
         )
-        is_crop.change(
-            dataset_manager.update_crop,
-            inputs=[is_crop],   
-        )
+        # is_crop.change(
+        #     dataset_manager.update_crop,
+        #     inputs=[is_crop],   
+        # )
         
         # this is not updating well so there are errors, it may updates only in the first one, not in the last one
         annotation_file.change(
@@ -539,11 +592,9 @@ def create_ui():
         )
         
         predict_button.click(
-            call_function, inputs=[subtitles_type, transcribe],
-            outputs=[result, annotation_file]
+            csv_for_predictions, outputs=[result, annotation_file]
         ).then(finder.make_predictions,
-            inputs=[model, device],
-            outputs=[result])
+            inputs=[model, device],outputs=[result])
         
         # audios and dialogs
         first_character.change(

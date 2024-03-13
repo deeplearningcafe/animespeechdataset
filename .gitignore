@@ -22,3 +22,4 @@ src/characterdataset/DatasetManager.egg-info/
 src/characterdataset.egg-info
 tests/
 test_api.py
+common/texts.json

@@ -82,8 +82,26 @@ We could processes the response of the api, in json format, in the text_dataset.
 
 We need to normalize the path of the audio when sending to the API
 
-The common and config part should be included in the src probably, as there is an error when importing.
+IMPORTANT: The common and config part should be included in the src probably, as there is an error when importing.
 
 
 
 There is an error that when creating the dialogs, it only takes the character wroten, not the (可能) as well.
+
+In character creation, the "cropping" option should always be true, as there we want to create the embeddings for predicting so the character column is always necessary.
+We need to update the cropping logic.
+
+The model selection in predictic works but in create embedds does not.
+That is because the name of the variable is the same as in the predicts.
+Merge all the repeated advanced options.
+
+The filename column should be removed as the tmp audio files are deleted.
+
+Maybe we should include a script to download the models automatically.
+
+Include a script that creates the folder if they not exists?
+
+The min characters is not working. It can't be updated.
+
+# Installation
+We need to include the soundfile.

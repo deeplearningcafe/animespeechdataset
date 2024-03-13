@@ -42,6 +42,9 @@ class KNN_classifier:
         embeddings_cls = None
         labels = []
         dim = 0
+
+        # add the embeddings folder
+        audio_embds_dir = f"{audio_embds_dir}/embeddings"
         
         # これはサブフォルダの名前をリストに格納する
         role_dirs = []
@@ -145,9 +148,19 @@ class KNN_classifier:
         # log.info(len(file_list), len(preds), len(distances))
         assert ((len(file_list) == len(preds)) and (len(file_list) == len(distances))), "The lengths of the preds and the files list is not the same"
         # csvファイルに保存する
-        csv_filename = f"{filename}_preds.csv"
-        csv_filename = os.path.join(temp_dir, csv_filename)
+        # normalize path
+        # csv_filename = f"{filename}_preds.csv"
+        csv_filename = f"preds.csv"
+
+        # csv_filename = os.path.join(temp_dir, csv_filename)
+        csv_filename =  f'{temp_dir}/{csv_filename}'
+        csv_filename = os.path.normpath(csv_filename)
         df = pd.DataFrame({"filename": file_list, "predicted_label": preds, "distance": distances})
+        
+        if not os.path.isdir(os.path.dirname(csv_filename)):
+            log.warning('the folder to save the csv does not exist')
+        
+        
         df.to_csv(csv_filename, index=False)
         log.info(f"csvを保存しました{csv_filename}！")
         

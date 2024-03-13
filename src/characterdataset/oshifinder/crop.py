@@ -88,7 +88,8 @@ def load_model(model_name:str=None, device:str=None):
         except:
             "can't import speechbrain"
         classifier = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb",
-                                                run_opts={"device": device},)
+                                                    savedir="pretrained_models/spkrec-ecapa-voxceleb",
+                                                    run_opts={"device": device},)
         return classifier
     
     elif model_name == "wavlm":
@@ -97,8 +98,10 @@ def load_model(model_name:str=None, device:str=None):
         except:
             "can't import transformers"
             
-        feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained('microsoft/wavlm-base-plus-sv')
-        model = WavLMForXVector.from_pretrained('microsoft/wavlm-base-plus-sv').to(device)
+        feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained('microsoft/wavlm-base-plus-sv',
+                                                                     cache_dir="pretrained_models")
+        model = WavLMForXVector.from_pretrained('microsoft/wavlm-base-plus-sv',
+                                                cache_dir="pretrained_models").to(device)
 
         model_dict = {"feature_extractor": feature_extractor, 
                       "model": model}

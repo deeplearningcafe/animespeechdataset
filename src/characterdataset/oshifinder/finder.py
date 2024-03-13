@@ -89,7 +89,7 @@ class Finder:
         if not os.path.isdir(self.character_folder):
             log.info(f'character embeddings folder {self.character_folder} does not exist')
             # create role_audios folder
-            os.mkdir(self.character_folder)
+            os.makedirs(self.character_folder)
             
         if device == True:
             device = "cuda"

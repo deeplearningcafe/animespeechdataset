@@ -559,8 +559,8 @@ class DatasetManager:
     we will use the same variables, output_path, annotation_file, etc; a lot
     of times so it is better to store them.
     """
-    
-    dataset_types = ["subtitles", "dialogues", "audios"]
+    # subtitles is not needed
+    dataset_types = ["dialogues", "audios"]
     
     def __init__(self,
                  dataset_type:str=None,
@@ -666,7 +666,7 @@ class DatasetManager:
         # TODO: add min length to the subtitles as we have to label after
         if checks == "Success":
             filename = subtitle_2_csv(input_path=self.subtitles_file, output_path=self.output_path,
-                           cropping=self.crop)
+                           cropping=self.crop, num_characters=25)
             return "Completado", filename
 
         return "Error", None
