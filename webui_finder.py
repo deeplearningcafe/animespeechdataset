@@ -59,7 +59,8 @@ def call_function(dataset_type:str, transcribe:bool=False, ) -> str:
     else:
         log.info("Transcribing video")
         # this is probably really bad but maybe it works
-        result = dataset_manager.transcribe_video(finder.video_path)
+        result = dataset_manager.transcribe_video(video_path=finder.video_path, 
+                                                  iscropping=True)
 
     return result  
     
@@ -150,7 +151,8 @@ def create_labeling_data(transcribe:bool=False) -> tuple:
     if transcribe:
         log.info("Transcribing video")
         # this is probably really bad but maybe it works
-        result, annotation_file = dataset_manager.transcribe_video(finder.video_path)
+        result, annotation_file = dataset_manager.transcribe_video(video_path=finder.video_path,
+                                                                   iscropping=False)
     else:
         result, annotation_file = dataset_manager.create_csv(crop=True)
     
@@ -164,8 +166,8 @@ def create_labeling_data(transcribe:bool=False) -> tuple:
     return result, annotation_file, df
 
 def csv_for_predictions() -> str:
-    dataset_manager.update_crop(False)
-    result = dataset_manager.create_csv()
+    # dataset_manager.update_crop(False)
+    result = dataset_manager.create_csv(crop=False)
     return result
 
 
@@ -205,6 +207,7 @@ Input should be the annotations file.
 │   ├── outputs
 │   │   ├── subtitle-file.csv
 │   │   ├── video-file
+│   │   │   ├── preds.csv
 │   │   │   ├── voice
 │   │   │   ├── embeddings
 
@@ -267,7 +270,7 @@ def create_ui():
         with gr.Row():
             # This file should not be visible
             annotation_file = gr.Textbox(label="Nombre del archivo de anotaciones.",
-                                        info="No rellenar nunca.", visible=True)
+                                        info="Solo usar para crear audios y diálogos.", visible=True)
             result = gr.Textbox(label="Resultado")
             
         # For the crop given the subs

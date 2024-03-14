@@ -116,7 +116,9 @@ class KNN_classifier:
         filename, format = os.path.splitext(file)
         
         temp_dir = f'{temp_folder}/{filename}'
-        temp_embeds = os.path.join(temp_dir, 'embeddings')
+        # temp_embeds = os.path.join(temp_dir, 'embeddings')
+        temp_embeds = f'{temp_dir}/embeddings'
+
         
         # files names
         file_names = os.listdir(os.path.join(temp_embeds))
@@ -150,8 +152,9 @@ class KNN_classifier:
         # csvファイルに保存する
         # normalize path
         # csv_filename = f"{filename}_preds.csv"
-        csv_filename = f"preds.csv"
-
+        # csv_filename = f"preds.csv"
+        csv_filename = f"{filename}.csv"
+        
         # csv_filename = os.path.join(temp_dir, csv_filename)
         csv_filename =  f'{temp_dir}/{csv_filename}'
         csv_filename = os.path.normpath(csv_filename)

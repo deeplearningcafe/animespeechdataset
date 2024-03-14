@@ -655,10 +655,12 @@ class DatasetManager:
         # log.info(f"The function {self.dataset_type} has been completed!")
         return "Success"
     
-    def create_csv(self, dataset_type:str="subtitles", subtitles_file:str=None, output_path:str=None,
+    def create_csv(self, 
+                #    dataset_type:str="subtitles",
+                   subtitles_file:str=None, output_path:str=None,
                    crop:bool=None, num_characters:int=None):
         # Check inputs
-        self.update_dataset_type(dataset_type)
+        self.update_dataset_type("subtitles")
         self.update_subtitles_file(subtitles_file)
         self.update_output_path(output_path)
         # self.update_crop(crop)
@@ -668,6 +670,7 @@ class DatasetManager:
         
         # TODO: add min length to the subtitles as we have to label after
         if checks == "Success":
+            log.info("Creating annotation file")
             filename = subtitle_2_csv(input_path=self.subtitles_file, output_path=self.output_path,
                            cropping=crop, num_characters=self.num_characters)
             return "Completado", filename
@@ -760,7 +763,7 @@ class DatasetManager:
                          iscropping:bool=None, 
                          num_characters:int=4):
         
-        self.update_crop(iscropping)
+        # self.update_crop(iscropping)
         self.update_num_characters(num_characters)
         self.update_output_path(output_path)
 
@@ -779,7 +782,7 @@ class DatasetManager:
         
         try: 
             filename = extract_subtitles(output_path=self.output_path,
-            video_path=video_path, iscropping=self.crop,
+            video_path=video_path, iscropping=iscropping,
             num_characters=self.num_characters,)
         
         except Exception as e:
