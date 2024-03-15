@@ -1,0 +1,1347 @@
+2024-03-11 17:15:38,799 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-11 17:18:03,767 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-11 17:18:03,900 WARNING torchvision is not available - cannot save figures
+2024-03-11 17:18:03,972 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-11 17:18:04,464 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-11 17:18:04,517 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-11 17:18:04,533 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-11 17:18:04,946 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-11 17:18:05,515 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-11 17:18:05,586 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-11 17:46:01,876 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-11 17:46:01,911 WARNING torchvision is not available - cannot save figures
+2024-03-11 17:46:01,936 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-11 17:46:03,501 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-11 17:46:03,510 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-11 17:46:03,518 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-11 17:46:03,956 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-11 17:46:04,597 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-11 17:46:04,603 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-12 17:49:31,164 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 17:49:31,320 WARNING torchvision is not available - cannot save figures
+2024-03-12 17:49:31,419 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 17:49:32,946 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-12 17:49:32,991 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-12 17:49:33,136 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 17:49:33,470 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-12 17:49:33,553 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 17:49:34,206 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-12 17:49:34,584 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-12 17:52:04,593 INFO    Calling function of subtitles
+2024-03-12 17:52:04,593 INFO    Checking inputs
+2024-03-12 17:52:04,593 INFO    Starting to create subtitles file
+2024-03-12 17:52:04,799 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-12 17:52:04,799 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-12 17:52:04,800 INFO    temp folder to save clips data/outputs/tmp does not exist
+2024-03-12 17:52:04,807 INFO    Salving audio files at data/outputs/tmp
+2024-03-12 17:52:06,486 INFO    Unable to crop data/outputs/tmp/0014_ちょっとあなた聞いていますの!?.wav
+2024-03-12 17:52:06,690 INFO    Unable to crop data/outputs/tmp/0018_あっ…クレア?.wav
+2024-03-12 17:52:06,915 INFO    Unable to crop data/outputs/tmp/0023_私の名前覚えていらっしゃいますか?.wav
+2024-03-12 17:52:07,002 INFO    Unable to crop data/outputs/tmp/0024_んっ…。バカにしていますの?レイ=テイラー!.wav
+2024-03-12 17:52:07,161 INFO    Unable to crop data/outputs/tmp/0027_ってことはあれですか!?.wav
+2024-03-12 17:52:07,287 INFO    Unable to crop data/outputs/tmp/0029_「異世界転生」ってやつですか!?.wav
+2024-03-12 17:52:07,371 INFO    Unable to crop data/outputs/tmp/0030_好きです。はっ?.wav
+2024-03-12 17:52:07,488 INFO    Unable to crop data/outputs/tmp/0032_なっ…ななななな…!?.wav
+2024-03-12 17:52:07,570 INFO    Unable to crop data/outputs/tmp/0033_あなたいったい何を言ってますの?.wav
+2024-03-12 17:52:07,930 INFO    Unable to crop data/outputs/tmp/0040_なっ…なんなんですのこの人!?.wav
+2024-03-12 17:52:08,018 INFO    Unable to crop data/outputs/tmp/0041_クレア様は私のこと嫌いですよね?あ…当たり前ですわ。.wav
+2024-03-12 17:52:08,312 INFO    Unable to crop data/outputs/tmp/0048_話が進んでますの!?.wav
+2024-03-12 17:52:08,487 INFO    Unable to crop data/outputs/tmp/0051_クレア様…。なんですの?.wav
+2024-03-12 17:52:08,625 INFO    Unable to crop data/outputs/tmp/0053_すばらしいです!えっ?.wav
+2024-03-12 17:52:09,115 INFO    Unable to crop data/outputs/tmp/0063_ひっ!?今の踏み方には.wav
+2024-03-12 17:52:09,267 INFO    Unable to crop data/outputs/tmp/0066_あれ?教科書がない。.wav
+2024-03-12 17:52:09,342 INFO    Unable to crop data/outputs/tmp/0067_どうなさったの?あっ…。.wav
+2024-03-12 17:52:09,417 INFO    Unable to crop data/outputs/tmp/0068_平民は教科書を買えないほど貧乏ですの?.wav
+2024-03-12 17:52:09,661 INFO    Unable to crop data/outputs/tmp/0074_授業を受けたいだなんて!えっ?.wav
+2024-03-12 17:52:10,424 INFO    Unable to crop data/outputs/tmp/0094_組む相手がいませんの?.wav
+2024-03-12 17:52:10,850 INFO    Unable to crop data/outputs/tmp/0102_これって…クレア様の仕業ですか?.wav
+2024-03-12 17:52:10,978 INFO    Unable to crop data/outputs/tmp/0104_押し花にして持ち歩きます。なんでそうなりますの!?.wav
+2024-03-12 17:52:11,103 INFO    Unable to crop data/outputs/tmp/0106_打たれ強すぎじゃありませんこと?.wav
+2024-03-12 17:52:11,194 INFO    Unable to crop data/outputs/tmp/0107_えっ?なんのことですか?.wav
+2024-03-12 17:52:11,343 INFO    Unable to crop data/outputs/tmp/0108_これだけ意地悪されてどうして平然としていられますの!?.wav
+2024-03-12 17:52:11,447 INFO    Unable to crop data/outputs/tmp/0109_意地悪?愛ですよね。違いますわよ!.wav
+2024-03-12 17:52:11,616 INFO    Unable to crop data/outputs/tmp/0111_どうしてわたくしが怒られてますの!?.wav
+2024-03-12 17:52:12,977 INFO    Unable to crop data/outputs/tmp/0143_それはあれですか?私と一緒に風紀を乱したいと?.wav
+2024-03-12 17:52:13,149 INFO    Unable to crop data/outputs/tmp/0146_クレア様声をかけに行ったらどうですか?.wav
+2024-03-12 17:52:13,254 INFO    Unable to crop data/outputs/tmp/0147_はあ?ど…どうしてわたくしが…。.wav
+2024-03-12 17:52:13,349 INFO    Unable to crop data/outputs/tmp/0148_だって好きなんでしょう?.wav
+2024-03-12 17:52:13,481 INFO    Unable to crop data/outputs/tmp/0150_ですよね?な…ななな。.wav
+2024-03-12 17:52:13,655 INFO    Unable to crop data/outputs/tmp/0153_でも動揺するクレア様かわいすぎでは?.wav
+2024-03-12 17:52:14,001 INFO    Unable to crop data/outputs/tmp/0160_ちょっと!どうしてくれますの?セイン様にあんな…。.wav
+2024-03-12 17:52:14,482 INFO    Unable to crop data/outputs/tmp/0170_お茶をかけたらどうかしら?でも熱湯はさすがに…。.wav
+2024-03-12 17:52:14,668 INFO    Unable to crop data/outputs/tmp/0173_レイ=テイラー。うん?.wav
+2024-03-12 17:52:14,924 INFO    Unable to crop data/outputs/tmp/0177_す…少しは考えたらどうなんですの?.wav
+2024-03-12 17:52:15,150 INFO    Unable to crop data/outputs/tmp/0181_その格助詞の使い方やめてくださらない?.wav
+2024-03-12 17:52:15,288 INFO    Unable to crop data/outputs/tmp/0183_首席入学者が逃げるつもりですの?.wav
+2024-03-12 17:52:15,496 INFO    Unable to crop data/outputs/tmp/0187_はあ?どうしてわたくしがそんな。.wav
+2024-03-12 17:52:15,583 INFO    Unable to crop data/outputs/tmp/0188_あれ逃げるんですか?内部生のトップともあろうお方が?.wav
+2024-03-12 17:52:15,679 INFO    Unable to crop data/outputs/tmp/0189_んっ。挑発してるつもりですの?いいでしょう乗ってあげますわ。.wav
+2024-03-12 17:52:16,562 INFO    Unable to crop data/outputs/tmp/0209_ちょっとこんな夜更けになんの用ですの?.wav
+2024-03-12 17:52:17,101 INFO    Unable to crop data/outputs/tmp/0221_そっちですの!?.wav
+2024-03-12 17:52:17,587 INFO    Unable to crop data/outputs/tmp/0231_化けの皮が剥がれましたわね?平民!.wav
+2024-03-12 17:52:17,728 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-12 17:52:17,938 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-12 17:57:46,536 INFO    data/outputs//wataoshi_1_updated.csv
+2024-03-12 17:57:46,549 INFO    CSVファイル "data/outputs//wataoshi_1_updated.csv" にデータを保存しました。
+2024-03-12 17:57:46,582 INFO    Deleted the audios folder at data/outputs/tmp
+2024-03-12 17:57:46,721 INFO    Annotation file of finder updated to data/outputs//wataoshi_1_updated.csv
+2024-03-12 17:59:42,224 INFO    character embeddings folder data/character_embedds/embeddings does not exist
+2024-03-12 18:01:55,821 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:01:55,858 WARNING torchvision is not available - cannot save figures
+2024-03-12 18:01:55,879 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:01:57,044 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-12 18:01:57,079 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-12 18:01:57,343 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 18:01:57,572 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-12 18:01:57,618 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 18:01:58,447 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-12 18:01:58,773 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-12 18:02:01,972 INFO    Annotation file of finder updated to data/outputs//wataoshi_1_updated.csv
+2024-03-12 18:02:15,954 INFO    character embeddings folder data/character_embedds/embeddings does not exist
+2024-03-12 18:02:15,956 INFO    Fetch hyperparams.yaml: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-12 18:02:16,591 INFO    HF fetch: C:\Users\victo\.cache\huggingface\hub\models--speechbrain--spkrec-ecapa-voxceleb\snapshots\eac27266f68caa806381260bd44ace38b136c76a\hyperparams.yaml
+2024-03-12 18:02:16,592 WARNING Error when cropping. [WinError 1314] クライアントは要求された特権を保有していません。: 'C:\\Users\\victo\\.cache\\huggingface\\hub\\models--speechbrain--spkrec-ecapa-voxceleb\\snapshots\\eac27266f68caa806381260bd44ace38b136c76a\\hyperparams.yaml' -> 'pretrained_models\\EncoderClassifier-8f6f7fdaa9628acf73e21ad1f99d5f83\\hyperparams.yaml'
+2024-03-12 18:09:49,879 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:09:49,917 WARNING torchvision is not available - cannot save figures
+2024-03-12 18:09:49,940 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:09:51,161 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-12 18:09:51,178 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-12 18:09:51,442 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 18:09:51,683 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-12 18:09:51,713 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 18:09:52,478 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-12 18:09:52,865 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-12 18:09:56,296 INFO    Annotation file of finder updated to data/outputs//wataoshi_1_updated.csv
+2024-03-12 18:10:09,874 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-12 18:10:09,875 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-12 18:10:10,528 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-12 18:10:10,530 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-12 18:10:10,531 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-12 18:10:10,533 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-12 18:10:10,534 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-12 18:10:34,597 INFO    録音データから埋め込みを作成しました。
+2024-03-12 18:20:39,370 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:20:39,451 WARNING torchvision is not available - cannot save figures
+2024-03-12 18:20:39,489 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:20:40,920 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 18:20:41,271 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-12 18:20:42,052 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-12 18:34:04,294 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:34:04,332 WARNING torchvision is not available - cannot save figures
+2024-03-12 18:34:04,360 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:34:05,758 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-12 18:34:05,795 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-12 18:34:05,880 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 18:34:06,338 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-12 18:34:06,425 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 18:34:06,963 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-12 18:34:07,599 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-12 18:34:31,589 INFO    Calling function of subtitles
+2024-03-12 18:34:31,589 INFO    Checking inputs
+2024-03-12 18:34:31,589 INFO    Starting to create subtitles file
+2024-03-12 18:34:31,775 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-12 18:34:31,775 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-12 18:34:31,776 INFO    temp folder to save clips data/outputs/tmp does not exist
+2024-03-12 18:34:31,783 INFO    Salving audio files at data/outputs/tmp
+2024-03-12 18:34:32,357 INFO    Unable to crop data/outputs/tmp/0014_ちょっとあなた聞いていますの!?.wav
+2024-03-12 18:34:32,520 INFO    Unable to crop data/outputs/tmp/0018_あっ…クレア?.wav
+2024-03-12 18:34:32,709 INFO    Unable to crop data/outputs/tmp/0023_私の名前覚えていらっしゃいますか?.wav
+2024-03-12 18:34:32,776 INFO    Unable to crop data/outputs/tmp/0024_んっ…。バカにしていますの?レイ=テイラー!.wav
+2024-03-12 18:34:33,021 INFO    Unable to crop data/outputs/tmp/0027_ってことはあれですか!?.wav
+2024-03-12 18:34:33,147 INFO    Unable to crop data/outputs/tmp/0029_「異世界転生」ってやつですか!?.wav
+2024-03-12 18:34:33,215 INFO    Unable to crop data/outputs/tmp/0030_好きです。はっ?.wav
+2024-03-12 18:34:33,319 INFO    Unable to crop data/outputs/tmp/0032_なっ…ななななな…!?.wav
+2024-03-12 18:34:33,388 INFO    Unable to crop data/outputs/tmp/0033_あなたいったい何を言ってますの?.wav
+2024-03-12 18:34:33,666 INFO    Unable to crop data/outputs/tmp/0040_なっ…なんなんですのこの人!?.wav
+2024-03-12 18:34:33,763 INFO    Unable to crop data/outputs/tmp/0041_クレア様は私のこと嫌いですよね?あ…当たり前ですわ。.wav
+2024-03-12 18:34:34,075 INFO    Unable to crop data/outputs/tmp/0048_話が進んでますの!?.wav
+2024-03-12 18:34:34,212 INFO    Unable to crop data/outputs/tmp/0051_クレア様…。なんですの?.wav
+2024-03-12 18:34:34,350 INFO    Unable to crop data/outputs/tmp/0053_すばらしいです!えっ?.wav
+2024-03-12 18:34:34,721 INFO    Unable to crop data/outputs/tmp/0063_ひっ!?今の踏み方には.wav
+2024-03-12 18:34:34,866 INFO    Unable to crop data/outputs/tmp/0066_あれ?教科書がない。.wav
+2024-03-12 18:34:34,937 INFO    Unable to crop data/outputs/tmp/0067_どうなさったの?あっ…。.wav
+2024-03-12 18:34:35,012 INFO    Unable to crop data/outputs/tmp/0068_平民は教科書を買えないほど貧乏ですの?.wav
+2024-03-12 18:34:35,219 INFO    Unable to crop data/outputs/tmp/0074_授業を受けたいだなんて!えっ?.wav
+2024-03-12 18:34:35,875 INFO    Unable to crop data/outputs/tmp/0094_組む相手がいませんの?.wav
+2024-03-12 18:34:36,148 INFO    Unable to crop data/outputs/tmp/0102_これって…クレア様の仕業ですか?.wav
+2024-03-12 18:34:36,253 INFO    Unable to crop data/outputs/tmp/0104_押し花にして持ち歩きます。なんでそうなりますの!?.wav
+2024-03-12 18:34:36,369 INFO    Unable to crop data/outputs/tmp/0106_打たれ強すぎじゃありませんこと?.wav
+2024-03-12 18:34:36,449 INFO    Unable to crop data/outputs/tmp/0107_えっ?なんのことですか?.wav
+2024-03-12 18:34:36,531 INFO    Unable to crop data/outputs/tmp/0108_これだけ意地悪されてどうして平然としていられますの!?.wav
+2024-03-12 18:34:36,600 INFO    Unable to crop data/outputs/tmp/0109_意地悪?愛ですよね。違いますわよ!.wav
+2024-03-12 18:34:36,695 INFO    Unable to crop data/outputs/tmp/0111_どうしてわたくしが怒られてますの!?.wav
+2024-03-12 18:34:37,771 INFO    Unable to crop data/outputs/tmp/0143_それはあれですか?私と一緒に風紀を乱したいと?.wav
+2024-03-12 18:34:37,904 INFO    Unable to crop data/outputs/tmp/0146_クレア様声をかけに行ったらどうですか?.wav
+2024-03-12 18:34:37,983 INFO    Unable to crop data/outputs/tmp/0147_はあ?ど…どうしてわたくしが…。.wav
+2024-03-12 18:34:38,055 INFO    Unable to crop data/outputs/tmp/0148_だって好きなんでしょう?.wav
+2024-03-12 18:34:38,161 INFO    Unable to crop data/outputs/tmp/0150_ですよね?な…ななな。.wav
+2024-03-12 18:34:38,283 INFO    Unable to crop data/outputs/tmp/0153_でも動揺するクレア様かわいすぎでは?.wav
+2024-03-12 18:34:38,536 INFO    Unable to crop data/outputs/tmp/0160_ちょっと!どうしてくれますの?セイン様にあんな…。.wav
+2024-03-12 18:34:38,884 INFO    Unable to crop data/outputs/tmp/0170_お茶をかけたらどうかしら?でも熱湯はさすがに…。.wav
+2024-03-12 18:34:39,007 INFO    Unable to crop data/outputs/tmp/0173_レイ=テイラー。うん?.wav
+2024-03-12 18:34:39,162 INFO    Unable to crop data/outputs/tmp/0177_す…少しは考えたらどうなんですの?.wav
+2024-03-12 18:34:39,352 INFO    Unable to crop data/outputs/tmp/0181_その格助詞の使い方やめてくださらない?.wav
+2024-03-12 18:34:39,454 INFO    Unable to crop data/outputs/tmp/0183_首席入学者が逃げるつもりですの?.wav
+2024-03-12 18:34:39,615 INFO    Unable to crop data/outputs/tmp/0187_はあ?どうしてわたくしがそんな。.wav
+2024-03-12 18:34:39,685 INFO    Unable to crop data/outputs/tmp/0188_あれ逃げるんですか?内部生のトップともあろうお方が?.wav
+2024-03-12 18:34:39,752 INFO    Unable to crop data/outputs/tmp/0189_んっ。挑発してるつもりですの?いいでしょう乗ってあげますわ。.wav
+2024-03-12 18:34:40,452 INFO    Unable to crop data/outputs/tmp/0209_ちょっとこんな夜更けになんの用ですの?.wav
+2024-03-12 18:34:40,981 INFO    Unable to crop data/outputs/tmp/0221_そっちですの!?.wav
+2024-03-12 18:34:41,334 INFO    Unable to crop data/outputs/tmp/0231_化けの皮が剥がれましたわね?平民!.wav
+2024-03-12 18:34:41,427 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-12 18:34:41,544 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-12 18:35:26,715 INFO    data/outputs//wataoshi_1_updated.csv
+2024-03-12 18:35:26,722 INFO    CSVファイル "data/outputs//wataoshi_1_updated.csv" にデータを保存しました。
+2024-03-12 18:35:26,759 INFO    Deleted the audios folder at data/outputs/tmp
+2024-03-12 18:35:26,867 INFO    Annotation file of finder updated to data/outputs//wataoshi_1_updated.csv
+2024-03-12 18:36:27,314 INFO    Checking inputs
+2024-03-12 18:36:27,315 INFO    Starting to create subtitles file
+2024-03-12 18:36:27,346 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-12 18:36:27,410 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-12 18:36:27,625 INFO    Starting predictions
+2024-03-12 18:36:27,627 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-12 18:36:27,627 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-12 18:36:28,249 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-12 18:36:28,251 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-12 18:36:28,253 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-12 18:36:28,255 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-12 18:36:28,256 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-12 18:36:28,379 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-12 18:36:28,380 INFO    Audios extracted
+2024-03-12 18:36:28,381 INFO    録音データから埋め込みを作成しました。
+2024-03-12 18:36:28,381 INFO    Embeddings created
+2024-03-12 18:36:28,381 INFO    data/character_embedds/embeddings/embeddings
+2024-03-12 18:36:28,381 WARNING Error when predicting. [Errno 13] Permission denied: 'data/character_embedds/embeddings\\embeddings\\クレア'
+2024-03-12 18:41:04,748 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:41:04,787 WARNING torchvision is not available - cannot save figures
+2024-03-12 18:41:04,810 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-12 18:41:06,063 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-12 18:41:06,086 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-12 18:41:06,235 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 18:41:06,546 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-12 18:41:06,692 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-12 18:41:07,317 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-12 18:41:07,675 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-12 18:41:12,293 INFO    Annotation file of finder updated to data/outputs//wataoshi_1_updated.csv
+2024-03-12 18:41:20,728 INFO    character embeddings folder data/character_embedds does not exist
+2024-03-12 18:41:20,731 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-12 18:41:20,732 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-12 18:41:21,334 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-12 18:41:21,336 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-12 18:41:21,339 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-12 18:41:21,342 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-12 18:41:21,343 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-12 18:41:21,483 WARNING Error when cropping. Torch not compiled with CUDA enabled
+2024-03-12 18:41:36,098 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-12 18:41:36,099 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-12 18:41:36,383 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-12 18:41:36,385 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-12 18:41:36,386 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-12 18:41:36,388 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-12 18:41:36,389 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-12 18:41:58,829 INFO    録音データから埋め込みを作成しました。
+2024-03-12 18:42:07,820 INFO    Checking inputs
+2024-03-12 18:42:07,821 WARNING subtitles_file does not exist
+2024-03-12 18:42:07,928 INFO    Annotation file of finder updated to 
+2024-03-12 18:42:08,052 INFO    Starting predictions
+2024-03-12 18:42:08,052 INFO    annotate_map  does not exist
+2024-03-12 18:42:29,811 INFO    Checking inputs
+2024-03-12 18:42:29,812 INFO    Starting to create subtitles file
+2024-03-12 18:42:29,987 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-12 18:42:30,067 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-12 18:42:30,258 INFO    Starting predictions
+2024-03-12 18:42:30,260 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-12 18:42:30,261 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-12 18:42:30,868 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-12 18:42:30,870 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-12 18:42:30,872 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-12 18:42:30,874 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-12 18:42:30,875 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-12 18:42:30,988 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-12 18:42:30,989 INFO    Audios extracted
+2024-03-12 18:42:30,990 INFO    録音データから埋め込みを作成しました。
+2024-03-12 18:42:30,990 INFO    Embeddings created
+2024-03-12 18:42:30,991 INFO    data/character_embedds/embeddings/クレア
+2024-03-12 18:42:30,998 INFO    data/character_embedds/embeddings/レイ
+2024-03-12 18:42:31,006 INFO    Starting predictions with output at data/outputs/
+2024-03-12 18:42:31,006 WARNING Error when predicting. [WinError 3] 指定されたパスが見つかりません。: 'data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\\embeddings'
+2024-03-13 09:33:56,007 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 09:33:56,229 WARNING torchvision is not available - cannot save figures
+2024-03-13 09:33:56,390 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 09:33:58,318 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 09:33:58,326 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 09:33:58,368 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 09:33:58,758 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 09:33:59,458 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 09:33:59,547 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 09:35:02,874 INFO    Checking inputs
+2024-03-13 09:35:02,875 INFO    Starting to create subtitles file
+2024-03-13 09:35:03,024 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 09:35:03,025 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 09:35:03,025 INFO    temp folder to save clips data/outputs/tmp does not exist
+2024-03-13 09:35:03,032 INFO    Salving audio files at data/outputs/tmp
+2024-03-13 09:35:03,234 INFO    Unable to crop data/outputs/tmp/0000_﻿0レイ:王立学院を舞台に0人の王子様との恋を楽しむ.wav
+2024-03-13 09:35:03,378 INFO    Unable to crop data/outputs/tmp/0001_恋愛シミュレーションゲーム『revolution』。.wav
+2024-03-13 09:35:03,734 INFO    Unable to crop data/outputs/tmp/0002_そんな乙女ゲームでの私の推しは….wav
+2024-03-13 09:35:04,594 INFO    Unable to crop data/outputs/tmp/0003_クレア様!んっ!.wav
+2024-03-13 09:35:05,345 INFO    Unable to crop data/outputs/tmp/0004_うっ!私はクレア様が大好きです!.wav
+2024-03-13 09:35:05,458 INFO    Unable to crop data/outputs/tmp/0005_クレア=フランソワ。ライバルである主人公をいじめ.wav
+2024-03-13 09:35:05,541 INFO    Unable to crop data/outputs/tmp/0006_最後には逆転される意地悪なお嬢様。.wav
+2024-03-13 09:35:05,609 INFO    Unable to crop data/outputs/tmp/0007_いわゆる悪役令嬢である.wav
+2024-03-13 09:35:05,677 INFO    Unable to crop data/outputs/tmp/0008_中小企業に勤める私大橋零は.wav
+2024-03-13 09:35:05,739 INFO    Unable to crop data/outputs/tmp/0009_その日もブラックな残業を終えて.wav
+2024-03-13 09:35:05,798 INFO    Unable to crop data/outputs/tmp/0010_趣味のゲームに没頭していた….wav
+2024-03-13 09:35:05,857 INFO    Unable to crop data/outputs/tmp/0011_すぅ…。はずだった.wav
+2024-03-13 09:35:05,915 INFO    Unable to crop data/outputs/tmp/0012_いいかげんに目を覚ましなさい。.wav
+2024-03-13 09:35:05,973 INFO    Unable to crop data/outputs/tmp/0013_冗談じゃありませんわ!.wav
+2024-03-13 09:35:06,036 INFO    Unable to crop data/outputs/tmp/0014_ちょっとあなた聞いていますの!?.wav
+2024-03-13 09:35:06,104 INFO    Unable to crop data/outputs/tmp/0015_気付くと目の前にいたのは….wav
+2024-03-13 09:35:06,170 INFO    Unable to crop data/outputs/tmp/0016_平民風情がわたくしと机を並べようなんて.wav
+2024-03-13 09:35:06,228 INFO    Unable to crop data/outputs/tmp/0017_身の程を知りなさい!.wav
+2024-03-13 09:35:06,290 INFO    Unable to crop data/outputs/tmp/0018_あっ…クレア?.wav
+2024-03-13 09:35:06,351 INFO    Unable to crop data/outputs/tmp/0019_まあ!このわたくしの名前を呼び捨てにするなんて!.wav
+2024-03-13 09:35:06,413 INFO    Unable to crop data/outputs/tmp/0020_これって…ゲームと同じ….wav
+2024-03-13 09:35:06,467 INFO    Unable to crop data/outputs/tmp/0021_クレア様!そうそう。.wav
+2024-03-13 09:35:06,531 INFO    Unable to crop data/outputs/tmp/0022_平民はそうやって尊称をつけるものですのよ。.wav
+2024-03-13 09:35:06,592 INFO    Unable to crop data/outputs/tmp/0023_私の名前覚えていらっしゃいますか?.wav
+2024-03-13 09:35:06,660 INFO    Unable to crop data/outputs/tmp/0024_んっ…。バカにしていますの?レイ=テイラー!.wav
+2024-03-13 09:35:06,722 INFO    Unable to crop data/outputs/tmp/0025_テイラーはゲームの主人公のファミリーネーム。.wav
+2024-03-13 09:35:06,781 INFO    Unable to crop data/outputs/tmp/0026_レイは私が登録した名前で…。.wav
+2024-03-13 09:35:06,842 INFO    Unable to crop data/outputs/tmp/0027_ってことはあれですか!?.wav
+2024-03-13 09:35:06,912 INFO    Unable to crop data/outputs/tmp/0028_これってもしかしてもしかすると…。.wav
+2024-03-13 09:35:06,976 INFO    Unable to crop data/outputs/tmp/0029_「異世界転生」ってやつですか!?.wav
+2024-03-13 09:35:07,071 INFO    Unable to crop data/outputs/tmp/0030_好きです。はっ?.wav
+2024-03-13 09:35:07,140 INFO    Unable to crop data/outputs/tmp/0031_私はクレア様が大好きです!.wav
+2024-03-13 09:35:07,214 INFO    Unable to crop data/outputs/tmp/0032_なっ…ななななな…!?.wav
+2024-03-13 09:35:07,268 INFO    Unable to crop data/outputs/tmp/0033_あなたいったい何を言ってますの?.wav
+2024-03-13 09:35:07,325 INFO    Unable to crop data/outputs/tmp/0034_何って単にクレア様が大好きなだけですけど。.wav
+2024-03-13 09:35:07,376 INFO    Unable to crop data/outputs/tmp/0035_ふ…ふん!取り入ろうとしても無駄ですわよ。.wav
+2024-03-13 09:35:07,443 INFO    Unable to crop data/outputs/tmp/0036_わたくしは平民なんかに少しも心を許したりしませんから。.wav
+2024-03-13 09:35:07,508 INFO    Unable to crop data/outputs/tmp/0037_かわいいなあ。んぶうっ!.wav
+2024-03-13 09:35:07,576 INFO    Unable to crop data/outputs/tmp/0038_あっすみません。ついつい本音が。.wav
+2024-03-13 09:35:07,637 INFO    Unable to crop data/outputs/tmp/0039_クレア様がかわいくてかわいくて。.wav
+2024-03-13 09:35:07,739 INFO    Unable to crop data/outputs/tmp/0040_なっ…なんなんですのこの人!?.wav
+2024-03-13 09:35:07,814 INFO    Unable to crop data/outputs/tmp/0041_クレア様は私のこと嫌いですよね?あ…当たり前ですわ。.wav
+2024-03-13 09:35:07,890 INFO    Unable to crop data/outputs/tmp/0042_それでokです!.wav
+2024-03-13 09:35:07,944 INFO    Unable to crop data/outputs/tmp/0043_今後もどんどんいじめてください。.wav
+2024-03-13 09:35:08,008 INFO    Unable to crop data/outputs/tmp/0044_ばっちこいです!うっ…うう。.wav
+2024-03-13 09:35:08,058 INFO    Unable to crop data/outputs/tmp/0045_さあ楽しい楽しい学院生活の始まりですねクレア様。.wav
+2024-03-13 09:35:08,113 INFO    Unable to crop data/outputs/tmp/0046_一緒に目いっぱい楽しみましょう!.wav
+2024-03-13 09:35:08,165 INFO    Unable to crop data/outputs/tmp/0047_なんでわたくしがあなたに巻き込まれる前提で.wav
+2024-03-13 09:35:08,231 INFO    Unable to crop data/outputs/tmp/0048_話が進んでますの!?.wav
+2024-03-13 09:35:08,299 INFO    Unable to crop data/outputs/tmp/0049_あらごめんあそばせ。.wav
+2024-03-13 09:35:08,372 INFO    Unable to crop data/outputs/tmp/0050_ぼっとしていらっしゃるから置物かと思いましたわ。.wav
+2024-03-13 09:35:08,430 INFO    Unable to crop data/outputs/tmp/0051_クレア様…。なんですの?.wav
+2024-03-13 09:35:08,490 INFO    Unable to crop data/outputs/tmp/0052_謝罪を求めても無駄ですわよ。.wav
+2024-03-13 09:35:08,553 INFO    Unable to crop data/outputs/tmp/0053_すばらしいです!えっ?.wav
+2024-03-13 09:35:08,613 INFO    Unable to crop data/outputs/tmp/0054_取り巻きがいるにもかかわらずご自分の手を汚される!.wav
+2024-03-13 09:35:08,667 INFO    Unable to crop data/outputs/tmp/0055_やはりそんじょそこらのいじめっことは格が違います!.wav
+2024-03-13 09:35:08,728 INFO    Unable to crop data/outputs/tmp/0056_な…何を言ってる…。.wav
+2024-03-13 09:35:08,788 INFO    Unable to crop data/outputs/tmp/0057_大好きですクレア様。.wav
+2024-03-13 09:35:08,847 INFO    Unable to crop data/outputs/tmp/0058_うううう…。.wav
+2024-03-13 09:35:08,901 INFO    Unable to crop data/outputs/tmp/0059_踏んでしまいましたわ。.wav
+2024-03-13 09:35:08,964 INFO    Unable to crop data/outputs/tmp/0060_さい…。聞こえませんわよ平民。.wav
+2024-03-13 09:35:09,028 INFO    Unable to crop data/outputs/tmp/0061_言いたいことがあるならもっとはっきりと。.wav
+2024-03-13 09:35:09,102 INFO    Unable to crop data/outputs/tmp/0062_どうせならもっと強く踏んでください!.wav
+2024-03-13 09:35:09,164 INFO    Unable to crop data/outputs/tmp/0063_ひっ!?今の踏み方には.wav
+2024-03-13 09:35:09,231 INFO    Unable to crop data/outputs/tmp/0064_遠慮が感じられました。.wav
+2024-03-13 09:35:09,296 INFO    Unable to crop data/outputs/tmp/0065_クレア様ともあろうお方が何を遠慮するのです!.wav
+2024-03-13 09:35:09,372 INFO    Unable to crop data/outputs/tmp/0066_あれ?教科書がない。.wav
+2024-03-13 09:35:09,431 INFO    Unable to crop data/outputs/tmp/0067_どうなさったの?あっ…。.wav
+2024-03-13 09:35:09,493 INFO    Unable to crop data/outputs/tmp/0068_平民は教科書を買えないほど貧乏ですの?.wav
+2024-03-13 09:35:09,552 INFO    Unable to crop data/outputs/tmp/0069_申し訳ありません。.wav
+2024-03-13 09:35:09,617 INFO    Unable to crop data/outputs/tmp/0070_クレア様のお気持ちに気がつけず…。.wav
+2024-03-13 09:35:09,669 INFO    Unable to crop data/outputs/tmp/0071_オーッホッホッホ!.wav
+2024-03-13 09:35:09,725 INFO    Unable to crop data/outputs/tmp/0072_初めからそうしてしおらしくしていれば…。.wav
+2024-03-13 09:35:09,782 INFO    Unable to crop data/outputs/tmp/0073_教科書を隠してまで私と密着しながら.wav
+2024-03-13 09:35:09,849 INFO    Unable to crop data/outputs/tmp/0074_授業を受けたいだなんて!えっ?.wav
+2024-03-13 09:35:09,920 INFO    Unable to crop data/outputs/tmp/0075_私たち席お隣ですもんね。一緒に見ましょう!ゼロ距離で。.wav
+2024-03-13 09:35:09,987 INFO    Unable to crop data/outputs/tmp/0076_ちょっ…意味がわかりませんわ。.wav
+2024-03-13 09:35:10,052 INFO    Unable to crop data/outputs/tmp/0077_うん目をつけられたっていうか.wav
+2024-03-13 09:35:10,127 INFO    Unable to crop data/outputs/tmp/0078_目をつけられに行ったっていうか。.wav
+2024-03-13 09:35:10,187 INFO    Unable to crop data/outputs/tmp/0079_私クレア様大好きなんだよ。.wav
+2024-03-13 09:35:10,250 INFO    Unable to crop data/outputs/tmp/0080_キャンキャンした声に底意地の悪い悪行の数々。.wav
+2024-03-13 09:35:10,305 INFO    Unable to crop data/outputs/tmp/0081_どこをとっても私のツボにドストライク。.wav
+2024-03-13 09:35:10,360 INFO    Unable to crop data/outputs/tmp/0082_クレア様っていじめても決して一線は越えないんだ。.wav
+2024-03-13 09:35:10,427 INFO    Unable to crop data/outputs/tmp/0083_廊下で突き飛ばしたのも安全な場所だし.wav
+2024-03-13 09:35:10,490 INFO    Unable to crop data/outputs/tmp/0084_教科書も隠すだけで捨てたりはしない。.wav
+2024-03-13 09:35:10,558 INFO    Unable to crop data/outputs/tmp/0085_それにね…。.wav
+2024-03-13 09:35:10,630 INFO    Unable to crop data/outputs/tmp/0086_なりませんわ!あっ…。.wav
+2024-03-13 09:35:10,696 INFO    Unable to crop data/outputs/tmp/0087_わたくしが手ずから必ずあの平民を屈服させてみせますわ。.wav
+2024-03-13 09:35:10,761 INFO    Unable to crop data/outputs/tmp/0088_クレア様はいじめるときは必ず自分の手を汚すんだ。.wav
+2024-03-13 09:35:10,824 INFO    Unable to crop data/outputs/tmp/0089_無駄にプライドが高かったり.wav
+2024-03-13 09:35:10,891 INFO    Unable to crop data/outputs/tmp/0090_ホントは傷つきやすいのを隠して威嚇してたり。.wav
+2024-03-13 09:35:10,958 INFO    Unable to crop data/outputs/tmp/0091_あの人間臭さが妙に憎めなくて。.wav
+2024-03-13 09:35:11,022 INFO    Unable to crop data/outputs/tmp/0092_そういうところがかわいくてたまらないんだよ。.wav
+2024-03-13 09:35:11,078 INFO    Unable to crop data/outputs/tmp/0093_あっ。あらあなた.wav
+2024-03-13 09:35:11,143 INFO    Unable to crop data/outputs/tmp/0094_組む相手がいませんの?.wav
+2024-03-13 09:35:11,203 INFO    Unable to crop data/outputs/tmp/0095_卑しい平民はこれだから…。先生!あっ…。.wav
+2024-03-13 09:35:11,273 INFO    Unable to crop data/outputs/tmp/0096_クレア様が組んでくださるそうです!.wav
+2024-03-13 09:35:11,336 INFO    Unable to crop data/outputs/tmp/0097_組みませんわよ!.wav
+2024-03-13 09:35:11,400 INFO    Unable to crop data/outputs/tmp/0098_オーッホッホッホ!あまりに汚いので.wav
+2024-03-13 09:35:11,459 INFO    Unable to crop data/outputs/tmp/0099_泥かと思いましたわ。.wav
+2024-03-13 09:35:11,529 INFO    Unable to crop data/outputs/tmp/0100_きゃっ!触らないで!.wav
+2024-03-13 09:35:11,593 INFO    Unable to crop data/outputs/tmp/0101_クレア様あっためてください。.wav
+2024-03-13 09:35:11,655 INFO    Unable to crop data/outputs/tmp/0102_これって…クレア様の仕業ですか?.wav
+2024-03-13 09:35:11,709 INFO    Unable to crop data/outputs/tmp/0103_初めてのプレゼントですね!あっ…あっ…。.wav
+2024-03-13 09:35:11,774 INFO    Unable to crop data/outputs/tmp/0104_押し花にして持ち歩きます。なんでそうなりますの!?.wav
+2024-03-13 09:35:11,837 INFO    Unable to crop data/outputs/tmp/0105_ちょっと…あなた…。.wav
+2024-03-13 09:35:11,901 INFO    Unable to crop data/outputs/tmp/0106_打たれ強すぎじゃありませんこと?.wav
+2024-03-13 09:35:11,961 INFO    Unable to crop data/outputs/tmp/0107_えっ?なんのことですか?.wav
+2024-03-13 09:35:12,033 INFO    Unable to crop data/outputs/tmp/0108_これだけ意地悪されてどうして平然としていられますの!?.wav
+2024-03-13 09:35:12,101 INFO    Unable to crop data/outputs/tmp/0109_意地悪?愛ですよね。違いますわよ!.wav
+2024-03-13 09:35:12,163 INFO    Unable to crop data/outputs/tmp/0110_じゃあなんだっていうんですか!.wav
+2024-03-13 09:35:12,223 INFO    Unable to crop data/outputs/tmp/0111_どうしてわたくしが怒られてますの!?.wav
+2024-03-13 09:35:12,287 INFO    Unable to crop data/outputs/tmp/0112_平民はおとなしく労働にいそしんでいなさい!.wav
+2024-03-13 09:35:12,353 INFO    Unable to crop data/outputs/tmp/0113_クレア様をめでるのが私の労働。いえ奉仕です。.wav
+2024-03-13 09:35:12,413 INFO    Unable to crop data/outputs/tmp/0114_もうやだこの子。.wav
+2024-03-13 09:35:12,471 INFO    Unable to crop data/outputs/tmp/0115_クレア様くじけちゃだめです!「継続は力なり」ですよ!.wav
+2024-03-13 09:35:12,532 INFO    Unable to crop data/outputs/tmp/0116_ガーン!それは困る。.wav
+2024-03-13 09:35:12,596 INFO    Unable to crop data/outputs/tmp/0117_クレア様がいじめてくれなくなったら.wav
+2024-03-13 09:35:12,665 INFO    Unable to crop data/outputs/tmp/0118_どうしようミシャ!ああ…。.wav
+2024-03-13 09:35:12,723 INFO    Unable to crop data/outputs/tmp/0119_ゲームどおりに行動すれば.wav
+2024-03-13 09:35:12,797 INFO    Unable to crop data/outputs/tmp/0120_負けず嫌いのクレア様は私を無視できない。.wav
+2024-03-13 09:35:12,871 INFO    Unable to crop data/outputs/tmp/0121_私はクレア様をめでられる。.wav
+2024-03-13 09:35:12,939 INFO    Unable to crop data/outputs/tmp/0122_なんというウィンウィンな関係!.wav
+2024-03-13 09:35:12,998 INFO    Unable to crop data/outputs/tmp/0123_入学してもうすぐ0週間。.wav
+2024-03-13 09:35:13,064 INFO    Unable to crop data/outputs/tmp/0124_クレア様とじゃれ合う毎日は…至福だ.wav
+2024-03-13 09:35:13,132 INFO    Unable to crop data/outputs/tmp/0125_あっクレア様!あっ…。.wav
+2024-03-13 09:35:13,194 INFO    Unable to crop data/outputs/tmp/0126_ごきげんようクレア様。.wav
+2024-03-13 09:35:13,249 INFO    Unable to crop data/outputs/tmp/0127_取り巻きさんたちに用はないんだ。なっ…。まあ!.wav
+2024-03-13 09:35:13,309 INFO    Unable to crop data/outputs/tmp/0128_というわけでごきげんようクレア様。.wav
+2024-03-13 09:35:13,369 INFO    Unable to crop data/outputs/tmp/0129_調子に乗らないでちょうだい。あっ…。.wav
+2024-03-13 09:35:13,478 INFO    Unable to crop data/outputs/tmp/0130_あなたなんかにかける言葉などなくってよ。.wav
+2024-03-13 09:35:13,567 INFO    Unable to crop data/outputs/tmp/0131_だいたい「ごきげんよう」は別れの挨拶として使うもので…。.wav
+2024-03-13 09:35:13,656 INFO    Unable to crop data/outputs/tmp/0132_でも結局声をかけちゃうし.wav
+2024-03-13 09:35:13,735 INFO    Unable to crop data/outputs/tmp/0133_間違いまで指摘してくれるクレア様好きです。.wav
+2024-03-13 09:35:13,796 INFO    Unable to crop data/outputs/tmp/0134_いいかげんにしなさい!.wav
+2024-03-13 09:35:13,851 INFO    Unable to crop data/outputs/tmp/0135_先日から好きだのなんだのとからかうのも大概になさい!.wav
+2024-03-13 09:35:13,911 INFO    Unable to crop data/outputs/tmp/0136_今すぐこの学院から消えなさい!目障りですわ。.wav
+2024-03-13 09:35:13,976 INFO    Unable to crop data/outputs/tmp/0137_興味がなさすぎて忘れていたけど.wav
+2024-03-13 09:35:14,037 INFO    Unable to crop data/outputs/tmp/0138_ここは乙女ゲーの世界.wav
+2024-03-13 09:35:14,102 INFO    Unable to crop data/outputs/tmp/0139_彼らはゲームの舞台であるバウアー王国の王子。.wav
+2024-03-13 09:35:14,158 INFO    Unable to crop data/outputs/tmp/0140_すなわち本来の攻略対象である.wav
+2024-03-13 09:35:14,218 INFO    Unable to crop data/outputs/tmp/0141_ロッド様…。おもしろいことなんて何もありませんわ。.wav
+2024-03-13 09:35:14,277 INFO    Unable to crop data/outputs/tmp/0142_若干0名学院の風紀を乱すようなやからがいるというだけで。.wav
+2024-03-13 09:35:14,341 INFO    Unable to crop data/outputs/tmp/0143_それはあれですか?私と一緒に風紀を乱したいと?.wav
+2024-03-13 09:35:14,405 INFO    Unable to crop data/outputs/tmp/0144_乱しませんわよ!はう。.wav
+2024-03-13 09:35:14,472 INFO    Unable to crop data/outputs/tmp/0145_セイン様…。.wav
+2024-03-13 09:35:14,530 INFO    Unable to crop data/outputs/tmp/0146_クレア様声をかけに行ったらどうですか?.wav
+2024-03-13 09:35:14,585 INFO    Unable to crop data/outputs/tmp/0147_はあ?ど…どうしてわたくしが…。.wav
+2024-03-13 09:35:14,654 INFO    Unable to crop data/outputs/tmp/0148_だって好きなんでしょう?.wav
+2024-03-13 09:35:14,712 INFO    Unable to crop data/outputs/tmp/0149_そう実はクレア様の思い人はこのセイン様なのだ.wav
+2024-03-13 09:35:14,777 INFO    Unable to crop data/outputs/tmp/0150_ですよね?な…ななな。.wav
+2024-03-13 09:35:14,836 INFO    Unable to crop data/outputs/tmp/0151_何言ってるんですのあなた!.wav
+2024-03-13 09:35:14,915 INFO    Unable to crop data/outputs/tmp/0152_しまった。つい…。.wav
+2024-03-13 09:35:15,012 INFO    Unable to crop data/outputs/tmp/0153_でも動揺するクレア様かわいすぎでは?.wav
+2024-03-13 09:35:15,085 INFO    Unable to crop data/outputs/tmp/0154_ち…違いますわ!.wav
+2024-03-13 09:35:15,158 INFO    Unable to crop data/outputs/tmp/0155_セイン様のことなんてなんとも思っていませんわ!.wav
+2024-03-13 09:35:15,224 INFO    Unable to crop data/outputs/tmp/0156_あっ。わ…わたくしそんなつもりじゃ…。.wav
+2024-03-13 09:35:15,315 INFO    Unable to crop data/outputs/tmp/0157_セイン様って小さい頃から優秀な兄弟に挟まれて.wav
+2024-03-13 09:35:15,394 INFO    Unable to crop data/outputs/tmp/0158_コンプレックスの塊。いろいろ面倒な性格なんだよね。.wav
+2024-03-13 09:35:15,466 INFO    Unable to crop data/outputs/tmp/0159_私は嫌いじゃないんだけど.wav
+2024-03-13 09:35:15,553 INFO    Unable to crop data/outputs/tmp/0160_ちょっと!どうしてくれますの?セイン様にあんな…。.wav
+2024-03-13 09:35:15,628 INFO    Unable to crop data/outputs/tmp/0161_謝りましょうクレア様。セイン様は繊細な方です。.wav
+2024-03-13 09:35:15,698 INFO    Unable to crop data/outputs/tmp/0162_平民風情が何を知ったような口を!.wav
+2024-03-13 09:35:15,766 INFO    Unable to crop data/outputs/tmp/0163_だいたい誰のせいだと…あっ。.wav
+2024-03-13 09:35:15,839 INFO    Unable to crop data/outputs/tmp/0164_謝りましょう。えいっ!.wav
+2024-03-13 09:35:15,894 INFO    Unable to crop data/outputs/tmp/0165_余計なお世話ですわ!もう我慢なりません。.wav
+2024-03-13 09:35:15,954 INFO    Unable to crop data/outputs/tmp/0166_こうなったらあなたが泣いて屈服するその日まで.wav
+2024-03-13 09:35:16,009 INFO    Unable to crop data/outputs/tmp/0167_いじめていじめていじめ抜いてみせますわ!.wav
+2024-03-13 09:35:16,084 INFO    Unable to crop data/outputs/tmp/0168_覚悟なさいレイ=テイラー!わたくし絶対諦めませんわよ!.wav
+2024-03-13 09:35:16,148 INFO    Unable to crop data/outputs/tmp/0169_水じゃ手ぬるいですわ。.wav
+2024-03-13 09:35:16,215 INFO    Unable to crop data/outputs/tmp/0170_お茶をかけたらどうかしら?でも熱湯はさすがに…。.wav
+2024-03-13 09:35:16,280 INFO    Unable to crop data/outputs/tmp/0171_いいえだめですわ。うっ。うん。.wav
+2024-03-13 09:35:16,376 INFO    Unable to crop data/outputs/tmp/0172_それですわ!うわっ。.wav
+2024-03-13 09:35:16,435 INFO    Unable to crop data/outputs/tmp/0173_レイ=テイラー。うん?.wav
+2024-03-13 09:35:16,489 INFO    Unable to crop data/outputs/tmp/0174_明日の試験でわたくしと勝負なさい。.wav
+2024-03-13 09:35:16,547 INFO    Unable to crop data/outputs/tmp/0175_わたくしが勝ったらあなたにはこの学院を去ってもらいますわ。.wav
+2024-03-13 09:35:16,608 INFO    Unable to crop data/outputs/tmp/0176_えっ嫌ですけど。ほぶうっ!.wav
+2024-03-13 09:35:16,673 INFO    Unable to crop data/outputs/tmp/0177_す…少しは考えたらどうなんですの?.wav
+2024-03-13 09:35:16,730 INFO    Unable to crop data/outputs/tmp/0178_いやだって私に何もうまみがないですし。.wav
+2024-03-13 09:35:16,782 INFO    Unable to crop data/outputs/tmp/0179_それに学院をやめたらクレア様で遊べないじゃないですか。.wav
+2024-03-13 09:35:16,839 INFO    Unable to crop data/outputs/tmp/0180_「と」!「で」じゃなくて「と」!.wav
+2024-03-13 09:35:16,901 INFO    Unable to crop data/outputs/tmp/0181_その格助詞の使い方やめてくださらない?.wav
+2024-03-13 09:35:16,961 INFO    Unable to crop data/outputs/tmp/0182_いいから勝負なさい!.wav
+2024-03-13 09:35:17,017 INFO    Unable to crop data/outputs/tmp/0183_首席入学者が逃げるつもりですの?.wav
+2024-03-13 09:35:17,075 INFO    Unable to crop data/outputs/tmp/0184_わかりました。じゃあこうしましょう。.wav
+2024-03-13 09:35:17,131 INFO    Unable to crop data/outputs/tmp/0185_もしクレア様が勝てなかったら.wav
+2024-03-13 09:35:17,193 INFO    Unable to crop data/outputs/tmp/0186_何か一つお願いを聞いてください。.wav
+2024-03-13 09:35:17,249 INFO    Unable to crop data/outputs/tmp/0187_はあ?どうしてわたくしがそんな。.wav
+2024-03-13 09:35:17,312 INFO    Unable to crop data/outputs/tmp/0188_あれ逃げるんですか?内部生のトップともあろうお方が?.wav
+2024-03-13 09:35:17,372 INFO    Unable to crop data/outputs/tmp/0189_んっ。挑発してるつもりですの?いいでしょう乗ってあげますわ。.wav
+2024-03-13 09:35:17,447 INFO    Unable to crop data/outputs/tmp/0190_ミシャ!あなたこの勝負の証人になってちょうだい。.wav
+2024-03-13 09:35:17,510 INFO    Unable to crop data/outputs/tmp/0191_神に誓って!.wav
+2024-03-13 09:35:17,570 INFO    Unable to crop data/outputs/tmp/0192_クレア:文化歴史文学。.wav
+2024-03-13 09:35:17,631 INFO    Unable to crop data/outputs/tmp/0193_生活に直結しない教養の分野は貴族の独壇場。.wav
+2024-03-13 09:35:17,702 INFO    Unable to crop data/outputs/tmp/0194_つまり圧倒的にわたくしが有利!.wav
+2024-03-13 09:35:17,764 INFO    Unable to crop data/outputs/tmp/0195_この試験勝ちましたわ!.wav
+2024-03-13 09:35:17,821 INFO    Unable to crop data/outputs/tmp/0196_ゲームを周回プレイ済みの私は.wav
+2024-03-13 09:35:17,877 INFO    Unable to crop data/outputs/tmp/0197_このイベントを当然何度も経験しているわけで。.wav
+2024-03-13 09:35:17,933 INFO    Unable to crop data/outputs/tmp/0198_つまりこの試験やり込みガチ勢にとって.wav
+2024-03-13 09:35:17,994 INFO    Unable to crop data/outputs/tmp/0199_赤子の手をひねるがごとし.wav
+2024-03-13 09:35:18,050 INFO    Unable to crop data/outputs/tmp/0200_テーブルマナーって実際にやるとしんどいなあ。.wav
+2024-03-13 09:35:18,117 INFO    Unable to crop data/outputs/tmp/0201_ゲームでは選択式だったから楽だったけど…。.wav
+2024-03-13 09:35:18,242 INFO    Unable to crop data/outputs/tmp/0202_こればかりは生まれたときから.wav
+2024-03-13 09:35:18,313 INFO    Unable to crop data/outputs/tmp/0203_自然と身につけているものが大きい。.wav
+2024-03-13 09:35:18,372 INFO    Unable to crop data/outputs/tmp/0204_貴族のほうが圧倒的に有利.wav
+2024-03-13 09:35:18,424 INFO    Unable to crop data/outputs/tmp/0205_う…美しすぎる。.wav
+2024-03-13 09:35:18,481 INFO    Unable to crop data/outputs/tmp/0206_ああクレア様!さすがです!好きです!.wav
+2024-03-13 09:35:18,542 INFO    Unable to crop data/outputs/tmp/0207_目に焼き付けておきたい!.wav
+2024-03-13 09:35:18,597 INFO    Unable to crop data/outputs/tmp/0208_オーッホッホッホ!当然ですわ。.wav
+2024-03-13 09:35:18,658 INFO    Unable to crop data/outputs/tmp/0209_ちょっとこんな夜更けになんの用ですの?.wav
+2024-03-13 09:35:18,721 INFO    Unable to crop data/outputs/tmp/0210_一日がかりの試験で身も心も疲れ果てまして。.wav
+2024-03-13 09:35:18,850 INFO    Unable to crop data/outputs/tmp/0211_元気をもらいに来ました。.wav
+2024-03-13 09:35:18,914 INFO    Unable to crop data/outputs/tmp/0212_どうかおやすみのハグを。きゃっ!.wav
+2024-03-13 09:35:18,976 INFO    Unable to crop data/outputs/tmp/0213_この間の試験結果が今日発表になるんですの。.wav
+2024-03-13 09:35:19,038 INFO    Unable to crop data/outputs/tmp/0214_ヘヘヘヘ…。あら平民。.wav
+2024-03-13 09:35:19,115 INFO    Unable to crop data/outputs/tmp/0215_わあ。くまができてますわよ。.wav
+2024-03-13 09:35:19,177 INFO    Unable to crop data/outputs/tmp/0216_あっクレア様。実は昨日一睡もできなくて。.wav
+2024-03-13 09:35:19,235 INFO    Unable to crop data/outputs/tmp/0217_オーッホッホッホッホ!お気の毒さま!.wav
+2024-03-13 09:35:19,298 INFO    Unable to crop data/outputs/tmp/0218_わたくしに負けるのが心配で眠れなかったというわけですわね。.wav
+2024-03-13 09:35:19,459 INFO    Unable to crop data/outputs/tmp/0219_ええ。クレア様に何をしてもらうか考えていたら.wav
+2024-03-13 09:35:19,523 INFO    Unable to crop data/outputs/tmp/0220_夜が明けてしまいました。.wav
+2024-03-13 09:35:19,580 INFO    Unable to crop data/outputs/tmp/0221_そっちですの!?.wav
+2024-03-13 09:35:19,662 INFO    Unable to crop data/outputs/tmp/0222_ありえませんわ…。平民相手にわたくしが負けるだなんて。.wav
+2024-03-13 09:35:19,775 INFO    Unable to crop data/outputs/tmp/0223_すみませんクレア様。.wav
+2024-03-13 09:35:19,850 INFO    Unable to crop data/outputs/tmp/0224_私やり込みガチ勢ってだけじゃなく.wav
+2024-03-13 09:35:19,931 INFO    Unable to crop data/outputs/tmp/0225_同人誌出してるんです。.wav
+2024-03-13 09:35:20,021 INFO    Unable to crop data/outputs/tmp/0226_内容は没落したクレア様が成り上がる悪役令嬢物。.wav
+2024-03-13 09:35:20,083 INFO    Unable to crop data/outputs/tmp/0227_世界観の把握や時代考察が必須で.wav
+2024-03-13 09:35:20,155 INFO    Unable to crop data/outputs/tmp/0228_設定資料を隅から隅まで読み込んだ。.wav
+2024-03-13 09:35:20,233 INFO    Unable to crop data/outputs/tmp/0229_正直開発スタッフより詳しい自信がある.wav
+2024-03-13 09:35:20,308 INFO    Unable to crop data/outputs/tmp/0230_オーッホッホッホッホ!やはりさっきのはただの偶然!.wav
+2024-03-13 09:35:20,381 INFO    Unable to crop data/outputs/tmp/0231_化けの皮が剥がれましたわね?平民!.wav
+2024-03-13 09:35:20,478 INFO    Unable to crop data/outputs/tmp/0232_はしゃぐクレア様…かわいい.wav
+2024-03-13 09:35:20,593 INFO    Unable to crop data/outputs/tmp/0233_さあかつもくしなさい。あなたの最後の瞬間ですわ。.wav
+2024-03-13 09:35:20,657 INFO    Unable to crop data/outputs/tmp/0234_測定…不能。.wav
+2024-03-13 09:35:20,674 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 09:35:20,789 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 09:38:16,549 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 09:38:16,596 WARNING torchvision is not available - cannot save figures
+2024-03-13 09:38:16,625 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 09:38:17,860 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 09:38:17,891 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 09:38:17,923 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 09:38:18,520 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 09:38:18,984 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 09:38:19,012 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 09:39:00,909 INFO    Checking inputs
+2024-03-13 09:39:00,909 INFO    Starting to create subtitles file
+2024-03-13 09:39:01,116 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 09:39:01,116 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 09:39:01,125 INFO    Salving audio files at data/outputs/tmp
+2024-03-13 09:39:01,858 INFO    Unable to crop data/outputs/tmp/0014_ちょっとあなた聞いていますの!?.wav
+2024-03-13 09:39:02,102 INFO    Unable to crop data/outputs/tmp/0018_あっ…クレア?.wav
+2024-03-13 09:39:02,339 INFO    Unable to crop data/outputs/tmp/0023_私の名前覚えていらっしゃいますか?.wav
+2024-03-13 09:39:02,442 INFO    Unable to crop data/outputs/tmp/0024_んっ…。バカにしていますの?レイ=テイラー!.wav
+2024-03-13 09:39:02,616 INFO    Unable to crop data/outputs/tmp/0027_ってことはあれですか!?.wav
+2024-03-13 09:39:02,760 INFO    Unable to crop data/outputs/tmp/0029_「異世界転生」ってやつですか!?.wav
+2024-03-13 09:39:02,857 INFO    Unable to crop data/outputs/tmp/0030_好きです。はっ?.wav
+2024-03-13 09:39:03,003 INFO    Unable to crop data/outputs/tmp/0032_なっ…ななななな…!?.wav
+2024-03-13 09:39:03,086 INFO    Unable to crop data/outputs/tmp/0033_あなたいったい何を言ってますの?.wav
+2024-03-13 09:39:03,473 INFO    Unable to crop data/outputs/tmp/0040_なっ…なんなんですのこの人!?.wav
+2024-03-13 09:39:03,553 INFO    Unable to crop data/outputs/tmp/0041_クレア様は私のこと嫌いですよね?あ…当たり前ですわ。.wav
+2024-03-13 09:39:03,906 INFO    Unable to crop data/outputs/tmp/0048_話が進んでますの!?.wav
+2024-03-13 09:39:04,065 INFO    Unable to crop data/outputs/tmp/0051_クレア様…。なんですの?.wav
+2024-03-13 09:39:04,194 INFO    Unable to crop data/outputs/tmp/0053_すばらしいです!えっ?.wav
+2024-03-13 09:39:04,608 INFO    Unable to crop data/outputs/tmp/0063_ひっ!?今の踏み方には.wav
+2024-03-13 09:39:04,779 INFO    Unable to crop data/outputs/tmp/0066_あれ?教科書がない。.wav
+2024-03-13 09:39:04,863 INFO    Unable to crop data/outputs/tmp/0067_どうなさったの?あっ…。.wav
+2024-03-13 09:39:04,951 INFO    Unable to crop data/outputs/tmp/0068_平民は教科書を買えないほど貧乏ですの?.wav
+2024-03-13 09:39:05,255 INFO    Unable to crop data/outputs/tmp/0074_授業を受けたいだなんて!えっ?.wav
+2024-03-13 09:39:06,053 INFO    Unable to crop data/outputs/tmp/0094_組む相手がいませんの?.wav
+2024-03-13 09:39:06,392 INFO    Unable to crop data/outputs/tmp/0102_これって…クレア様の仕業ですか?.wav
+2024-03-13 09:39:06,527 INFO    Unable to crop data/outputs/tmp/0104_押し花にして持ち歩きます。なんでそうなりますの!?.wav
+2024-03-13 09:39:06,647 INFO    Unable to crop data/outputs/tmp/0106_打たれ強すぎじゃありませんこと?.wav
+2024-03-13 09:39:06,721 INFO    Unable to crop data/outputs/tmp/0107_えっ?なんのことですか?.wav
+2024-03-13 09:39:06,812 INFO    Unable to crop data/outputs/tmp/0108_これだけ意地悪されてどうして平然としていられますの!?.wav
+2024-03-13 09:39:06,897 INFO    Unable to crop data/outputs/tmp/0109_意地悪?愛ですよね。違いますわよ!.wav
+2024-03-13 09:39:07,036 INFO    Unable to crop data/outputs/tmp/0111_どうしてわたくしが怒られてますの!?.wav
+2024-03-13 09:39:08,285 INFO    Unable to crop data/outputs/tmp/0143_それはあれですか?私と一緒に風紀を乱したいと?.wav
+2024-03-13 09:39:08,440 INFO    Unable to crop data/outputs/tmp/0146_クレア様声をかけに行ったらどうですか?.wav
+2024-03-13 09:39:08,534 INFO    Unable to crop data/outputs/tmp/0147_はあ?ど…どうしてわたくしが…。.wav
+2024-03-13 09:39:08,617 INFO    Unable to crop data/outputs/tmp/0148_だって好きなんでしょう?.wav
+2024-03-13 09:39:08,763 INFO    Unable to crop data/outputs/tmp/0150_ですよね?な…ななな。.wav
+2024-03-13 09:39:08,922 INFO    Unable to crop data/outputs/tmp/0153_でも動揺するクレア様かわいすぎでは?.wav
+2024-03-13 09:39:09,283 INFO    Unable to crop data/outputs/tmp/0160_ちょっと!どうしてくれますの?セイン様にあんな…。.wav
+2024-03-13 09:39:09,703 INFO    Unable to crop data/outputs/tmp/0170_お茶をかけたらどうかしら?でも熱湯はさすがに…。.wav
+2024-03-13 09:39:09,873 INFO    Unable to crop data/outputs/tmp/0173_レイ=テイラー。うん?.wav
+2024-03-13 09:39:10,083 INFO    Unable to crop data/outputs/tmp/0177_す…少しは考えたらどうなんですの?.wav
+2024-03-13 09:39:10,276 INFO    Unable to crop data/outputs/tmp/0181_その格助詞の使い方やめてくださらない?.wav
+2024-03-13 09:39:10,400 INFO    Unable to crop data/outputs/tmp/0183_首席入学者が逃げるつもりですの?.wav
+2024-03-13 09:39:10,612 INFO    Unable to crop data/outputs/tmp/0187_はあ?どうしてわたくしがそんな。.wav
+2024-03-13 09:39:10,691 INFO    Unable to crop data/outputs/tmp/0188_あれ逃げるんですか?内部生のトップともあろうお方が?.wav
+2024-03-13 09:39:10,779 INFO    Unable to crop data/outputs/tmp/0189_んっ。挑発してるつもりですの?いいでしょう乗ってあげますわ。.wav
+2024-03-13 09:39:11,578 INFO    Unable to crop data/outputs/tmp/0209_ちょっとこんな夜更けになんの用ですの?.wav
+2024-03-13 09:39:12,066 INFO    Unable to crop data/outputs/tmp/0221_そっちですの!?.wav
+2024-03-13 09:39:12,507 INFO    Unable to crop data/outputs/tmp/0231_化けの皮が剥がれましたわね?平民!.wav
+2024-03-13 09:39:12,625 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 09:39:12,804 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 09:43:02,557 INFO    data/outputs//wataoshi_1_updated.csv
+2024-03-13 09:43:02,566 INFO    CSVファイル "data/outputs//wataoshi_1_updated.csv" にデータを保存しました。
+2024-03-13 09:43:02,612 INFO    Deleted the audios folder at data/outputs/tmp
+2024-03-13 09:43:02,713 INFO    Annotation file of finder updated to data/outputs//wataoshi_1_updated.csv
+2024-03-13 09:49:20,621 INFO    Checking inputs
+2024-03-13 09:49:20,623 INFO    Starting to create subtitles file
+2024-03-13 09:49:20,652 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 09:49:20,746 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 09:49:20,952 INFO    Starting predictions
+2024-03-13 09:49:20,954 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 09:49:20,954 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 09:49:21,719 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 09:49:21,721 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 09:49:21,723 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 09:49:21,727 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 09:49:21,730 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 09:49:21,988 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-13 09:49:31,339 INFO    Audios extracted
+2024-03-13 09:50:54,848 INFO    録音データから埋め込みを作成しました。
+2024-03-13 09:50:54,848 INFO    Embeddings created
+2024-03-13 09:50:54,849 INFO    data/character_embedds/embeddings/クレア
+2024-03-13 09:50:54,874 INFO    data/character_embedds/embeddings/レイ
+2024-03-13 09:50:54,908 INFO    Starting predictions with output at data/outputs/
+2024-03-13 09:50:55,377 WARNING Error when predicting. [Errno 2] No such file or directory: 'data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv'
+2024-03-13 09:59:44,565 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 09:59:44,608 WARNING torchvision is not available - cannot save figures
+2024-03-13 09:59:44,635 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 09:59:45,842 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 09:59:45,885 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 09:59:45,903 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 09:59:46,442 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 09:59:46,916 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 09:59:47,002 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 10:00:08,495 INFO    Checking inputs
+2024-03-13 10:00:08,496 INFO    Starting to create subtitles file
+2024-03-13 10:00:08,689 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 10:00:08,793 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 10:00:08,935 INFO    Starting predictions
+2024-03-13 10:00:08,937 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 10:00:08,938 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 10:00:09,584 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 10:00:09,586 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 10:00:09,588 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 10:00:09,590 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 10:00:09,592 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 10:00:09,712 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-13 10:00:17,765 INFO    Audios extracted
+2024-03-13 10:01:36,932 INFO    録音データから埋め込みを作成しました。
+2024-03-13 10:01:36,932 INFO    Embeddings created
+2024-03-13 10:01:36,932 INFO    data/character_embedds/embeddings/クレア
+2024-03-13 10:01:36,942 INFO    data/character_embedds/embeddings/レイ
+2024-03-13 10:01:36,950 INFO    Starting predictions with output at data/outputs/
+2024-03-13 10:01:37,444 WARNING Error when predicting. [Errno 2] No such file or directory: 'data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv'
+2024-03-13 10:04:18,105 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:04:18,149 WARNING torchvision is not available - cannot save figures
+2024-03-13 10:04:18,173 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:04:19,307 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 10:04:19,360 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 10:04:19,396 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 10:04:19,873 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 10:04:20,432 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 10:04:20,462 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 10:04:34,807 INFO    Checking inputs
+2024-03-13 10:04:34,807 INFO    Starting to create subtitles file
+2024-03-13 10:04:34,993 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 10:04:35,123 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 10:04:35,325 INFO    Starting predictions
+2024-03-13 10:04:35,326 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 10:04:35,327 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 10:04:35,974 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 10:04:35,976 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 10:04:35,980 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 10:04:35,983 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 10:04:35,987 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 10:04:36,106 WARNING Error when predicting. Torch not compiled with CUDA enabled
+2024-03-13 10:04:51,891 INFO    Checking inputs
+2024-03-13 10:04:51,892 INFO    Starting to create subtitles file
+2024-03-13 10:04:51,923 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 10:04:52,253 INFO    Starting predictions
+2024-03-13 10:04:52,255 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 10:04:52,255 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 10:04:52,544 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 10:04:52,546 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 10:04:52,549 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 10:04:52,552 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 10:04:52,553 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 10:04:52,677 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-13 10:05:00,573 INFO    Audios extracted
+2024-03-13 10:06:21,117 INFO    録音データから埋め込みを作成しました。
+2024-03-13 10:06:21,117 INFO    Embeddings created
+2024-03-13 10:06:21,118 INFO    data/character_embedds/embeddings/クレア
+2024-03-13 10:06:21,127 INFO    data/character_embedds/embeddings/レイ
+2024-03-13 10:06:21,137 INFO    Starting predictions with output at data/outputs/
+2024-03-13 10:06:21,637 INFO                                                filename predicted_label      distance
+0  data/outputs//[LoliHouse] Watashi no Oshi wa A...              レイ  0.000000e+00
+1  data/outputs//[LoliHouse] Watashi no Oshi wa A...              レイ  0.000000e+00
+2  data/outputs//[LoliHouse] Watashi no Oshi wa A...              レイ  1.192093e-07
+3  data/outputs//[LoliHouse] Watashi no Oshi wa A...              レイ  1.192093e-07
+4  data/outputs//[LoliHouse] Watashi no Oshi wa A...              レイ  0.000000e+00
+2024-03-13 10:06:21,647 INFO    Path of the df data\outputs\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv
+2024-03-13 10:06:21,649 WARNING Error when predicting. [Errno 2] No such file or directory: 'data\\outputs\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv'
+2024-03-13 10:13:47,345 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:13:47,387 WARNING torchvision is not available - cannot save figures
+2024-03-13 10:13:47,412 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:13:48,683 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 10:13:48,765 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 10:13:48,786 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 10:13:49,237 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 10:13:49,895 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 10:13:49,967 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 10:14:08,269 INFO    Calling function of audios
+2024-03-13 10:14:21,118 INFO    Checking inputs
+2024-03-13 10:14:21,118 INFO    Starting to create subtitles file
+2024-03-13 10:14:21,322 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 10:14:21,420 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 10:14:21,628 INFO    Starting predictions
+2024-03-13 10:14:21,635 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 10:14:21,636 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 10:14:22,369 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 10:14:22,371 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 10:14:22,373 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 10:14:22,375 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 10:14:22,385 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 10:14:22,504 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-13 10:14:31,309 INFO    Audios extracted
+2024-03-13 10:15:55,082 INFO    録音データから埋め込みを作成しました。
+2024-03-13 10:15:55,083 INFO    Embeddings created
+2024-03-13 10:15:55,083 INFO    data/character_embedds/embeddings/クレア
+2024-03-13 10:15:55,095 INFO    data/character_embedds/embeddings/レイ
+2024-03-13 10:15:55,106 INFO    Starting predictions with output at data/outputs/
+2024-03-13 10:15:55,587 WARNING Error when predicting. [Errno 2] No such file or directory: 'data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv'
+2024-03-13 10:19:30,837 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:19:30,905 WARNING torchvision is not available - cannot save figures
+2024-03-13 10:19:30,958 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:19:32,291 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 10:19:32,370 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 10:19:32,388 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 10:19:32,886 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 10:19:33,428 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 10:19:33,531 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 10:19:46,695 INFO    Checking inputs
+2024-03-13 10:19:46,699 INFO    Starting to create subtitles file
+2024-03-13 10:19:46,888 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 10:19:46,980 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 10:19:47,180 INFO    Starting predictions
+2024-03-13 10:19:47,183 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 10:19:47,184 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 10:19:47,842 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 10:19:47,845 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 10:19:47,849 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 10:19:47,851 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 10:19:47,853 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 10:19:48,000 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-13 10:19:55,004 INFO    Audios extracted
+2024-03-13 10:20:45,426 INFO    録音データから埋め込みを作成しました。
+2024-03-13 10:20:45,426 INFO    Embeddings created
+2024-03-13 10:20:45,427 INFO    data/character_embedds/embeddings/クレア
+2024-03-13 10:20:45,438 INFO    data/character_embedds/embeddings/レイ
+2024-03-13 10:20:45,449 INFO    Starting predictions with output at data/outputs/
+2024-03-13 10:20:45,452 WARNING Error when predicting. [Errno 2] No such file or directory: 'data\\outputs\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv'
+2024-03-13 10:21:05,955 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:21:06,003 WARNING torchvision is not available - cannot save figures
+2024-03-13 10:21:06,027 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:21:07,278 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 10:21:07,326 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 10:21:07,360 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 10:21:07,871 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 10:21:08,330 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 10:21:08,456 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 10:21:36,402 INFO    Checking inputs
+2024-03-13 10:21:36,403 INFO    Starting to create subtitles file
+2024-03-13 10:21:36,596 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 10:21:36,717 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 10:21:36,917 INFO    Starting predictions
+2024-03-13 10:21:36,919 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 10:21:36,919 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 10:21:37,650 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 10:21:37,652 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 10:21:37,664 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 10:21:37,667 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 10:21:37,669 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 10:21:37,797 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-13 10:21:42,500 INFO    Audios extracted
+2024-03-13 10:22:31,383 INFO    録音データから埋め込みを作成しました。
+2024-03-13 10:22:31,384 INFO    Embeddings created
+2024-03-13 10:22:31,384 INFO    data/character_embedds/embeddings/クレア
+2024-03-13 10:22:31,394 INFO    data/character_embedds/embeddings/レイ
+2024-03-13 10:22:31,405 INFO    Starting predictions with output at data/outputs/
+2024-03-13 10:22:31,677 WARNING Error when predicting. [Errno 2] No such file or directory: 'data\\outputs\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv'
+2024-03-13 10:23:26,449 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:23:26,493 WARNING torchvision is not available - cannot save figures
+2024-03-13 10:23:26,518 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:23:27,663 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 10:23:27,745 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 10:23:27,781 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 10:23:28,284 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 10:23:28,782 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 10:23:28,814 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 10:23:38,962 INFO    Checking inputs
+2024-03-13 10:23:38,965 INFO    Starting to create subtitles file
+2024-03-13 10:23:39,159 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 10:23:39,282 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 10:23:39,483 INFO    Starting predictions
+2024-03-13 10:23:39,484 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 10:23:39,484 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 10:23:40,343 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 10:23:40,346 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 10:23:40,348 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 10:23:40,350 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 10:23:40,352 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 10:23:40,481 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-13 10:23:41,250 INFO    Audios extracted
+2024-03-13 10:24:32,331 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:24:32,390 WARNING torchvision is not available - cannot save figures
+2024-03-13 10:24:32,418 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 10:24:33,812 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 10:24:33,856 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 10:24:33,897 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 10:24:34,451 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 10:24:34,891 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 10:24:34,998 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 10:24:41,351 INFO    Checking inputs
+2024-03-13 10:24:41,352 INFO    Starting to create subtitles file
+2024-03-13 10:24:41,586 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 10:24:41,699 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-13 10:24:41,898 INFO    Starting predictions
+2024-03-13 10:24:41,900 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 10:24:41,901 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 10:24:42,752 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 10:24:42,757 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 10:24:42,762 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 10:24:42,767 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 10:24:42,771 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 10:24:43,023 WARNING Error when predicting. Torch not compiled with CUDA enabled
+2024-03-13 10:24:46,008 INFO    Checking inputs
+2024-03-13 10:24:46,010 INFO    Starting to create subtitles file
+2024-03-13 10:24:46,038 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-13 10:24:46,337 INFO    Starting predictions
+2024-03-13 10:24:46,338 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-13 10:24:46,339 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-13 10:24:46,664 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-13 10:24:46,667 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-13 10:24:46,669 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-13 10:24:46,671 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-13 10:24:46,673 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-13 10:24:46,806 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-13 10:24:47,545 INFO    Audios extracted
+2024-03-13 10:24:55,728 INFO    録音データから埋め込みを作成しました。
+2024-03-13 10:24:55,728 INFO    Embeddings created
+2024-03-13 10:24:55,729 INFO    data/character_embedds/embeddings/クレア
+2024-03-13 10:24:55,739 INFO    data/character_embedds/embeddings/レイ
+2024-03-13 10:24:55,750 INFO    Starting predictions with output at data/outputs/
+2024-03-13 10:24:55,801 INFO    csvを保存しましたdata\outputs\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\preds.csv！
+2024-03-13 14:05:38,538 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:05:38,607 WARNING torchvision is not available - cannot save figures
+2024-03-13 14:05:38,651 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:05:41,836 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 14:05:41,870 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 14:05:42,958 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:05:43,168 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 14:05:43,169 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:05:44,753 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 14:05:45,140 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 14:06:27,480 ERROR   Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\victo\anaconda3\envs\animedataset\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\victo\anaconda3\envs\animedataset\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 既存の接続はリモート ホストに強制的に切断されました。
+2024-03-13 14:08:40,407 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:08:40,454 WARNING torchvision is not available - cannot save figures
+2024-03-13 14:08:40,481 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:08:43,764 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 14:08:43,797 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 14:08:49,558 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 14:08:49,725 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 14:19:51,687 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:19:51,738 WARNING torchvision is not available - cannot save figures
+2024-03-13 14:19:51,771 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:19:54,895 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 14:19:54,930 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 14:19:56,158 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 14:19:56,259 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:19:56,269 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:19:58,164 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 14:19:58,173 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 14:35:49,201 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:35:49,247 WARNING torchvision is not available - cannot save figures
+2024-03-13 14:35:49,272 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:35:52,354 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 14:35:52,397 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 14:35:53,661 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 14:35:53,668 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:35:54,430 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:35:55,506 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 14:35:56,199 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 14:37:33,960 INFO    Annotation file of finder updated to data\outputs\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\preds.csv
+2024-03-13 14:39:05,428 INFO    Calling function of dialogues
+2024-03-13 14:39:05,428 INFO    Checking inputs
+2024-03-13 14:39:05,429 WARNING annotation_file does not exist
+2024-03-13 14:39:25,819 INFO    Annotation file of finder updated to \[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\preds.csv
+2024-03-13 14:39:26,084 INFO    Annotation file of finder updated to [LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\preds.csv
+2024-03-13 14:40:20,579 INFO    Calling function of dialogues
+2024-03-13 14:40:20,579 INFO    Checking inputs
+2024-03-13 14:40:20,580 INFO    Starting to create dialogues file
+2024-03-13 14:40:20,596 INFO                                                filename predicted_label  start_time  end_time                         text
+0  data/outputs//[LoliHouse] Watashi no Oshi wa A...              レイ        3.40      7.57   ﻿0レイ.王立学院を舞台に0人の王子様との恋を楽しむ
+1  data/outputs//[LoliHouse] Watashi no Oshi wa A...              レイ        7.57     12.07   恋愛シミュレーションゲーム『revolution』。
+2  data/outputs//[LoliHouse] Watashi no Oshi wa A...             クレア      231.93    236.93  わたくしは平民なんかに少しも心を許したりしませんから。
+3  data/outputs//[LoliHouse] Watashi no Oshi wa A...              レイ      356.58    361.26  私たち席お隣ですもんね。一緒に見ましょう!ゼロ距離で。
+4  data/outputs//[LoliHouse] Watashi no Oshi wa A...             クレア      451.04    456.72  わたくしが手ずから必ずあの平民を屈服させてみせますわ。
+2024-03-13 14:40:20,602 INFO    Characters used for the dialogs are ['（可能）クレア', 'レイ', 'クレア'] and ['（可能）クレア', 'レイ', 'クレア']
+2024-03-13 14:40:20,773 INFO    CSVファイル "data/outputs//preds_dialogs.csv" にデータを保存しました。
+2024-03-13 14:41:50,678 INFO    Calling function of audios
+2024-03-13 14:41:50,679 INFO    Checking inputs
+2024-03-13 14:41:50,679 WARNING audios_path data/outputs/voice does not exist
+2024-03-13 14:45:47,740 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:45:47,784 WARNING torchvision is not available - cannot save figures
+2024-03-13 14:45:47,808 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:45:50,460 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 14:45:50,493 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 14:45:51,673 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:45:51,752 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:45:51,768 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 14:45:53,506 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 14:45:54,421 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 14:46:40,566 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:46:40,605 WARNING torchvision is not available - cannot save figures
+2024-03-13 14:46:40,628 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:46:42,891 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 14:46:42,926 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 14:46:43,669 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:46:44,469 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 14:46:44,554 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:46:45,845 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 14:46:46,321 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 14:46:51,019 INFO    Annotation file of finder updated to [LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\preds.csv
+2024-03-13 14:47:13,969 INFO    Calling function of audios
+2024-03-13 14:47:13,969 INFO    Checking inputs
+2024-03-13 14:47:13,970 WARNING audios_path data/outputs/data\outputs\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\voice does not exist
+2024-03-13 14:48:55,806 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:48:55,850 WARNING torchvision is not available - cannot save figures
+2024-03-13 14:48:55,876 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:48:58,524 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 14:48:58,564 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 14:48:59,575 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:48:59,792 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 14:48:59,811 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:49:01,498 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 14:49:01,686 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 14:49:02,412 INFO    Annotation file of finder updated to [LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\preds.csv
+2024-03-13 14:49:08,842 ERROR   Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\victo\anaconda3\envs\animedataset\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\victo\anaconda3\envs\animedataset\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 既存の接続はリモート ホストに強制的に切断されました。
+2024-03-13 14:49:08,966 ERROR   Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\victo\anaconda3\envs\animedataset\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\victo\anaconda3\envs\animedataset\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 既存の接続はリモート ホストに強制的に切断されました。
+2024-03-13 14:49:11,068 INFO    Calling function of audios
+2024-03-13 14:49:11,068 INFO    Checking inputs
+2024-03-13 14:49:11,070 WARNING audios_path data/outputs/preds.csv\voice does not exist
+2024-03-13 14:54:42,390 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:54:42,432 WARNING torchvision is not available - cannot save figures
+2024-03-13 14:54:42,456 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-13 14:54:45,335 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-13 14:54:45,358 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-13 14:54:46,395 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:54:46,625 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-13 14:54:46,627 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-13 14:54:48,202 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-13 14:54:48,415 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-13 14:55:15,295 INFO    Annotation file of finder updated to [LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\preds.csv
+2024-03-13 14:55:22,487 INFO    Calling function of audios
+2024-03-13 14:55:22,488 INFO    Checking inputs
+2024-03-13 14:55:22,488 INFO    Starting to audio files
+2024-03-13 14:55:22,492 INFO    ['クレア', '（可能）クレア']
+2024-03-13 14:55:22,498 INFO    Dataframe created
+2024-03-13 14:55:22,498 INFO    Looking for audios at data/outputs/[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\voice
+2024-03-13 14:55:22,546 INFO    All file copied at data/outputs//クレア
+2024-03-13 14:55:22,552 INFO    CSV created at data/outputs/text.list with 9 elements!
+2024-03-13 14:55:22,552 INFO    Completed
+2024-03-14 14:07:02,263 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:07:02,459 WARNING torchvision is not available - cannot save figures
+2024-03-14 14:07:02,566 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:07:03,888 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-14 14:07:03,914 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-14 14:07:03,936 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-14 14:07:04,299 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-14 14:07:05,066 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-14 14:07:05,069 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-14 14:21:19,951 INFO    Starting predictions
+2024-03-14 14:24:08,382 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:24:08,452 WARNING torchvision is not available - cannot save figures
+2024-03-14 14:24:08,484 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:24:09,652 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-14 14:24:09,808 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-14 14:24:09,842 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-14 14:24:10,189 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-14 14:24:10,846 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-14 14:24:10,957 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-14 14:24:58,393 INFO    Checking inputs
+2024-03-14 14:24:58,689 INFO    Starting predictions
+2024-03-14 14:27:49,332 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:27:49,395 WARNING torchvision is not available - cannot save figures
+2024-03-14 14:27:49,436 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:27:50,966 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-14 14:27:51,024 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-14 14:27:51,059 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-14 14:27:51,506 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-14 14:27:52,057 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-14 14:27:52,165 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-14 14:28:02,428 INFO    Checking inputs
+2024-03-14 14:28:02,430 INFO    Starting to create subtitles file
+2024-03-14 14:28:02,431 INFO    Creating annotation file
+2024-03-14 14:28:02,528 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-14 14:28:02,618 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-14 14:28:02,805 INFO    Starting predictions
+2024-03-14 14:28:02,807 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-14 14:28:02,808 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-14 14:28:03,526 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-14 14:28:03,528 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-14 14:28:03,531 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-14 14:28:03,535 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-14 14:28:03,537 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-14 14:28:03,784 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-14 14:28:03,785 INFO    Audios extracted
+2024-03-14 14:28:03,786 INFO    録音データから埋め込みを作成しました。
+2024-03-14 14:28:03,786 INFO    Embeddings created
+2024-03-14 14:28:03,787 INFO    data/character_embedds/embeddings/クレア
+2024-03-14 14:28:03,818 INFO    data/character_embedds/embeddings/レイ
+2024-03-14 14:28:03,844 INFO    Starting predictions with output at data/outputs/
+2024-03-14 14:28:03,844 WARNING Error when predicting. [WinError 3] 指定されたパスが見つかりません。: 'data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\\embeddings'
+2024-03-14 14:31:32,480 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:31:32,540 WARNING torchvision is not available - cannot save figures
+2024-03-14 14:31:32,573 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:31:33,733 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-14 14:31:33,808 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-14 14:31:33,841 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-14 14:31:34,274 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-14 14:31:34,860 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-14 14:31:34,955 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-14 14:31:49,914 INFO    Checking inputs
+2024-03-14 14:31:49,915 INFO    Starting to create subtitles file
+2024-03-14 14:31:49,915 INFO    Creating annotation file
+2024-03-14 14:31:49,994 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-14 14:31:50,091 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-14 14:31:50,273 INFO    Starting predictions
+2024-03-14 14:31:50,275 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-14 14:31:50,276 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-14 14:31:50,967 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-14 14:31:50,971 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-14 14:31:50,975 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-14 14:31:50,977 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-14 14:31:50,979 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-14 14:31:51,149 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-14 14:31:51,150 INFO    Audios extracted
+2024-03-14 14:31:51,151 INFO    録音データから埋め込みを作成しました。
+2024-03-14 14:31:51,151 INFO    Embeddings created
+2024-03-14 14:31:51,152 INFO    data/character_embedds/embeddings/クレア
+2024-03-14 14:31:51,161 INFO    data/character_embedds/embeddings/レイ
+2024-03-14 14:31:51,171 INFO    Starting predictions with output at data/outputs/
+2024-03-14 14:31:51,172 WARNING Error when predicting. [WinError 3] 指定されたパスが見つかりません。: 'data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/embeddings'
+2024-03-14 14:35:03,670 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:35:03,731 WARNING torchvision is not available - cannot save figures
+2024-03-14 14:35:03,769 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:35:05,221 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-14 14:35:05,500 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-14 14:35:05,523 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-14 14:35:05,782 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-14 14:35:06,541 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-14 14:35:06,828 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-14 14:35:21,903 INFO    Checking inputs
+2024-03-14 14:35:21,904 INFO    Starting to create subtitles file
+2024-03-14 14:35:21,904 INFO    Creating annotation file
+2024-03-14 14:35:21,990 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-14 14:35:22,075 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-14 14:35:22,262 INFO    Starting predictions
+2024-03-14 14:35:22,263 INFO    input_video is not exist
+2024-03-14 14:35:41,913 INFO    Checking inputs
+2024-03-14 14:35:41,914 INFO    Starting to create subtitles file
+2024-03-14 14:35:41,914 INFO    Creating annotation file
+2024-03-14 14:35:41,947 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-14 14:35:42,225 INFO    Starting predictions
+2024-03-14 14:35:42,228 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-14 14:35:42,229 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-14 14:35:42,901 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-14 14:35:42,905 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-14 14:35:42,908 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-14 14:35:42,910 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-14 14:35:42,913 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-14 14:35:43,050 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-14 14:35:51,657 INFO    Audios extracted
+2024-03-14 14:36:57,305 INFO    録音データから埋め込みを作成しました。
+2024-03-14 14:36:57,306 INFO    Embeddings created
+2024-03-14 14:36:57,307 INFO    data/character_embedds/embeddings/クレア
+2024-03-14 14:36:57,323 INFO    data/character_embedds/embeddings/レイ
+2024-03-14 14:36:57,337 INFO    Starting predictions with output at data/outputs/
+2024-03-14 14:36:57,787 WARNING Error when predicting. [Errno 2] No such file or directory: 'data\\outputs\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv'
+2024-03-14 14:39:49,535 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:39:49,594 WARNING torchvision is not available - cannot save figures
+2024-03-14 14:39:49,624 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:39:50,900 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-14 14:39:50,957 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-14 14:39:50,992 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-14 14:39:51,434 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-14 14:39:51,997 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-14 14:39:52,082 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-14 14:40:03,705 INFO    Checking inputs
+2024-03-14 14:40:03,706 INFO    Starting to create subtitles file
+2024-03-14 14:40:03,706 INFO    Creating annotation file
+2024-03-14 14:40:03,792 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-14 14:40:03,902 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-14 14:40:04,040 INFO    Starting predictions
+2024-03-14 14:40:04,042 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-14 14:40:04,042 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-14 14:40:04,706 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-14 14:40:04,709 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-14 14:40:04,713 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-14 14:40:04,716 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-14 14:40:04,718 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-14 14:40:04,850 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-14 14:40:12,369 INFO    Audios extracted
+2024-03-14 14:41:16,116 INFO    録音データから埋め込みを作成しました。
+2024-03-14 14:41:16,116 INFO    Embeddings created
+2024-03-14 14:41:16,117 INFO    data/character_embedds/embeddings/クレア
+2024-03-14 14:41:16,126 INFO    data/character_embedds/embeddings/レイ
+2024-03-14 14:41:16,136 INFO    Starting predictions with output at data/outputs/
+2024-03-14 14:41:16,532 WARNING Error when predicting. [Errno 2] No such file or directory: 'data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv'
+2024-03-14 14:50:55,666 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:50:55,725 WARNING torchvision is not available - cannot save figures
+2024-03-14 14:50:55,756 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-14 14:50:56,900 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-14 14:50:56,943 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-14 14:50:56,959 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-14 14:50:57,443 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-14 14:50:58,018 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-14 14:50:58,113 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-14 14:51:10,499 INFO    Checking inputs
+2024-03-14 14:51:10,500 INFO    Starting to create subtitles file
+2024-03-14 14:51:10,500 INFO    Creating annotation file
+2024-03-14 14:51:10,583 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-14 14:51:10,689 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-14 14:51:10,876 INFO    Starting predictions
+2024-03-14 14:51:10,878 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-14 14:51:10,878 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-14 14:51:11,565 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-14 14:51:11,570 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-14 14:51:11,576 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-14 14:51:11,579 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-14 14:51:11,582 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-14 14:51:11,743 INFO    data/outputs//[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]/voice
+2024-03-14 14:51:18,838 INFO    Audios extracted
+2024-03-14 14:52:20,951 INFO    録音データから埋め込みを作成しました。
+2024-03-14 14:52:20,951 INFO    Embeddings created
+2024-03-14 14:52:20,952 INFO    data/character_embedds/embeddings/クレア
+2024-03-14 14:52:20,962 INFO    data/character_embedds/embeddings/レイ
+2024-03-14 14:52:20,975 INFO    Starting predictions with output at data/outputs/
+2024-03-14 14:52:21,364 INFO    csvを保存しましたdata\outputs\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2]\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2].csv！
+2024-03-15 08:08:54,866 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:08:55,049 WARNING torchvision is not available - cannot save figures
+2024-03-15 08:08:55,168 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:08:58,602 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-15 08:08:58,640 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-15 08:08:59,845 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:08:59,863 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-15 08:09:00,039 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:09:01,856 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-15 08:09:02,037 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-15 08:11:53,165 INFO    Checking inputs
+2024-03-15 08:12:44,623 INFO    _updated.csv
+2024-03-15 08:12:49,982 INFO    Checking inputs
+2024-03-15 08:13:05,012 INFO    _updated.csv
+2024-03-15 08:19:16,827 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:19:16,892 WARNING torchvision is not available - cannot save figures
+2024-03-15 08:19:16,922 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:19:19,887 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-15 08:19:19,896 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-15 08:19:21,002 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:19:21,171 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:19:21,176 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-15 08:19:22,889 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-15 08:19:23,087 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-15 08:19:27,231 INFO    Checking inputs
+2024-03-15 08:23:44,218 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:23:44,282 WARNING torchvision is not available - cannot save figures
+2024-03-15 08:23:44,319 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:23:47,717 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-15 08:23:47,749 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-15 08:23:48,825 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:23:48,989 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-15 08:23:49,097 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:23:50,689 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-15 08:23:50,982 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-15 08:24:45,235 INFO    Checking inputs
+2024-03-15 08:25:00,344 INFO    Checking inputs
+2024-03-15 08:25:29,379 INFO    Checking inputs
+2024-03-15 08:25:29,379 INFO    Creating annotation file
+2024-03-15 08:25:29,491 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-15 08:25:29,491 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-15 08:29:10,835 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:29:10,885 WARNING torchvision is not available - cannot save figures
+2024-03-15 08:29:10,916 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:29:13,856 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-15 08:29:13,894 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-15 08:29:15,097 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:29:15,154 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-15 08:29:15,156 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:29:17,004 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-15 08:29:17,087 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-15 08:29:44,505 INFO    Annotation file of finder updated to wataoshi_1.srt
+2024-03-15 08:29:46,891 INFO    Checking inputs
+2024-03-15 08:29:57,309 INFO    Checking inputs
+2024-03-15 08:29:57,310 INFO    Creating annotation file
+2024-03-15 08:29:57,405 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-15 08:29:57,406 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-15 08:30:39,545 INFO    Checking inputs
+2024-03-15 08:30:39,548 INFO    Creating annotation file
+2024-03-15 08:30:39,581 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-15 08:30:39,581 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-15 08:30:39,588 INFO    Salving audio files at data/outputs/tmp
+2024-03-15 08:30:41,397 INFO    Unable to crop data/outputs/tmp/0014_ちょっとあなた聞いていますの!?.wav
+2024-03-15 08:30:41,602 INFO    Unable to crop data/outputs/tmp/0018_あっ…クレア?.wav
+2024-03-15 08:30:41,875 INFO    Unable to crop data/outputs/tmp/0023_私の名前覚えていらっしゃいますか?.wav
+2024-03-15 08:30:41,988 INFO    Unable to crop data/outputs/tmp/0024_んっ…。バカにしていますの?レイ=テイラー!.wav
+2024-03-15 08:30:42,163 INFO    Unable to crop data/outputs/tmp/0027_ってことはあれですか!?.wav
+2024-03-15 08:30:42,291 INFO    Unable to crop data/outputs/tmp/0029_「異世界転生」ってやつですか!?.wav
+2024-03-15 08:30:42,378 INFO    Unable to crop data/outputs/tmp/0030_好きです。はっ?.wav
+2024-03-15 08:30:42,531 INFO    Unable to crop data/outputs/tmp/0032_なっ…ななななな…!?.wav
+2024-03-15 08:30:42,652 INFO    Unable to crop data/outputs/tmp/0033_あなたいったい何を言ってますの?.wav
+2024-03-15 08:30:43,070 INFO    Unable to crop data/outputs/tmp/0040_なっ…なんなんですのこの人!?.wav
+2024-03-15 08:30:43,216 INFO    Unable to crop data/outputs/tmp/0041_クレア様は私のこと嫌いですよね?あ…当たり前ですわ。.wav
+2024-03-15 08:30:43,598 INFO    Unable to crop data/outputs/tmp/0048_話が進んでますの!?.wav
+2024-03-15 08:30:43,787 INFO    Unable to crop data/outputs/tmp/0051_クレア様…。なんですの?.wav
+2024-03-15 08:30:43,950 INFO    Unable to crop data/outputs/tmp/0053_すばらしいです!えっ?.wav
+2024-03-15 08:30:44,442 INFO    Unable to crop data/outputs/tmp/0063_ひっ!?今の踏み方には.wav
+2024-03-15 08:30:44,631 INFO    Unable to crop data/outputs/tmp/0066_あれ?教科書がない。.wav
+2024-03-15 08:30:44,732 INFO    Unable to crop data/outputs/tmp/0067_どうなさったの?あっ…。.wav
+2024-03-15 08:30:44,824 INFO    Unable to crop data/outputs/tmp/0068_平民は教科書を買えないほど貧乏ですの?.wav
+2024-03-15 08:30:45,178 INFO    Unable to crop data/outputs/tmp/0074_授業を受けたいだなんて!えっ?.wav
+2024-03-15 08:30:46,111 INFO    Unable to crop data/outputs/tmp/0094_組む相手がいませんの?.wav
+2024-03-15 08:30:46,511 INFO    Unable to crop data/outputs/tmp/0102_これって…クレア様の仕業ですか?.wav
+2024-03-15 08:30:46,641 INFO    Unable to crop data/outputs/tmp/0104_押し花にして持ち歩きます。なんでそうなりますの!?.wav
+2024-03-15 08:30:46,774 INFO    Unable to crop data/outputs/tmp/0106_打たれ強すぎじゃありませんこと?.wav
+2024-03-15 08:30:46,866 INFO    Unable to crop data/outputs/tmp/0107_えっ?なんのことですか?.wav
+2024-03-15 08:30:46,952 INFO    Unable to crop data/outputs/tmp/0108_これだけ意地悪されてどうして平然としていられますの!?.wav
+2024-03-15 08:30:47,050 INFO    Unable to crop data/outputs/tmp/0109_意地悪?愛ですよね。違いますわよ!.wav
+2024-03-15 08:30:47,191 INFO    Unable to crop data/outputs/tmp/0111_どうしてわたくしが怒られてますの!?.wav
+2024-03-15 08:30:48,637 INFO    Unable to crop data/outputs/tmp/0143_それはあれですか?私と一緒に風紀を乱したいと?.wav
+2024-03-15 08:30:48,815 INFO    Unable to crop data/outputs/tmp/0146_クレア様声をかけに行ったらどうですか?.wav
+2024-03-15 08:30:48,910 INFO    Unable to crop data/outputs/tmp/0147_はあ?ど…どうしてわたくしが…。.wav
+2024-03-15 08:30:49,019 INFO    Unable to crop data/outputs/tmp/0148_だって好きなんでしょう?.wav
+2024-03-15 08:30:49,167 INFO    Unable to crop data/outputs/tmp/0150_ですよね?な…ななな。.wav
+2024-03-15 08:30:49,379 INFO    Unable to crop data/outputs/tmp/0153_でも動揺するクレア様かわいすぎでは?.wav
+2024-03-15 08:30:49,772 INFO    Unable to crop data/outputs/tmp/0160_ちょっと!どうしてくれますの?セイン様にあんな…。.wav
+2024-03-15 08:30:50,274 INFO    Unable to crop data/outputs/tmp/0170_お茶をかけたらどうかしら?でも熱湯はさすがに…。.wav
+2024-03-15 08:30:50,464 INFO    Unable to crop data/outputs/tmp/0173_レイ=テイラー。うん?.wav
+2024-03-15 08:30:50,685 INFO    Unable to crop data/outputs/tmp/0177_す…少しは考えたらどうなんですの?.wav
+2024-03-15 08:30:50,911 INFO    Unable to crop data/outputs/tmp/0181_その格助詞の使い方やめてくださらない?.wav
+2024-03-15 08:30:51,068 INFO    Unable to crop data/outputs/tmp/0183_首席入学者が逃げるつもりですの?.wav
+2024-03-15 08:30:51,280 INFO    Unable to crop data/outputs/tmp/0187_はあ?どうしてわたくしがそんな。.wav
+2024-03-15 08:30:51,364 INFO    Unable to crop data/outputs/tmp/0188_あれ逃げるんですか?内部生のトップともあろうお方が?.wav
+2024-03-15 08:30:51,465 INFO    Unable to crop data/outputs/tmp/0189_んっ。挑発してるつもりですの?いいでしょう乗ってあげますわ。.wav
+2024-03-15 08:30:52,489 INFO    Unable to crop data/outputs/tmp/0209_ちょっとこんな夜更けになんの用ですの?.wav
+2024-03-15 08:30:53,123 INFO    Unable to crop data/outputs/tmp/0221_そっちですの!?.wav
+2024-03-15 08:30:53,674 INFO    Unable to crop data/outputs/tmp/0231_化けの皮が剥がれましたわね?平民!.wav
+2024-03-15 08:30:53,811 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-15 08:30:53,956 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-15 08:33:57,411 INFO    data/outputs//wataoshi_1_updated.csv
+2024-03-15 08:33:57,425 INFO    CSVファイル "data/outputs//wataoshi_1_updated.csv" にデータを保存しました。
+2024-03-15 08:33:57,494 INFO    Deleted the audios folder at data/outputs/tmp
+2024-03-15 08:33:57,596 INFO    Annotation file of finder updated to data/outputs//wataoshi_1_updated.csv
+2024-03-15 08:34:37,885 INFO    Checking inputs
+2024-03-15 08:34:37,886 INFO    Creating annotation file
+2024-03-15 08:34:37,921 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-15 08:34:38,027 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-15 08:34:38,178 INFO    Starting predictions
+2024-03-15 08:34:38,180 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-15 08:34:38,181 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-15 08:34:40,369 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-15 08:34:40,371 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-15 08:34:40,374 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-15 08:34:40,377 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-15 08:34:40,380 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-15 08:34:56,606 INFO    Checking inputs
+2024-03-15 08:34:56,838 INFO    Starting predictions
+2024-03-15 08:34:56,841 INFO    Fetch hyperparams.yaml: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\hyperparams.yaml.
+2024-03-15 08:34:56,842 INFO    Fetch custom.py: Delegating to Huggingface hub, source speechbrain/spkrec-ecapa-voxceleb.
+2024-03-15 08:34:57,557 INFO    Fetch embedding_model.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\embedding_model.ckpt.
+2024-03-15 08:34:57,564 INFO    Fetch mean_var_norm_emb.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\mean_var_norm_emb.ckpt.
+2024-03-15 08:34:57,567 INFO    Fetch classifier.ckpt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\classifier.ckpt.
+2024-03-15 08:34:57,569 INFO    Fetch label_encoder.txt: Using existing file/symlink in pretrained_models\spkrec-ecapa-voxceleb\label_encoder.ckpt.
+2024-03-15 08:34:57,571 INFO    Loading pretrained files for: embedding_model, mean_var_norm_emb, classifier, label_encoder
+2024-03-15 08:35:30,351 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:35:30,404 WARNING torchvision is not available - cannot save figures
+2024-03-15 08:35:30,433 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:35:33,147 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-15 08:35:33,182 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-15 08:35:34,352 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:35:34,434 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:35:34,488 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-15 08:35:36,254 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-15 08:35:36,347 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-15 08:35:39,836 INFO    Checking inputs
+2024-03-15 08:35:40,124 INFO    Starting predictions
+2024-03-15 08:35:58,498 INFO    Checking inputs
+2024-03-15 08:40:01,686 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:40:01,748 WARNING torchvision is not available - cannot save figures
+2024-03-15 08:40:01,777 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:40:04,861 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-15 08:40:04,897 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-15 08:40:05,917 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:40:06,181 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-15 08:40:08,151 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:40:08,512 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-15 08:40:10,196 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-15 08:40:11,831 INFO    Checking inputs
+2024-03-15 08:40:12,134 INFO    Starting predictions
+2024-03-15 08:41:35,883 INFO    Checking inputs
+2024-03-15 08:43:04,124 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:43:04,179 WARNING torchvision is not available - cannot save figures
+2024-03-15 08:43:04,207 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:43:07,315 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-15 08:43:07,348 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-15 08:43:08,373 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:43:08,552 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-15 08:43:08,659 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:43:09,789 INFO    Checking inputs
+2024-03-15 08:43:09,900 INFO    Starting predictions
+2024-03-15 08:43:10,365 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-15 08:43:10,592 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-15 08:43:18,382 INFO    Checking inputs
+2024-03-15 08:43:18,491 INFO    Starting predictions
+2024-03-15 08:47:15,856 INFO    Checking inputs
+2024-03-15 08:47:15,857 INFO    Creating annotation file
+2024-03-15 08:47:15,941 INFO    CSVファイル "data/outputs//wataoshi_1.csv" にデータを保存しました。
+2024-03-15 08:47:16,044 INFO    Annotation file of finder updated to data/outputs//wataoshi_1.csv
+2024-03-15 08:47:16,046 INFO    Starting predictions
+2024-03-15 08:47:57,200 INFO    Annotation file of finder updated to 
+2024-03-15 08:48:09,272 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:48:09,326 WARNING torchvision is not available - cannot save figures
+2024-03-15 08:48:09,363 WARNING The torchaudio backend is switched to 'soundfile'. Note that 'sox_io' is not supported on Windows.
+2024-03-15 08:48:12,380 INFO    HTTP Request: GET http://127.0.0.1:7860/startup-events "HTTP/1.1 200 OK"
+2024-03-15 08:48:12,395 INFO    HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2024-03-15 08:48:13,606 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:48:13,657 INFO    HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-03-15 08:48:13,702 INFO    HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-03-15 08:48:15,561 INFO    HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+2024-03-15 08:48:15,624 INFO    HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+2024-03-15 08:48:15,870 INFO    Calling function of dialogues
+2024-03-15 08:48:15,871 INFO    Checking inputs
+2024-03-15 08:48:20,321 INFO    Annotation file of finder updated to a
+2024-03-15 08:48:20,420 INFO    Annotation file of finder updated to asd
+2024-03-15 08:48:20,543 INFO    Annotation file of finder updated to asdf
+2024-03-15 08:48:20,672 INFO    Annotation file of finder updated to asdfadsf
+2024-03-15 08:48:21,667 INFO    Calling function of dialogues
+2024-03-15 08:48:21,668 INFO    Checking inputs

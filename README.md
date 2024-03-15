@@ -240,6 +240,8 @@ What is the objective of min length text in the dialogs and audios? This functio
 We should change the log warnings to raise value error?
 
 The implementation of update annotation_file is differenct for finder and for dataset_manager. But as the one in finder should be automatic, there is not problem with the actual implementation.
+There is an error with the annotation file for creating dialogs, as the implementation is different, we can't use directly the result of the predction, we need to remove the path of the generated annotation file. The problem is that the annotation file is not the same as the prediction file.
+But everything else works.
 
 Change the log by Raising errors, because I don't know the line where the error was produced.
 Change the code logic, classes have many attributes, we should use parameters in the functions. It makes no sense to be storing attributes and then use them as paramters to other functions.

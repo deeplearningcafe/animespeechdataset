@@ -4,7 +4,7 @@ from tqdm import tqdm
 import pandas as pd
 
 from .utils import time_to_seconds, extract_main_text, convert_time
-from common.log import log
+from ..common import log
 
 
 def parse_lines(lines:list=None) -> list[list[float, float, str]]:

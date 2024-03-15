@@ -13,7 +13,7 @@ import argparse
 
 
 from .crop import data_processor, load_model
-from common.log import log
+from ..common import log
 
 class KNN_classifier:
     def __init__(self, audio_embds_dir, n_neighbors=3, 

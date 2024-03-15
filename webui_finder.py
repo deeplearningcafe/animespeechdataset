@@ -8,8 +8,8 @@ import shutil
 
 
 import logging
-from common.log import log
-from configs import load_global_config
+from characterdataset.common import log
+from characterdataset.configs import load_global_config
 
 from characterdataset.datasetmanager import DatasetManager
 from characterdataset.oshifinder import Finder

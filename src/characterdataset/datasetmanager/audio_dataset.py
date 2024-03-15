@@ -4,7 +4,7 @@ import pandas as pd
 from tqdm import tqdm
 
 from .utils import time_to_seconds
-from common.log import log
+from ..common import log
 
 def copy_file_old(input_path:str=None, output_path:str=None):
     

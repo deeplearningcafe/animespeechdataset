@@ -12,7 +12,7 @@ import numpy as np
 import requests
 import json
 
-from common.log import log
+from ..common import log
 from ..datasetmanager.text_dataset import segments_2_annotations
 
 from .utils import (ffmpeg_extract_audio,

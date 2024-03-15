@@ -1,7 +1,7 @@
 import os
 
 from .crop import crop, prepare_labeling
-from common.log import log
+from ..common import log
 from .predict import recognize
 from .crop import data_processor, extract_subtitles
 import asyncio

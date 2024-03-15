@@ -11,7 +11,7 @@ import requests
 import json
 
 from .utils import time_to_seconds, extract_main_text, convert_time, ffmpeg_video_2_audio
-from common.log import log
+from ..common import log
 
 from .text_dataset import str_2_csv as subtitle_2_csv
 from .text_dataset import dialoges_from_csv as csv_2_dialoges
