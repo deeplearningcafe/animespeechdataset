@@ -132,7 +132,9 @@ def save_df(df: pd.DataFrame=None, csv_path: str=None) -> str:
         shutil.rmtree(finder.output_path_labeling)
         log.info(f"Deleted the audios folder at {finder.output_path_labeling}")
     except Exception as e:
-        log.warning(f"Could not remove the temp folder {e}")
+        # we want to continue despite not removing this folder
+        log.error(f"Could not remove the temp folder {e}")
+        pass
         
     return filename, "Base de datos actualizada!"
     

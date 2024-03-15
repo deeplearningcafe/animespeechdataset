@@ -160,8 +160,8 @@ class KNN_classifier:
         csv_filename = os.path.normpath(csv_filename)
         df = pd.DataFrame({"filename": file_list, "predicted_label": preds, "distance": distances})
         
-        if not os.path.isdir(os.path.dirname(csv_filename)):
-            log.warning('the folder to save the csv does not exist')
+        # if not os.path.isdir(os.path.dirname(csv_filename)):
+        #     log.warning('the folder to save the csv does not exist')
         
         
         df.to_csv(csv_filename, index=False)
@@ -228,20 +228,20 @@ def recognize(annotation_file:str=None,
         device (str, optional): _description_. Defaults to None.
     """
     
-    # checking if input_video is a file
-    if not os.path.isfile(video_path):
-        log.info('input_video is not exist')
-        return
+    # # checking if input_video is a file
+    # if not os.path.isfile(video_path):
+    #     log.info('input_video is not exist')
+    #     return
     
-    # checking if input_srt is a file
-    if not os.path.isfile(annotation_file):
-        log.info('annotate_map is not exist')
-        return
+    # # checking if input_srt is a file
+    # if not os.path.isfile(annotation_file):
+    #     log.info('annotate_map is not exist')
+    #     return
     
-    # checking if role_audios is a folder
-    if not os.path.isdir(output_path):
-        log.info('role_audios is not exist')
-        return
+    # # checking if role_audios is a folder
+    # if not os.path.isdir(output_path):
+    #     log.info('role_audios is not exist')
+    #     return
 
 
 

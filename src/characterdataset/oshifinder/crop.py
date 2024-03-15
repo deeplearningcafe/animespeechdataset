@@ -83,20 +83,20 @@ def extract_pkl_feat(audio_extractor, role_audios):
 
 def load_model(model_name:str=None, device:str=None):
     if model_name == "speechbrain":
-        try:
-            from speechbrain.pretrained import EncoderClassifier
-        except:
-            "can't import speechbrain"
+        # try:
+        from speechbrain.pretrained import EncoderClassifier
+        # except:
+        #     "can't import speechbrain"
         classifier = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb",
                                                     savedir="pretrained_models/spkrec-ecapa-voxceleb",
                                                     run_opts={"device": device},)
         return classifier
     
     elif model_name == "wavlm":
-        try:
-            from transformers import Wav2Vec2FeatureExtractor, WavLMForXVector
-        except:
-            "can't import transformers"
+        # try:
+        from transformers import Wav2Vec2FeatureExtractor, WavLMForXVector
+        # except:
+        #     "can't import transformers"
             
         feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained('microsoft/wavlm-base-plus-sv',
                                                                      cache_dir="pretrained_models")
@@ -107,7 +107,7 @@ def load_model(model_name:str=None, device:str=None):
                       "model": model}
         return model_dict
     else:
-        raise "not included model"
+        raise ValueError(f"Model {model_name} is not included")
         
 
 
@@ -278,7 +278,8 @@ class data_processor:
                     with open(f"{new_dir}/{file}.pkl", "wb") as f:
                         pickle.dump(embeddings.detach().cpu(), f)
                 except Exception as e:
-                    log.warning(f"Error when saving the embeddings. {e}")
+                    # here we want to continue saving other embeddings despite one failing
+                    log.error(f"Error when saving the embeddings. {e}")
                     continue
         log.info("録音データから埋め込みを作成しました。")
         
@@ -394,7 +395,8 @@ class data_processor:
                 drop_idx.append(i)
             
         df = df.drop(index=drop_idx)
-        assert len(file_names) == len(df), log.error("The lenght of file_names is not enough")
+        # not log it because we want the program to stop here
+        assert len(file_names) == len(df), "The lenght of file_names is not enough"
         df["filename"] = file_names
         df.to_csv(annotate_csv, index=False)
         log.info(f'CSVファイル "{annotate_csv}" にデータを保存しました。')
@@ -435,8 +437,11 @@ class data_processor:
                 # 埋め込みを保存する
                 with open(f"{new_dir}/{file}.pkl", "wb") as f:
                     pickle.dump(embeddings.detach().cpu(), f)
-            except:
+            except Exception as e:
+                # here we want to continue saving other embeddings despite one failing
+                log.error(f"Error when saving the new embeddings. {e}")
                 continue
+
 
         log.info("録音データから埋め込みを作成しました。")
     

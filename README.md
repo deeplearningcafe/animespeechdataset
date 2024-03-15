@@ -242,6 +242,11 @@ We should change the log warnings to raise value error?
 The implementation of update annotation_file is differenct for finder and for dataset_manager. But as the one in finder should be automatic, there is not problem with the actual implementation.
 
 Change the log by Raising errors, because I don't know the line where the error was produced.
+Change the code logic, classes have many attributes, we should use parameters in the functions. It makes no sense to be storing attributes and then use them as paramters to other functions.
+
+Update clases attributes to getters and setters.
+
+In gradio the then() always continues despite the result of the first part.
 
 # Installation
 We need to include the soundfile.

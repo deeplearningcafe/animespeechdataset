@@ -188,7 +188,7 @@ def character_audios(csv_path:str=None, character:str=None, num_characters:int=4
     df_out = os.path.join(output_path, "text.list")
     df.to_csv(df_out, index=False)
     log.info(f"CSV created at {df_out} with {len(df)} elements!")
-    log.info("Completed")
+    # log.info("Completed")
 
     
     

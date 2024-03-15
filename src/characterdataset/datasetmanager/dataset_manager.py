@@ -457,7 +457,10 @@ def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool
     if os.path.exists(audio_path):
         log.info(f"Extracted audio at {audio_path}")
     else:
-        log.error(f"Could not extract audio at {audio_path}")
+        # log.error(f"Could not extract audio at {audio_path}")
+        raise ValueError(
+            f"Could not extract audio at {audio_path}"
+        )
     
     # 2. Transcribe audio, here we call the api, the response is a json file with a list of segments
     segments = request_transcription(os.path.normpath(audio_path))
@@ -468,17 +471,19 @@ def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool
     
     filename = f"{output_path}/{filename}.csv"
     
-    try:
-        segments_2_annotations(segments, filename, num_characters, iscropping)
-        log.info(f"Created annotation file from transcriptions at {filename}")
-    except Exception as e:
-        log.error(f"Error when creating annotations from segments. {e}")
+    # try:
+    segments_2_annotations(segments, filename, num_characters, iscropping)
+
+    log.info(f"Created annotation file from transcriptions at {filename}")
+    # except Exception as e:
+    #     log.error(f"Error when creating annotations from segments. {e}")
     
     # delete the audio file
     try:
         os.remove(audio_path)
-    except:
-        log.warning(f"Could not remove the temp audio file {e}")
+    except FileNotFoundError:
+        pass
+    # log.warning(f"Could not remove the temp audio file {e}")
     
     return filename
 
@@ -592,24 +597,39 @@ class DatasetManager:
         log.info("Checking inputs")
         # checking if output_folder is a folder
         if not os.path.isdir(self.output_path):
-            log.warning('output_path does not exist')
+            log.info('output_path does not exist')
             # create output_folder
             os.mkdir(self.output_path)
-            log.warning(f'created folder at {self.output_path}')
+            log.info(f'created folder at {self.output_path}')
         
         if self.dataset_type == "subtitles":
             # checking if subtitles_file is a file
+            if self.subtitles_file is None:
+                raise ValueError(
+                    f"Provide a subtitle file"
+                )
             if not os.path.isfile(self.subtitles_file):
-                log.warning('subtitles_file does not exist')
-                return
-            log.info("Starting to create subtitles file")
+                # log.warning('subtitles_file does not exist')
+                # return
+                raise ValueError(
+                    f"The subtitles file at {self.subtitles_file} does not exists"
+                )
+                
+            # log.info("Starting to create subtitles file")
             # str_2_csv(intput_path=self.subtitles_file, output_path=self.output_path)
         
         elif self.dataset_type == "dialogues":
             # checking if input_srt is a file
+            if self.annotation_file is None:
+                raise ValueError(
+                    f"Provide an annotation file"
+                )
             if not os.path.isfile(self.annotation_file):
-                log.warning('annotation_file does not exist')
-                return
+                # log.warning('annotation_file does not exist')
+                # return
+                raise ValueError(
+                    f"The annotation file at {self.annotation_file} does not exists"
+                )
             
             if self.num_characters < 1 or self.num_characters == None:
                 log.warning('num_characters must be >= 1')
@@ -619,7 +639,7 @@ class DatasetManager:
                 self.time_interval = 5
 
                 
-            log.info("Starting to create dialogues file")
+            # log.info("Starting to create dialogues file")
 
             # dialoges_from_csv(csv_path=self.annotation_file, output_path=self.output_path,
             #                 time_interval=self.time_interval, num_characters=self.num_characters,
@@ -627,21 +647,30 @@ class DatasetManager:
             
         elif self.dataset_type == "audios":
             if not os.path.isfile(self.annotation_file):
-                log.warning('annotation_file does not exist')
-                return
+                # log.warning('annotation_file does not exist')
+                # return
+                raise ValueError(
+                    f"The annotation file at {self.annotation_file} does not exists"
+                )
             if not os.path.isdir(self.audios_path):
-                log.warning(f'audios_path {self.audios_path} does not exist')
-                return
+                # log.warning(f'audios_path {self.audios_path} does not exist')
+                # return
+                raise ValueError(
+                    f"The folder with audio files at {self.audios_path} does not exists"
+                )
             
             if self.num_characters < 1 or self.num_characters == None:
                 log.warning('num_characters must be >= 1')
                 self.num_characters = 4
             
             if self.character == None:
-                log.warning('character does not exist')
-                return
+                # log.warning('character does not exist')
+                # return
+                raise ValueError(
+                    "You must pass a character name"
+                )
 
-            log.info("Starting to audio files")
+            # log.info("Starting to audio files")
 
             # character_audios(csv_path=self.annotation_file, character=self.character,
             #                 num_characters=self.num_characters, output_path=self.output_path,
@@ -649,9 +678,11 @@ class DatasetManager:
                 
             
         else:
-            log.warning("That function does not exist.")
-            return
-        
+            # log.warning("That function does not exist.")
+            # return
+            raise ValueError(
+                    f"The dataset type {self.dataset_type} does not exists"
+                )
         # log.info(f"The function {self.dataset_type} has been completed!")
         return "Success"
     
@@ -697,6 +728,7 @@ class DatasetManager:
         checks = self.inputs_check()
         
         if checks == "Success":
+            log.info("Starting to create dialogues file")
             csv_2_dialoges(csv_path=self.annotation_file, output_path=self.output_path,
                             time_interval=self.time_interval, num_characters=self.num_characters,
                             first_character=self.first_character, second_character=self.second_character)
@@ -752,6 +784,7 @@ class DatasetManager:
         checks = self.inputs_check()
         
         if checks == "Success":
+            log.info("Starting to extract audio files")
             csv_2_audios(csv_path=self.annotation_file, character=self.character,
                             num_characters=self.num_characters, output_path=self.output_path,
                             audios_path=self.audios_path
@@ -771,23 +804,27 @@ class DatasetManager:
         log.info("Starting transcription")
         # check if annotate_map is a file
         if not os.path.isfile(video_path):
-            log.info(f'annotate_map {video_path} does not exist')
-            return
+            # log.info(f'annotate_map {video_path} does not exist')
+            # return
+            raise ValueError(
+                    f"The annotation file at {self.annotation_file} does not exists"
+                )
 
         # check if role_audios is a folder
         if not os.path.isdir(self.output_path):
-            log.info(f'output folder {self.output_path} does not exist')
-            # create role_audios folder
+            log.info('output_path does not exist')
+            # create output_folder
             os.mkdir(self.output_path)
+            log.info(f'created folder at {self.output_path}')
         
-        try: 
-            filename = extract_subtitles(output_path=self.output_path,
-            video_path=video_path, iscropping=iscropping,
-            num_characters=self.num_characters,)
+        # try: 
+        filename = extract_subtitles(output_path=self.output_path,
+        video_path=video_path, iscropping=iscropping,
+        num_characters=self.num_characters,)
         
-        except Exception as e:
-            log.error(f"Error when transcribing. {e}")
-            return "Error", None
+        # except Exception as e:
+        #     log.error(f"Error when transcribing. {e}")
+        #     return "Error", None
         
         return "Transcrito audios!", filename
 
