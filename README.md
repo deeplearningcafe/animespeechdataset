@@ -122,7 +122,7 @@ python webui_finder.py
 
 ## License
 
-このプロジェクトはMITライセンスの下でライセンスされています。詳細については[LICENSE.md](LICENSE)ファイルを参照してください。
+このプロジェクトはMITライセンスの下でライセンスされています。詳細については[LICENSE.txt](LICENSE)ファイルを参照してください。
 
 
 
@@ -159,31 +159,16 @@ Make more clear the outputs and inputs folders.
 Change the update in classes to parameters in functions when needed.
 Improve the labeling part.
 
-Solve the error in cropping for labels. -> When there are several elements with the same name, only the last one counts for updating.
-As there are 3 annotation files variables, only the last one is used to update.
-
-Clean the innecesary stuf, repeated variables are problematic so only unique ones.
-For the case of creating labeled data, the user inputs are: Subs file, video file (the output folder for labeling should be automatically created and then removed), name for the character embeddings folder probably should be automatic as well.
-
-We could remove the subtitle functionality and make all the functions take as input the str, then internally convert it.
-We should leave only 3 buttons, one for starting to label(this converts the sub file, creates the temp folder with the audios), the second button should be the save annotations(save the updates csv and also removes the temp folder), finally, the last button should be create the embedds.
-
-The path of the audios for labeling should be simple to make it easier to copy paste them.
-
-There is an error that we can't select models and device for the embedds, probably because it is not "interactive".
 
 ## Webui_dataset
 We should unify all the webui in only one, but we can develop them alone and then just merge.
 For creating dialogs the user needs to introduce the annotation file, character 1 (user role) and character 2 (system role).
 For creating the audios the user needs to introduce the annotation file, character name and the audios folder.
 The audios folder should be automatically created, we can include it in outputs with the name of the character. But there is a problem if after getting the audios we use other annotation file, then the previous audios will get removed. Because the index is the same, so we need to manage the index part. We can create a folder with the annotation file name inside the character folder. That shouldn't be a problem for the tts.
-Creating audio folder for each annotation file is good, but we should append to just 1 text file. Other better option is to get the last index and just continue adding. But it is difficult because the index is used for looking for the audio file. 
 We can use as name for the audios the index and the text.
 
-The preds file is already in the same folder as the audios so we can get the audios_path from there. 
 There is a problem, as the preds is in the folder of the video, we need to include that folder name as well.
 
-We need to solve the problem of including the folder of the annotation file, as the folder name should be the same as the csv file, we can get it from there as well as we did with the audios paths.
 
 # Webui_finder
 ## Subtitles
@@ -193,57 +178,33 @@ Given a csv file with the times and the text, creates clips audios from the vide
 With the labeled csv we can create the embeddings for predicting.
 ## Create embeddings
 From the labeled csv created in crop for labeling, we create the embeddings for each character.
-It does not return any comment like "completed" or "error".
 ## Predict
 In the actual implementation, we first need to convert the str file in the subtitles part, then we use the new csv file, the video and the
 path of the embeddings to predict the characters of the csv file.
-It would be better to use as input the str file for this part, to make it more simpler, so that it automatically converts to csv file in the process.
 
-As there are several variables shared among the different methods, one option is to leave those vars at the start so that they are always visible and just with accordeons appear the specific variables.
-Probably this is the best option I think.
 
-The folder of character_embedds should be in data, but not in inputs nor in outputs. We could specify from the beggning the folder to save the embedds.
 
-The create labeling data could be done as the predict button, first call the call_function and then use the updated annotation file.
-
-Should the transcribe logic be all in the dataset_manager? In that class we have alredy stored the "iscropping" and "num_characters". Also the segments_2_annotations is in the text_dataset.py. We can move the utils.py in common to have there ffmpeg functions and that stuf.
-
-We could processes the response of the api, in json format, in the text_dataset.py, so that we have the text processing in only one file.
-
-We need to normalize the path of the audio when sending to the API
-
-IMPORTANT: The common and config part should be included in the src probably, as there is an error when importing.
 
 
 
 There is an error that when creating the dialogs, it only takes the character wroten, not the (可能) as well.
 
-In character creation, the "cropping" option should always be true, as there we want to create the embeddings for predicting so the character column is always necessary.
-We need to update the cropping logic.
 
-The model selection in predictic works but in create embedds does not.
-That is because the name of the variable is the same as in the predicts.
-Merge all the repeated advanced options.
 
-The filename column should be removed as the tmp audio files are deleted.
+
 
 Maybe we should include a script to download the models automatically.
 
 Include a script that creates the folder if they not exists?
 
-The min characters is not working. It can't be updated.
-
-There was a problem with the predict when saving the csv because of the csv filename, so make it just preds.csv.
 
 What is the objective of min length text in the dialogs and audios? This functions use the predictions, which use the sub transformed. So the min characters should only be used for the subtitles transform.
 
-We should change the log warnings to raise value error?
 
 The implementation of update annotation_file is differenct for finder and for dataset_manager. But as the one in finder should be automatic, there is not problem with the actual implementation.
 There is an error with the annotation file for creating dialogs, as the implementation is different, we can't use directly the result of the predction, we need to remove the path of the generated annotation file. The problem is that the annotation file is not the same as the prediction file.
 But everything else works.
 
-Change the log by Raising errors, because I don't know the line where the error was produced.
 Change the code logic, classes have many attributes, we should use parameters in the functions. It makes no sense to be storing attributes and then use them as paramters to other functions.
 
 Update clases attributes to getters and setters.

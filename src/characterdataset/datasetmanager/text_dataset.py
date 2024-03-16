@@ -15,6 +15,10 @@ def parse_lines(lines:list=None) -> list[list[float, float, str]]:
         00:01:42,930 --> 00:01:48,600
         《レイ：魔法とは　この世界における
         最先端技術である。
+    Returns:
+        start_time,end_time,text
+        3.4,7.57,﻿0レイ:王立学院を舞台に0人の王子様との恋を楽しむ
+
     
     Args:
         lines (list, optional): _description_. Defaults to None.
@@ -57,7 +61,7 @@ def parse_lines(lines:list=None) -> list[list[float, float, str]]:
     return dialogues
 
 def str_2_csv(input_path:str=None, output_path:str=None, cropping:bool=False, num_characters:int=4) -> str:
-    """Given the path of a str file, outputs the csv cleaned version
+    """Given the path of a str file, outputs the csv cleaned version. In case of use for labeling, it adds the character column
 
     Args:
         path (str, optional): path of the str file. Defaults to None.
@@ -103,7 +107,8 @@ def str_2_csv(input_path:str=None, output_path:str=None, cropping:bool=False, nu
 
 def conversation_dataset(dialogues: pd.DataFrame=None, time_interval:int=3, first_characters:list=None, second_characters:list=None) -> list[list[str], list[str]]:
     """Given a dataframe with columns ["filename", "predicted_label", "start_time", "end_time", "text"],
-    returns a conversational like list where all the user interactions are from the first character
+    returns a conversational like list where all the user interactions are from the first character and 
+    all the system interactions are from the second character.
 
     Args:
         dialogues (pd.DataFrame, optional): dataframe with the texts and the timings. Defaults to None.

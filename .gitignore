@@ -6,7 +6,7 @@ role_audios/
 test/
 tmp/
 pretrained_models/*
-common/logs/dataset_manager.log
+src/characterdataset/common/logs/dataset_manager.log
 
 wataoshi_1.mkv
 data/inputs/*
@@ -22,4 +22,4 @@ src/characterdataset/DatasetManager.egg-info/
 src/characterdataset.egg-info
 tests/
 test_api.py
-common/texts.json
+src/characterdataset/common/texts.json

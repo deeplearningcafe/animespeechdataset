@@ -594,6 +594,21 @@ class DatasetManager:
         # self.crop = crop
         
     def inputs_check(self) -> str:
+        """Checks inputs before calling functions
+
+        Raises:
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+
+        Returns:
+            str: sucess if no problem
+        """
         log.info("Checking inputs")
         # checking if output_folder is a folder
         if not os.path.isdir(self.output_path):
@@ -689,7 +704,19 @@ class DatasetManager:
     def create_csv(self, 
                 #    dataset_type:str="subtitles",
                    subtitles_file:str=None, output_path:str=None,
-                   crop:bool=None, num_characters:int=None):
+                   crop:bool=None, num_characters:int=None) -> tuple[str, str]:
+        """Given the path of a str file, outputs the csv cleaned version. In case of use for labeling, it adds the character column
+
+        Args:
+            path (str, optional): path of the str file. Defaults to None.
+            output_path (str, optional): path to output the csv file. Defaults to None.
+            crop (bool, optional): if the file is going to be used for cropping,
+            then we want to include the column of characters. Defaults to False.
+            num_characters (int, optional): min length of the text. Defaults to 4.
+
+        Returns:
+            tuple[str, str]: _description_
+        """
         # Check inputs
         self.update_dataset_type("subtitles")
         self.update_subtitles_file(subtitles_file)
@@ -709,15 +736,27 @@ class DatasetManager:
         return "Error", None
     
     
-    def create_dialogues(self, dataset_type:str="dialogues",
+    def create_dialogues(self, 
+                        #  dataset_type:str="dialogues",
                          annotation_file:str=None, 
                          output_path:str=None,
                          time_interval:str=None, 
-                         num_characters:str=None,
+                         num_characters:int=None,
                          first_character:str=None, 
-                         second_character:str=None):
+                         second_character:str=None) -> str:
+        """Given a csv with columns [pkl_filename, predicted_label, discance] outputs a conversational 
+        like file, with format user, assistant.
+
+        Args:
+            annotation_file (str, optional): input file path. Defaults to None.
+            output_path (str, optional): output directory path. Defaults to None.
+            time_interval (int, optional): time between lines of the script. Defaults to 3.
+            num_characters (int, optional): min length of the text. Defaults to 4.
+            first_character (str, optional): in the dialog always the same character as user. Defaults to None.
+            second_character (str, optional): in the dialog always the same character as assistant. Defaults to None.
+        """
         # Check inputs
-        self.update_dataset_type(dataset_type)
+        self.update_dataset_type("dialogues")
         self.update_output_path(output_path)
         self.update_time_interval(time_interval)
         self.update_annotation_file(annotation_file)
@@ -735,29 +774,28 @@ class DatasetManager:
             
         return f"Creados dialogos"
 
-    def create_audio_files(self, dataset_type:str="audios",
+    def create_audio_files(self, 
+                        #    dataset_type:str="audios",
                          annotation_file:str=None, 
                          output_path:str=None,
                         #  audios_path:str=None, 
-                         num_characters:str=None,
+                         num_characters:int=None,
                          character:str=None, 
-                         ):
+                         ) -> str:
         """This function copys the audio files from the clipped audios that were used for predicting,
         then it creates a text file with the path of the copied audios and their texts, for training
         tts.
 
         Args:
-            dataset_type (str, optional): _description_. Defaults to "audios".
             annotation_file (str, optional): _description_. Defaults to None.
             output_path (str, optional): _description_. Defaults to None.
-            audios_path (str, optional): path of the original audios, the ones used for predicting
             the characters. Defaults to None.
-            num_characters (str, optional): _description_. Defaults to None.
+            num_characters (int, optional): _description_. Defaults to None.
             character (str, optional): _description_. Defaults to None.
         """
 
         # Check inputs
-        self.update_dataset_type(dataset_type)
+        self.update_dataset_type("audios")
         self.update_annotation_file(annotation_file)
         self.update_output_path(output_path)
         # self.update_audios_path(audios_path)
@@ -794,7 +832,23 @@ class DatasetManager:
     
     def transcribe_video(self, video_path:str=None, output_path:str=None, 
                          iscropping:bool=None, 
-                         num_characters:int=4):
+                         num_characters:int=None) -> tuple[str, str]:
+        """_summary_
+        First convert the video to audio. Second transcribe the audio. Third create a csv file from the results.
+        As nemo asr does not work in windows, we will use a api for the transcribing.
+        
+        Args:
+            video_path (str, optional): _description_. Defaults to None.
+            output_path (str, optional): _description_. Defaults to None.
+            iscropping (bool, optional): _description_. Defaults to False.
+            num_characters (int, optional): _description_. Defaults to None.
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            tuple[str, str]: _description_
+        """
         
         # self.update_crop(iscropping)
         self.update_num_characters(num_characters)

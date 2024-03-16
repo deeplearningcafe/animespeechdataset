@@ -90,7 +90,22 @@ class Finder:
                     model:str=None,
                     device:str=None,
                     ) -> str:
-        # Check the inputs
+        """Creates embeddings and save them in each character folder. This data will be used for predicting as the labeled data.
+        First extract audios and then extract embeddings from the audios.
+
+        Args:
+            model (str, optional): name of the model to use for extracting the embeddings. Defaults to None.
+            device (str, optional): device to use. Defaults to None.
+
+        Raises:
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+
+        Returns:
+            str: sucess if completed
+        """
     
         # check if annotate_map is a file
         if self.annotation_file is None:
@@ -145,6 +160,23 @@ class Finder:
                     # character_folder:str="tmp",
                     model:str=None,
                     device:str=None,) -> str:
+        """Predicts the character that said each line in the subtitles
+
+        Args:
+            model (str, optional): _description_. Defaults to None.
+            device (str, optional): _description_. Defaults to None.
+
+        Raises:
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+            ValueError: _description_
+
+        Returns:
+            str: sucess if completed
+        """
+        
         # as we need the annotation file to be updated, we need to wait to avoid none in the annotation_file
         await asyncio.sleep(0.2)
         

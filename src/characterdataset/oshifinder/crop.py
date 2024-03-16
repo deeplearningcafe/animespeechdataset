@@ -111,87 +111,95 @@ def load_model(model_name:str=None, device:str=None):
         
 
 
-class KNN_classifier:
-    def __init__(self, audio_embds_dir, n_neighbors=3, 
-                 threshold_certain=0.4, threshold_doubt=0.6) -> None:
-        self.embeddings, self.labels = self.fetch_embeddings(audio_embds_dir)
+# class KNN_classifier:
+#     def __init__(self, audio_embds_dir:str, n_neighbors=3, 
+#                  threshold_certain=0.4, threshold_doubt=0.6) -> None:
+#         """This class is used for prediction, using k-means we classify new samples by comparing the distance with its nearest cluster
+
+#         Args:
+#             audio_embds_dir (str): path of the directory where the character embeddings are stored.
+#             n_neighbors (int, optional): number of clusters to use. Defaults to 3.
+#             threshold_certain (float, optional): maximum distance to consider the character. Defaults to 0.4.
+#             threshold_doubt (float, optional): maximum distance to consider the character as possible. Defaults to 0.6.
+#         """
+#         self.embeddings, self.labels = self.fetch_embeddings(audio_embds_dir)
         
-        self.knn_cls = KNeighborsClassifier(n_neighbors=n_neighbors)
+#         self.knn_cls = KNeighborsClassifier(n_neighbors=n_neighbors)
         
-        # self.embeddings -> [batch_size, 1, hidden_dim]
-        self.knn_cls.fit(self.embeddings.squeeze(1), self.labels)
+#         # self.embeddings -> [batch_size, 1, hidden_dim]
+#         self.knn_cls.fit(self.embeddings.squeeze(1), self.labels)
         
-        self.threshold_certain = threshold_certain
-        self.threshold_doubt = threshold_doubt
+#         self.threshold_certain = threshold_certain
+#         self.threshold_doubt = threshold_doubt
     
     
-    def fetch_embeddings(self, audio_embds_dir:str=None) -> list[np.ndarray, list[str]]:
-        """ From a directory with folders named and labels and 
-        inside the embeddings files, get the embeddings and the labels.
+#     def fetch_embeddings(self, audio_embds_dir:str=None) -> list[np.ndarray, list[str]]:
+#         """ From a directory with folders named and labels and 
+#         inside the embeddings files, get the embeddings and the labels.
 
-        Args:
-            audio_embds_dir (str, optional): _description_. Defaults to None.
+#         Args:
+#             audio_embds_dir (str, optional): _description_. Defaults to None.
 
-        Returns:
-            _type_: 
-        """
-        embeddings_cls = None
-        labels = []
-        dim = 0
+#         Returns:
+#             _type_: 
+#         """
+#         embeddings_cls = None
+#         labels = []
+#         dim = 0
         
-        # これはサブフォルダの名前をリストに格納する
-        role_dirs = []
-        for item in os.listdir(audio_embds_dir):
-            if os.path.isdir(os.path.join(audio_embds_dir, item)):
-                role_dirs.append(item)
+#         # これはサブフォルダの名前をリストに格納する
+#         role_dirs = []
+#         for item in os.listdir(audio_embds_dir):
+#             if os.path.isdir(os.path.join(audio_embds_dir, item)):
+#                 role_dirs.append(item)
 
-        # キャラごとに埋め込みを読みます
-        for role_dir in role_dirs:
-            role = os.path.base(os.path.normpath(role_dir))
-            # これは名前だけ、パずじゃない
-            files_names = os.listdir(os.path.join(audio_embds_dir, role_dir))
-            file_list = [os.path.join(audio_embds_dir, role_dir, embeddings_path) for embeddings_path in files_names]
+#         # キャラごとに埋め込みを読みます
+#         for role_dir in role_dirs:
+#             role = os.path.base(os.path.normpath(role_dir))
+#             # これは名前だけ、パずじゃない
+#             files_names = os.listdir(os.path.join(audio_embds_dir, role_dir))
+#             file_list = [os.path.join(audio_embds_dir, role_dir, embeddings_path) for embeddings_path in files_names]
             
-            for embeddings_path in file_list:
-                # 埋め込みファイルを開く
-                with open(embeddings_path, 'rb') as fp:
-                    embedding = pickle.load(fp)
-                fp.close()
+#             for embeddings_path in file_list:
+#                 # 埋め込みファイルを開く
+#                 with open(embeddings_path, 'rb') as fp:
+#                     embedding = pickle.load(fp)
+#                 fp.close()
                 
-                # 前作ったリストに格納する
-                if dim == 0:
-                    embeddings_cls = embedding
-                    dim = embeddings_cls.shape[0]
-                else:
-                    # This is equivalent to concatenation along the first axis after 1-D arrays of shape (N,) have been reshaped to (1,N)
-                    embeddings_cls = np.vstack((embeddings_cls, embedding))
+#                 # 前作ったリストに格納する
+#                 if dim == 0:
+#                     embeddings_cls = embedding
+#                     dim = embeddings_cls.shape[0]
+#                 else:
+#                     # This is equivalent to concatenation along the first axis after 1-D arrays of shape (N,) have been reshaped to (1,N)
+#                     embeddings_cls = np.vstack((embeddings_cls, embedding))
 
-                labels.append(role)
+#                 labels.append(role)
                 
-        return embeddings_cls, labels
+#         return embeddings_cls, labels
 
-    def predict_class(self, embedding: torch.Tensor) -> list[str, float]:
-        """_summary_
+#     def predict_class(self, embedding: torch.Tensor) -> tuple[str, float]:
+#         """Given the embedding of the new sample, predict the class by comparing the distance with the labeled data
 
-        Args:
-            embedding (torch.Tensor): _description_
+#         Args:
+#             embedding (torch.Tensor): embedding from the new sample
 
-        Returns:
-            list[str, float]: _description_
-        """
-        predicted_label = self.knn_cls.predict(embedding)
-        dist, _ = self.knn_cls.kneighbors(embedding)
-        # 一番近いクラスターの距離をとる
-        dist = dist[0].min()
+#         Returns:
+#             tuple[str, float]: returns the label and the distance to the nearest cluster
+#         """
+#         predicted_label = self.knn_cls.predict(embedding)
+#         dist, _ = self.knn_cls.kneighbors(embedding)
+#         # 一番近いクラスターの距離をとる
+#         dist = dist[0].min()
         
-        # もしラベルがないなら、''を変える
-        name = ''
-        if dist < self.threshold_certain:
-            name = predicted_label[0]
-        elif dist < self.threshold_doubt:
-            name = '（可能）' + predicted_label[0]
+#         # もしラベルがないなら、''を変える
+#         name = ''
+#         if dist < self.threshold_certain:
+#             name = predicted_label[0]
+#         elif dist < self.threshold_doubt:
+#             name = '（可能）' + predicted_label[0]
         
-        return name, dist
+#         return name, dist
 
 class data_processor:
     """This class is used to store functions to extract audios from video,
@@ -285,6 +293,14 @@ class data_processor:
         
         
     def preprocess_audio(self, audio_path:str=None) -> torch.Tensor:
+        """Preprocessing of audios, convert to mono signal and resample
+
+        Args:
+            audio_path (str, optional): path of the audio file. Defaults to None.
+
+        Returns:
+            torch.Tensor: tensor containing the information of the audio file
+        """
         # サンプリングレートは16khzであるべき
         signal, fs = torchaudio.load(audio_path)
         # 録音の前処理
@@ -447,6 +463,14 @@ class data_processor:
     
     @staticmethod
     def request_transcription(audio_path:str=None) -> dict:
+        """Sends a request to the api to transcribe the audio
+
+        Args:
+            audio_path (str, optional): path of the audio file, should be normalized. Defaults to None.
+
+        Returns:
+            dict: dictionary in json format containing the segments and their timings.
+        """
         url = 'http://127.0.0.1:8001/api/media-file'
         #    curl -X 'POST' \
         #   'http://127.0.0.1:8001/api/media-file' \
@@ -522,7 +546,16 @@ def crop(annotation_file:str=None,
          model:str=None,
          device:str=None,
         ):
-    
+    """Creates embeddings and save them in each character folder. This data will be used for predicting as the labeled data.
+    First extract audios and then extract embeddings from the audios.
+
+    Args:
+        annotation_file (str, optional): path of the annotation file. Defaults to None.
+        output_path (str, optional): path to output the character embeddings. Defaults to None.
+        video_path (str, optional): path of the video file. Defaults to None.
+        model (str, optional): name of the model to use for extracting the embeddings. Defaults to None.
+        device (str, optional): device to use. Defaults to None.
+    """
    
         
     # data = pd.read_csv(annotation_file)

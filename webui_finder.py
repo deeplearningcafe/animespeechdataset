@@ -60,7 +60,7 @@ def call_function(dataset_type:str, transcribe:bool=False, ) -> str:
         log.info("Transcribing video")
         # this is probably really bad but maybe it works
         result = dataset_manager.transcribe_video(video_path=finder.video_path, 
-                                                  iscropping=True)
+                                                  iscropping=False)
 
     return result  
     
@@ -154,7 +154,7 @@ def create_labeling_data(transcribe:bool=False) -> tuple:
         log.info("Transcribing video")
         # this is probably really bad but maybe it works
         result, annotation_file = dataset_manager.transcribe_video(video_path=finder.video_path,
-                                                                   iscropping=False)
+                                                                   iscropping=True)
     else:
         result, annotation_file = dataset_manager.create_csv(crop=True)
     

@@ -18,6 +18,14 @@ from ..common import log
 class KNN_classifier:
     def __init__(self, audio_embds_dir, n_neighbors=3, 
                  threshold_certain=0.4, threshold_doubt=0.6) -> None:
+        """This class is used for prediction, using k-means we classify new samples by comparing the distance with its nearest cluster
+
+        Args:
+            audio_embds_dir (str): path of the directory where the character embeddings are stored.
+            n_neighbors (int, optional): number of clusters to use. Defaults to 3.
+            threshold_certain (float, optional): maximum distance to consider the character. Defaults to 0.4.
+            threshold_doubt (float, optional): maximum distance to consider the character as possible. Defaults to 0.6.
+        """
         self.embeddings, self.labels = self.fetch_embeddings(audio_embds_dir)
         
         self.knn_cls = KNeighborsClassifier(n_neighbors=n_neighbors, metric='cosine')
@@ -82,13 +90,13 @@ class KNN_classifier:
         return embeddings_cls, labels
 
     def predict_class(self, embedding: torch.Tensor) -> list[str, float]:
-        """_summary_
+        """Given the embedding of the new sample, predict the class by comparing the distance with the labeled data
 
         Args:
-            embedding (torch.Tensor): _description_
+            embedding (torch.Tensor): embedding from the new sample
 
         Returns:
-            list[str, float]: _description_
+            tuple[str, float]: returns the label and the distance to the nearest cluster
         """
         predicted_label = self.knn_cls.predict(embedding)
         dist, _ = self.knn_cls.kneighbors(embedding)
@@ -109,7 +117,7 @@ class KNN_classifier:
 
         Args:
             temp_folder (str, optional): Folder where the audios and embeddings we want to predict are stored. Defaults to None.
-            video_path (str, optional): _description_. Defaults to None.
+            video_path (str, optional): path of the video to get the filename . Defaults to None.
             keep_unclassed (bool, optional): if true keep the predictions without class, that is that they are not labelled as any character. Defaults to False.
         """
         file = os.path.basename(video_path)
@@ -217,7 +225,7 @@ def recognize(annotation_file:str=None,
          character_folder:str=None,
          model:str=None,
          device:str=None,) -> None:
-    """
+    """Predicts the character that said each line in the subtitles
 
     Args:
         annotation_file (str, optional): _description_. Defaults to None.
@@ -228,27 +236,6 @@ def recognize(annotation_file:str=None,
         device (str, optional): _description_. Defaults to None.
     """
     
-    # # checking if input_video is a file
-    # if not os.path.isfile(video_path):
-    #     log.info('input_video is not exist')
-    #     return
-    
-    # # checking if input_srt is a file
-    # if not os.path.isfile(annotation_file):
-    #     log.info('annotate_map is not exist')
-    #     return
-    
-    # # checking if role_audios is a folder
-    # if not os.path.isdir(output_path):
-    #     log.info('role_audios is not exist')
-    #     return
-
-
-
-        
-    
-    # classifier = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb",
-    #                                             run_opts={"device": "cuda"},)
     classifier = load_model(model, device)
     
     processor = data_processor(classifier)

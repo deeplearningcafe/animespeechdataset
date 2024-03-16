@@ -23,7 +23,15 @@ def convert_time(timestamp:str=None) -> float:
     total_seconds = hours * 3600 + minutes * 60 + seconds + float(milliseconds) / 1000.0
     return total_seconds
 
-def time_to_seconds(time):
+def time_to_seconds(time:str=None) -> float:
+    """Converts time, in format H.M.S.Mili to just seconds.
+
+    Args:
+        time (str): string to convert to seconds
+
+    Returns:
+        float: converted seconds 
+    """
     # 時間の各部分を取得
     hours, minutes, seconds, milliseconds = map(int, time.split('.'))
 
@@ -73,7 +81,13 @@ def extract_main_text(line:str=None) -> str:
     
     return cleaned_text
 
-def ffmpeg_video_2_audio(video_input, audio_output):
+def ffmpeg_video_2_audio(video_input:str, audio_output:str) -> None:
+    """Converts video file to audio file
+
+    Args:
+        video_input (str): path of the video
+        audio_output (str): path of the audio file to create
+    """
     
     # command = ['ffmpeg', '-i', f'{video_input}', "-q:a", "0",
     #                '-map', '0', audio_output, 

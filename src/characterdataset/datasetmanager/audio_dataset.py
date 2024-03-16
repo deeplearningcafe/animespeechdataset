@@ -161,6 +161,7 @@ def character_audios(csv_path:str=None, character:str=None, num_characters:int=4
     filenames = df["filename"]
     new_names = []
     texts = []
+    # could save the audios folder in the same folder as the preds csv file, so that we have everything of the video in one folder
     audio_output_path = f"{output_path}/{character}"
     
     for file in filenames:
