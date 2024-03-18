@@ -3,8 +3,6 @@ import pandas as pd
 import os
 from tqdm import tqdm
 import argparse
-import logging
-from datetime import datetime
 import os
 import shutil
 import requests

@@ -1,18 +1,20 @@
 demoji==1.1.0
-gradio==4.20.1
+gradio==4.21.0
 matplotlib==3.8.0
 munch==4.0.0
 neologdn==0.5.2
 numpy==1.25.2
 pandas==2.0.3
+pytest==8.1.1
+requests==2.31.0
 scikit_learn==1.2.2
-setuptools==69.1.1
+setuptools==68.2.2
 speechbrain==0.5.16
 toml==0.10.2
-torch==2.0.1
-torchaudio==2.0.2
+--index-url https://download.pytorch.org/whl/cu121
+torch==2.2.1
+torchaudio==2.2.1
 tqdm==4.66.1
-transformers==4.36.2
-soundfile==0.12.1
-pytest==8.1.1
+transformers==4.38.2
 pytest-asyncio==0.23.5.post1
+soundfile==0.12.1

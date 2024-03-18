@@ -18,6 +18,9 @@ This project aims to facilitate the generation of datasets for training Language
 7. [License](#license)
 
 ## Introduction
+`AnimeSpeech` is a project designed to generate datasets for training language models (LLMs) and text-to-speech (TTS) synthesis from anime subtitles. This project is aimed at making it easy to create the necessary data for training machine learning models using subtitles from anime videos. Specifically, it provides functionalities such as extracting conversation data and synthesizing character voices, which are useful for research and development in language modeling and speech synthesis.
+
+Speaker recognition from videos, known as speaker verification task, unfortunately has not been used in this case. The current approach involves extracting embeddings from videos, while the character creation part involves human labeling of subtitles. Based on these labeled embeddings, they serve as training data for KNN. When predicting from new videos, it measures the distance between the labeled embeddings and the new embeddings, recognizing them as characters if the distance is smaller than a certain threshold.
 
 ## Requirements
 - demoji==1.1.0
@@ -81,6 +84,9 @@ This extracts all audios of a desired character and organizes them into a folder
 │   ├── characterdataset
 │   │   ├── datasetmanager
 │   │   ├── oshifinder
+├── tests
+│   ├── test_dataset_manager.py
+│   ├── test_finder.py
 ├── webui_finder.py
 ```
 ### File description
@@ -113,18 +119,18 @@ To use the webui just run:
 ```bash
 python webui_finder.py
 ```
-#### Creating character representations
+### Creating character representations
 1. Introduce the video name and the subtitles name, both placed in `data/inputs`. In the case of not having the subtitles, then use the transcribe checkbox.
 2. Create reprentations(embeddings) of the desired characters, to load the dataset just use the `load df` button. 
 3. The user labels the dataframe, just introduce the character name in the first column.
 4. Save the labeled data using the `safe annotations` button.
 5. Use the `Create representation` button to extract the embeddings from the labeled data.
 
-#### Predict characters
+### Predict characters
 1. Introduce the video name and the subtitles name, both placed in `data/inputs`. In the case of not having the subtitles, then use the transcribe checkbox.
 2. Use the `Predict characters` button, the annotation file path will be displayed at the annotation file textbox. The result file will be stored in a folder with the same name as the video file.
 
-#### Create audio and dialogs datasets
+### Create audio and dialogs datasets
 1. Introduce the prediction results file, the folder in which is stored should be included, but not the `data/outputs` part.
 2. Select in the `Export for training` tab the type of dataset to create, `dialogues` or `audios`.
 3. In the case of `dialogues` you can specify `first character` and `second character`, user role and assystant role. In the case of `audios` you have to choose the character.
@@ -134,9 +140,20 @@ python webui_finder.py
 ### Transcribe
 For speech recognition, we are using the nemo model released by reazonspeech. However, this module cannot be used directly on Windows. There are no issues when using WSL2. Therefore, we have included a simple script asr_api.py using FastAPI for speech recognition.
 
-### TODO
+### Check best K for KKN
+To look for the best `n_neighbors`, just run:
+```bash
+python -m characterdataset.oshifinder.knn_choose
+```
+
+## TODO
+- [ ] Change classes attributes to function parameters when possible.  
+- [ ] When creating dialogues, look for (可能) with the character name.  
 - [ ] Add support for Whisper.  
-- [ ] Process entire folders, not just individual files.
+- [ ] Process entire folders, not just individual files.  
+- [ ] Add QLoRA script for finetunning LLM.  
+- [ ] Add the `n_neighbors` as parameter.  
+
 
 
 
@@ -145,97 +162,5 @@ For speech recognition, we are using the nemo model released by reazonspeech. Ho
 
 ## License
 
-This project is licensed under the MIT license. Details are in the [LICENSE.txt](LICENSE) file.
+This project is licensed under the MIT license. Details are in the [LICENSE](LICENSE) file.
 
-
-
-
-
-# CSV from str
-Use dataset.py 
-
-python crop.py --annotate_map datasets\rei_clair.csv --role_audios test --video_path wataoshi_1.mkv --model wavlm --device cuda
-
-python predict.py --annotate_map datasets\wataoshi3.csv --save_folder tmp --video_path "E:\Data\LLM\わたおし\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou [01-12][WebRip 1080p HEVC-10bit AAC]\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 03 [WebRip 1080p HEVC-10bit AAC ASSx2].mkv" --output_path datasets\preds\preds_wataoshi3.csv --character_folder role_audios/feature
-
-We want to create databases for first the LLM, that is instruction tunning so we want convertional format, that is question and answer.
-Then we want a database for the TTS, that is audio files with their names and their texts.
-
-python dataset_manager.py --dataset_type subtitles --subtitles_file "E:\Data\LLM\わたおし\私の推しは悪役令嬢。\Watashi no Oshi wa Akuyaku Reijou. - 03 「私の恋は七転八起。」 (AT-X 1280x720 x264 AAC).srt" --output_path test
-
-python dataset_manager.py --dataset_type dialogues --annotation_file "datasets\preds\preds_wataoshi3.csv" --output_path test
-python dataset_manager.py --dataset_type audios --annotation_file "datasets\preds\preds_wataoshi3.csv" --output_path test --audios_path "tmp\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 03 [WebRip 1080p HEVC-10bit AAC ASSx2]\voice" --character "クレア"
-
-
-data\outputs\Watashi no Oshi wa Akuyaku Reijou. - 04 「魔物の襲撃は油断大敵。」 (AT-X 1280x720 x264 AAC).csv
-[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2].mkv
-character_embedds\embeddings
-
-For dialogs and audios:
-[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2]\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2]_preds.csv
-レイ
-クレア
-[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2]\voice
-
-# Todo:
-Make more clear the outputs and inputs folders.
-Change the update in classes to parameters in functions when needed.
-Improve the labeling part.
-
-Add whisper support for the transcription part.
-
-There is an error that when creating the dialogs, it only takes the character wroten, not the (可能) as well.
-
-## Webui_dataset
-We should unify all the webui in only one, but we can develop them alone and then just merge.
-For creating dialogs the user needs to introduce the annotation file, character 1 (user role) and character 2 (system role).
-For creating the audios the user needs to introduce the annotation file, character name and the audios folder.
-The audios folder should be automatically created, we can include it in outputs with the name of the character. But there is a problem if after getting the audios we use other annotation file, then the previous audios will get removed. Because the index is the same, so we need to manage the index part. We can create a folder with the annotation file name inside the character folder. That shouldn't be a problem for the tts.
-We can use as name for the audios the index and the text.
-
-There is a problem, as the preds is in the folder of the video, we need to include that folder name as well.
-
-
-# Webui_finder
-## Subtitles
-Given the str file with the subtitles, transform that file to csv file format.
-## Crop for labeling
-Given a csv file with the times and the text, creates clips audios from the video and a csv file to include the character of each line.
-With the labeled csv we can create the embeddings for predicting.
-## Create embeddings
-From the labeled csv created in crop for labeling, we create the embeddings for each character.
-## Predict
-In the actual implementation, we first need to convert the str file in the subtitles part, then we use the new csv file, the video and the
-path of the embeddings to predict the characters of the csv file.
-
-
-
-
-
-
-
-
-
-
-
-
-Maybe we should include a script to download the models automatically.
-
-Include a script that creates the folder if they not exists?
-
-
-What is the objective of min length text in the dialogs and audios? This functions use the predictions, which use the sub transformed. So the min characters should only be used for the subtitles transform.
-
-
-The implementation of update annotation_file is differenct for finder and for dataset_manager. But as the one in finder should be automatic, there is not problem with the actual implementation.
-There is an error with the annotation file for creating dialogs, as the implementation is different, we can't use directly the result of the predction, we need to remove the path of the generated annotation file. The problem is that the annotation file is not the same as the prediction file.
-But everything else works.
-
-Change the code logic, classes have many attributes, we should use parameters in the functions. It makes no sense to be storing attributes and then use them as paramters to other functions.
-
-Update clases attributes to getters and setters.
-
-In gradio the then() always continues despite the result of the first part.
-
-# Installation
-We need to include the soundfile.

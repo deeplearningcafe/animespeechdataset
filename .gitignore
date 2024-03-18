@@ -19,6 +19,7 @@ emotion.py
 check_embeds.py
 check_knn.py
 webui_dataset.py
+memos.md
 
 src/characterdataset/characterdataset.egg-info/
 src/characterdataset/DatasetManager.egg-info/

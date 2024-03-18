@@ -29,6 +29,23 @@ finder = Finder(
     character_folder=config.finder.character_embedds,
 )
 
+# create folders
+if not os.path.isdir(config.dataset_manager.input_path):
+    log.info('Creating input folders')
+    # create output_folder
+    os.makedirs(config.dataset_manager.input_path, exist_ok=True)
+if not os.path.isdir("pretrained_models"):
+    log.info('Creating folder for storing models')
+    # create output_folder
+    os.makedirs("pretrained_models", exist_ok=True)
+
+if not os.path.isdir(config.dataset_manager.output_path):
+    log.info('Creating output folders')
+    # create output_folder
+    os.makedirs(config.dataset_manager.output_path, exist_ok=True)
+
+
+
 def call_function(dataset_type:str, transcribe:bool=False, ) -> str:
     log.info(f"Calling function of {dataset_type}")
     
@@ -186,7 +203,15 @@ Input should be the annotations file.
 │   │   │   ├── preds.csv
 │   │   │   ├── voice
 │   │   │   ├── embeddings
-
+├── pretrained_models
+├── src
+│   ├── characterdataset
+│   │   ├── datasetmanager
+│   │   ├── oshifinder
+├── tests
+│   ├── test_dataset_manager.py
+│   ├── test_finder.py
+├── webui_finder.py
 ```
 """
 
