@@ -690,7 +690,7 @@ class DatasetManager:
             log.info("Creating annotation file")
             filename = subtitle_2_csv(input_path=self.subtitles_file, output_path=self.output_path,
                            cropping=crop, num_characters=self.num_characters)
-            return "Completado", filename
+            return "Success", filename
 
         return "Error", None
     
@@ -731,7 +731,7 @@ class DatasetManager:
                             time_interval=self.time_interval, num_characters=self.num_characters,
                             first_character=self.first_character, second_character=self.second_character)
             
-        return f"Creados dialogos"
+        return f"Dialogues have been created!"
 
     def create_audio_files(self, 
                          annotation_file:str=None, 
@@ -777,7 +777,7 @@ class DatasetManager:
                             num_characters=self.num_characters, output_path=self.output_path,
                             audios_path=self.audios_path
                             )
-        return f"Creados audios de {self.character}"
+        return f"Created audios of {self.character}"
     
     
     def transcribe_video(self, video_path:str=None, output_path:str=None, 
@@ -824,7 +824,7 @@ class DatasetManager:
         num_characters=self.num_characters,)
         
         
-        return "Transcrito audios!", filename
+        return "Audios have been transcribed!", filename
 
     
     

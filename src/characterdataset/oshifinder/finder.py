@@ -61,7 +61,7 @@ class Finder:
                     iscropping=True)
             
 
-        return "Completado"
+        return "Success"
     
     
     def crop_files(self, 
@@ -123,7 +123,7 @@ class Finder:
             )
         
         
-        return "Representaciones de personajes creadas!"
+        return "Characters embeddings have been created!"
         
     async def make_predictions(self,
                     model:str=None,
@@ -194,7 +194,7 @@ class Finder:
         device=device,)
         
         
-        return "Creadas predicciones!"
+        return "Predictions have been completed!"
     
         
         
