@@ -10,9 +10,9 @@ def finder_instance():
     # Initialize Finder with dummy arguments for testing
     finder = Finder(
         input_path="data/inputs/",
-        annotation_file="data/outputs/wataoshi_1.csv",
+        annotation_file="tests\data\outputs\Watashi no Oshi wa Akuyaku Reijou. - 04 「魔物の襲撃は油断大敵。」 (AT-X 1280x720 x264 AAC).csv",
         output_path="tests/data/outputs",
-        video_path="data/inputs/[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 01 [WebRip 1080p HEVC-10bit AAC ASSx2].mkv",
+        video_path="data\inputs\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2].mkv",
         model="speechbrain",
         device="cpu",
         output_path_labeling="tests/data/outputs/tmp",
@@ -45,11 +45,11 @@ def test_crop_files(finder_instance):
     # Setup any necessary preconditions
     # (e.g., create dummy files or directories)
     # finder_instance = finder_instance()
-    finder_instance.annotation_file = r"data\outputs\wataoshi_1_updated.csv"
+    finder_instance.annotation_file = r"data\outputs\Watashi no Oshi wa Akuyaku Reijou. - 04 「魔物の襲撃は油断大敵。」 (AT-X 1280x720 x264 AAC)_updated.csv"
 
     
     # Call the method to be tested
-    result = finder_instance.crop_files(model="speechbrain", device="cpu")
+    result = finder_instance.crop_files(model="speechbrain", device=True)
     
     # Assert the expected outcome
     assert result == "Representaciones de personajes creadas!"
@@ -66,10 +66,10 @@ async def test_make_predictions(finder_instance):
     # Setup any necessary preconditions
     # (e.g., create dummy files or directories)
     # finder_instance = finder_instance()
-    finder_instance.annotation_file = r"data\outputs\wataoshi_1.csv"
+    finder_instance.annotation_file = r"data\outputs\Watashi no Oshi wa Akuyaku Reijou. - 04 「魔物の襲撃は油断大敵。」 (AT-X 1280x720 x264 AAC).csv"
     
     # Call the method to be tested
-    result = await finder_instance.make_predictions(model="speechbrain", device="cpu")
+    result = await finder_instance.make_predictions(model="speechbrain", device=True)
     
     # Assert the expected outcome
     assert result == "Creadas predicciones!"

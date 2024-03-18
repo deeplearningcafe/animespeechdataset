@@ -1,3 +1,6 @@
+[[Japanese](README_jp.md)/English]
+
+
 # AnimeSpeech: Dataset Generation for Language Model Training and Text-to-Speech Synthesis from Anime Subtitles
 
 This project aims to facilitate the generation of datasets for training Language Models (LLMs) and Text-to-Speech (TTS) synthesis using subtitles from anime videos.
@@ -12,8 +15,7 @@ This project aims to facilitate the generation of datasets for training Language
     - [Create Datasets](#Create-Datasets)
 5. [Directory Structure](#directory-structure)
 6. [How to Use](#how-to-use)
-7. [Contributing](#contributing)
-8. [License](#license)
+7. [License](#license)
 
 ## Introduction
 
@@ -92,37 +94,58 @@ This extracts all audios of a desired character and organizes them into a folder
 ### Installation
 ```bash
 git clone https://github.com/deeplearningcafe/animespeechdataset
+cd animespeechdataset
+
+```
+In case of using `conda` it is recommended to create a new environment.
+```bash
+conda create -n animespeech python=3.11
+conda activate animespeech
+```
+
+Then install the required packages.
+```bash
 pip install -r requirements.txt
 pip install -e .
 ```
 
 To use the webui just run:
-```python
+```bash
 python webui_finder.py
 ```
 #### Creating character representations
 1. Introduce the video name and the subtitles name, both placed in `data/inputs`. In the case of not having the subtitles, then use the transcribe checkbox.
 2. Create reprentations(embeddings) of the desired characters, to load the dataset just use the `load df` button. 
 3. The user labels the dataframe, just introduce the character name in the first column.
-4. Use the `Create representation` button to extract the embeddings from the labeled data.
+4. Save the labeled data using the `safe annotations` button.
+5. Use the `Create representation` button to extract the embeddings from the labeled data.
 
 #### Predict characters
 1. Introduce the video name and the subtitles name, both placed in `data/inputs`. In the case of not having the subtitles, then use the transcribe checkbox.
-2. Use the `Predict characters` button, the annotation file path will be displayed at the annotation file textbox. The result file will be stored
+2. Use the `Predict characters` button, the annotation file path will be displayed at the annotation file textbox. The result file will be stored in a folder with the same name as the video file.
 
 #### Create audio and dialogs datasets
-1. Introduce the prediction
+1. Introduce the prediction results file, the folder in which is stored should be included, but not the `data/outputs` part.
+2. Select in the `Export for training` tab the type of dataset to create, `dialogues` or `audios`.
+3. In the case of `dialogues` you can specify `first character` and `second character`, user role and assystant role. In the case of `audios` you have to choose the character.
+4. For the `dialogues` you can choose the maximum time interval to consider 2 lines as a conversation, default is 5 seconds.
+5. Click the `Transform` button.
 
-## Contributing
+### Transcribe
+For speech recognition, we are using the nemo model released by reazonspeech. However, this module cannot be used directly on Windows. There are no issues when using WSL2. Therefore, we have included a simple script asr_api.py using FastAPI for speech recognition.
 
-[Explain how others can contribute to the project. This could include information on submitting bug reports, feature requests, or pull requests.]
+### TODO
+- [ ] Add support for Whisper.  
+- [ ] Process entire folders, not just individual files.
+
+
 
 ## Author
 [aipracticecafe](https://github.com/deeplearningcafe)
 
 ## License
 
-このプロジェクトはMITライセンスの下でライセンスされています。詳細については[LICENSE.txt](LICENSE)ファイルを参照してください。
+This project is licensed under the MIT license. Details are in the [LICENSE.txt](LICENSE) file.
 
 
 
@@ -159,6 +182,7 @@ Make more clear the outputs and inputs folders.
 Change the update in classes to parameters in functions when needed.
 Improve the labeling part.
 
+Add whisper support for the transcription part.
 
 ## Webui_dataset
 We should unify all the webui in only one, but we can develop them alone and then just merge.

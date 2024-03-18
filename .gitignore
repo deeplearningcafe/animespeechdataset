@@ -16,6 +16,9 @@ datasets/
 dataset.py
 recognize.py
 emotion.py
+check_embeds.py
+check_knn.py
+webui_dataset.py
 
 src/characterdataset/characterdataset.egg-info/
 src/characterdataset/DatasetManager.egg-info/

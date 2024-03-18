@@ -14,8 +14,8 @@ class Finder:
                  annotation_file:str=None,
                  output_path:str=None,
                  video_path:str=None,
-                 model:str=None,
-                 device:str=None,
+                #  model:str=None,
+                #  device:str=None,
                  output_path_labeling:str=None,
                  character_folder:str=None,
                 #  crop:bool=False
@@ -24,8 +24,8 @@ class Finder:
         self.annotation_file = annotation_file
         self.output_path = output_path
         self.video_path = video_path
-        self.model = model
-        self.device = device
+        # self.model = model
+        # self.device = device
         self.output_path_labeling = output_path_labeling
         self.character_folder = character_folder
         # self.crop = crop
@@ -88,7 +88,7 @@ class Finder:
     def crop_files(self, 
                 #    output_path_labeling:str="tmp",
                     model:str=None,
-                    device:str=None,
+                    device:bool=None,
                     ) -> str:
         """Creates embeddings and save them in each character folder. This data will be used for predicting as the labeled data.
         First extract audios and then extract embeddings from the audios.
@@ -159,12 +159,12 @@ class Finder:
     async def make_predictions(self,
                     # character_folder:str="tmp",
                     model:str=None,
-                    device:str=None,) -> str:
+                    device:bool=None,) -> str:
         """Predicts the character that said each line in the subtitles
 
         Args:
             model (str, optional): _description_. Defaults to None.
-            device (str, optional): _description_. Defaults to None.
+            device (bool, optional): _description_. Defaults to None.
 
         Raises:
             ValueError: _description_
@@ -278,9 +278,9 @@ class Finder:
         if video_path != None:
             self.video_path = os.path.join(self.input_path, video_path)
         
-    def update_model(self, model:str=None):
-        if model != None:
-            self.model = model
+    # def update_model(self, model:str=None):
+    #     if model != None:
+    #         self.model = model
         
     def update_output_path(self, output_path:str=None):
         if output_path != None:
@@ -293,11 +293,11 @@ class Finder:
             self.annotation_file = annotation_file
             log.info(f"Annotation file of finder updated to {self.annotation_file}")
             
-    def update_device(self, device:bool=True):
-        if device == True:
-            self.device = "cuda"
-        else:
-            self.device = "cpu"    
+    # def update_device(self, device:bool=True):
+    #     if device == True:
+    #         self.device = "cuda"
+    #     else:
+    #         self.device = "cpu"    
         
     # def update_crop(self, crop:bool=None):
     #     if crop != None:
