@@ -49,7 +49,7 @@ def test_create_csv(dataset_manager_instance):
     )
     
     # Assert the expected outcome
-    assert result[0] == "Completado"
+    assert result[0] == "Success"
     
     # Optionally, perform additional assertions to ensure correctness
 
@@ -70,7 +70,7 @@ def test_create_dialogues(dataset_manager_instance):
     )
     
     # Assert the expected outcome
-    assert result == "Creados dialogos"
+    assert result == "Dialogues have been created!"
     
     # Optionally, perform additional assertions to ensure correctness
 
@@ -89,7 +89,7 @@ def test_create_audio_files(dataset_manager_instance):
     )
     
     # Assert the expected outcome
-    assert result == "Creados audios de クレア"
+    assert result == "Created audios of クレア"
     
     # Optionally, perform additional assertions to ensure correctness
 

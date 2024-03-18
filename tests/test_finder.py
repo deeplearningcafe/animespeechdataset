@@ -29,7 +29,7 @@ def test_crop_for_labeling(finder_instance):
     result = finder_instance.crop_for_labeling()
     
     # Assert the expected outcome
-    assert result == "Completado"
+    assert result == "Success"
     
     # Optionally, perform additional assertions to ensure correctness
     # check temp folder was created
@@ -50,7 +50,7 @@ def test_crop_files(finder_instance):
     result = finder_instance.crop_files(model="speechbrain", device=True)
     
     # Assert the expected outcome
-    assert result == "Representaciones de personajes creadas!"
+    assert result == "Characters embeddings have been created!"
     
     # Optionally, perform additional assertions to ensure correctness
     assert os.path.isdir(finder_instance.character_folder)
@@ -70,6 +70,6 @@ async def test_make_predictions(finder_instance):
     result = await finder_instance.make_predictions(model="speechbrain", device=True)
     
     # Assert the expected outcome
-    assert result == "Creadas predicciones!"
+    assert result == "Predictions have been completed!"
     
     # Optionally, perform additional assertions to ensure correctness

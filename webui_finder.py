@@ -199,90 +199,90 @@ def create_ui():
         with gr.Row():
             with gr.Column():
                 subtitles_file = gr.Textbox(
-                                label="Nombre del archivo de subtítulos.",
-                                placeholder="Nombre-de-tu-archivo",
-                                info="Inserte el nombre del archivo str, que está en la carpeta data/inputs",
+                                label="Subtitles file name.",
+                                placeholder="Name-of-your-file",
+                                info="Insert the name of the str file, which is in the folder data/inputs.",
                             )
             with gr.Column():
                 video_path = gr.Textbox(
-                                label="Nombre del archivo de video.",
-                                placeholder="Nombre-de-tu-archivo",
-                                info="Inserte el nombre del archivo de video, que está en la carpeta data/outputs",
+                                label="Video file name.",
+                                placeholder="Name-of-your-file",
+                                info="Insert the name of the video file, which is in the folder data/inputs.",
                             )
-                transcribe = gr.Checkbox(label="Transcribir", info="En el caso de no tener subtítulos, a partir del video se crean las anotaciones",
+                transcribe = gr.Checkbox(label="Transcribe", info="In the case of not having the subtitle, from the video create the annotations.",
                     value=False)
         with gr.Row():
-            with gr.Accordion("Opciones avanzadas", open=False):
+            with gr.Accordion("Advanced options", open=False):
                 with gr.Column():    
                     num_characters = gr.Slider(
                                 minimum=1,
                                 maximum=10,
                                 value=4,
                                 step=1,
-                                label="Mínimo número de caracteres para usar la frase.",
+                                label="Minimum number of characters to use the phrase.",
                                 interactive=True
                             )
                 with gr.Column():
                     model = gr.Dropdown(
                         choices=Finder.model_opts,
-                        label="Tipo de modelo para crear representaciones del personaje.",
+                        label="Type of the model to extract the embeddings.",
                         value=Finder.model_opts[0]
                     )
                 with gr.Column():
                     device = gr.Checkbox(
-                        label="cuda", info="En el caso de usar la gpu.(Recomendado)", value=True
+                        label="cuda", info="In case to use GPU.(Recommended)", value=True
                     )
 
         with gr.Row():
-            annotation_file = gr.Textbox(label="Nombre del archivo de anotaciones.",
-                                        info="Solo usar para crear audios y diálogos.", visible=True)
-            result = gr.Textbox(label="Resultado")
+            annotation_file = gr.Textbox(label="Annotation file name.",
+                                        info="Only use for dialogues and audio datasets.", visible=True)
+            result = gr.Textbox(label="Result")
             
         # For the crop given the subs
-        with gr.Tab("Crear personajes"):
+        with gr.Tab("Create characters"):
                         
             # For the audios
             with gr.Column(visible=True) as labeling:
-                with gr.Accordion(label="Crear dataset", open=False):
+                with gr.Accordion(label="Create dataset", open=False):
                     with gr.Row():
                         with gr.Column(min_width=640):
-                            load_data = gr.Button("Crear base de datos")
+                            load_data = gr.Button("Create dataset for labeling")
                             dataframe = gr.DataFrame(interactive=True, row_count=100)
                             
                     
                     with gr.Row():        
                         with gr.Column():
-                            path_audio = gr.Textbox(label="nombre del archivo de audio", info="puedes copiarlo del dataframe")
-                            audio_button = gr.Button("Cargar el audio")
+                            path_audio = gr.Textbox(label="Name of the audio file", info="You can copy it from the dataframe")
+                            audio_button = gr.Button("Load the audio")
                         with gr.Column():
                             audio_data = gr.Audio(
                                     label="Audio",
                                 )
                                             
                     with gr.Row():
-                        save_button = gr.Button("Guardar anotaciones")    
+                        save_button = gr.Button("Save annotations")    
                     
 
             
 
                 with gr.Column(visible=True) as crop:
-                    with gr.Accordion(label="Crear representaciones", open=False):
+                    with gr.Accordion(label="Create representations", open=False):
                         with gr.Row():
-                            embedds_button = gr.Button("Crear representaciones de los personajes")
+                            embedds_button = gr.Button("Create representations(embeddings) of the characters")
                 
 
         # For the predict given the subs
-        with gr.Tab("Predecir personajes"):
+        with gr.Tab("Predict characters"):
 
             with gr.Column(visible=True) as predict:                        
-                predict_button = gr.Button("Predecir los personajes")
+                predict_button = gr.Button("Predict")
         
         # For creating dialogs and audio datasets
-        with gr.Tab("Exportar para entrenamiento"):
+        with gr.Tab("Export for training"):
             # select the function we want to use
             dataset_type = gr.Dropdown(
                 choices=DatasetManager.dataset_types,
-                label="Tipo de archivo para procesar",
+                label="Type of dataset to process",
                 value=dataset_manager.dataset_type
             )
             # For the dialogs
@@ -290,24 +290,24 @@ def create_ui():
                 with gr.Row():
                     with gr.Column():
                         first_character = gr.Textbox(
-                                label="Personaje uno, rol usuario.",
-                                placeholder="Nombre-de-tu-archivo",
-                                info="Nombre del personaje que hace las preguntas, en el prompt el rol de usuario",
+                                label="First character, user role.",
+                                placeholder="Name-of-your-character",
+                                info="Name of the character that makes the questions, in the prompt the user role.",
                             )
                     with gr.Column():
                         second_character = gr.Textbox(
-                                label="Personaje dos, rol sistema.",
-                                placeholder="Nombre-de-tu-archivo",
-                                info="Nombre del personaje que responde, en el prompt el rol de sistema.",
+                                label="Second character, system role.",
+                                placeholder="Name-of-your-character",
+                                info="Name of the character that makes the answers, in the prompt the system role.",
                             )
             # For the audios
             with gr.Column(visible=False) as audios:
                 with gr.Row():
                     with gr.Column():
                         character = gr.Textbox(
-                                label="Personaje del que tomar los audios",
-                                placeholder="Nombre-de-tu-archivo",
-                                info="Nombre del personaje que responde, en el prompt el rol de sistema.",
+                                label="Character to create audios",
+                                placeholder="Name-of-your-character",
+                                info="Name of the character to create the audio dataset.",
                             )
             
             with gr.Row():
@@ -318,12 +318,12 @@ def create_ui():
                             maximum=10,
                             value=5,
                             step=1,
-                            label="Intervalo máximo entre diálogos, segundos",
+                            label="Maximum interval between dialogue lines, seconds",
                             interactive=True
                         )
 
             with gr.Row():
-                transcribe_button = gr.Button("Transformar")
+                transcribe_button = gr.Button("Transform")
 
         # this is for the dialgs and audios
         transcribe_button.click(
