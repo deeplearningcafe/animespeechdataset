@@ -7,8 +7,6 @@ import argparse
 import torch
 import torchaudio.transforms as T
 import torch.nn.functional as F
-from sklearn.neighbors import KNeighborsClassifier
-import numpy as np
 import requests
 import json
 
@@ -37,8 +35,6 @@ def clip_audio_bycsv(annotate_csv,video_pth,role_audios):
             start_time = float(start_time)
             end_time = float(end_time)
             
-            # ss = start_time.zfill(11).ljust(12, '0')[:12]
-            # ee = end_time.zfill(11).ljust(12, '0')[:12]
             ss = srt_format_timestamp(start_time)
             ee = srt_format_timestamp(end_time)
             
@@ -83,20 +79,14 @@ def extract_pkl_feat(audio_extractor, role_audios):
 
 def load_model(model_name:str=None, device:str=None):
     if model_name == "speechbrain":
-        # try:
         from speechbrain.pretrained import EncoderClassifier
-        # except:
-        #     "can't import speechbrain"
         classifier = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb",
                                                     savedir="pretrained_models/spkrec-ecapa-voxceleb",
                                                     run_opts={"device": device},)
         return classifier
     
     elif model_name == "wavlm":
-        # try:
         from transformers import Wav2Vec2FeatureExtractor, WavLMForXVector
-        # except:
-        #     "can't import transformers"
             
         feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained('microsoft/wavlm-base-plus-sv',
                                                                      cache_dir="pretrained_models")
@@ -111,95 +101,6 @@ def load_model(model_name:str=None, device:str=None):
         
 
 
-# class KNN_classifier:
-#     def __init__(self, audio_embds_dir:str, n_neighbors=3, 
-#                  threshold_certain=0.4, threshold_doubt=0.6) -> None:
-#         """This class is used for prediction, using k-means we classify new samples by comparing the distance with its nearest cluster
-
-#         Args:
-#             audio_embds_dir (str): path of the directory where the character embeddings are stored.
-#             n_neighbors (int, optional): number of clusters to use. Defaults to 3.
-#             threshold_certain (float, optional): maximum distance to consider the character. Defaults to 0.4.
-#             threshold_doubt (float, optional): maximum distance to consider the character as possible. Defaults to 0.6.
-#         """
-#         self.embeddings, self.labels = self.fetch_embeddings(audio_embds_dir)
-        
-#         self.knn_cls = KNeighborsClassifier(n_neighbors=n_neighbors)
-        
-#         # self.embeddings -> [batch_size, 1, hidden_dim]
-#         self.knn_cls.fit(self.embeddings.squeeze(1), self.labels)
-        
-#         self.threshold_certain = threshold_certain
-#         self.threshold_doubt = threshold_doubt
-    
-    
-#     def fetch_embeddings(self, audio_embds_dir:str=None) -> list[np.ndarray, list[str]]:
-#         """ From a directory with folders named and labels and 
-#         inside the embeddings files, get the embeddings and the labels.
-
-#         Args:
-#             audio_embds_dir (str, optional): _description_. Defaults to None.
-
-#         Returns:
-#             _type_: 
-#         """
-#         embeddings_cls = None
-#         labels = []
-#         dim = 0
-        
-#         # これはサブフォルダの名前をリストに格納する
-#         role_dirs = []
-#         for item in os.listdir(audio_embds_dir):
-#             if os.path.isdir(os.path.join(audio_embds_dir, item)):
-#                 role_dirs.append(item)
-
-#         # キャラごとに埋め込みを読みます
-#         for role_dir in role_dirs:
-#             role = os.path.base(os.path.normpath(role_dir))
-#             # これは名前だけ、パずじゃない
-#             files_names = os.listdir(os.path.join(audio_embds_dir, role_dir))
-#             file_list = [os.path.join(audio_embds_dir, role_dir, embeddings_path) for embeddings_path in files_names]
-            
-#             for embeddings_path in file_list:
-#                 # 埋め込みファイルを開く
-#                 with open(embeddings_path, 'rb') as fp:
-#                     embedding = pickle.load(fp)
-#                 fp.close()
-                
-#                 # 前作ったリストに格納する
-#                 if dim == 0:
-#                     embeddings_cls = embedding
-#                     dim = embeddings_cls.shape[0]
-#                 else:
-#                     # This is equivalent to concatenation along the first axis after 1-D arrays of shape (N,) have been reshaped to (1,N)
-#                     embeddings_cls = np.vstack((embeddings_cls, embedding))
-
-#                 labels.append(role)
-                
-#         return embeddings_cls, labels
-
-#     def predict_class(self, embedding: torch.Tensor) -> tuple[str, float]:
-#         """Given the embedding of the new sample, predict the class by comparing the distance with the labeled data
-
-#         Args:
-#             embedding (torch.Tensor): embedding from the new sample
-
-#         Returns:
-#             tuple[str, float]: returns the label and the distance to the nearest cluster
-#         """
-#         predicted_label = self.knn_cls.predict(embedding)
-#         dist, _ = self.knn_cls.kneighbors(embedding)
-#         # 一番近いクラスターの距離をとる
-#         dist = dist[0].min()
-        
-#         # もしラベルがないなら、''を変える
-#         name = ''
-#         if dist < self.threshold_certain:
-#             name = predicted_label[0]
-#         elif dist < self.threshold_doubt:
-#             name = '（可能）' + predicted_label[0]
-        
-#         return name, dist
 
 class data_processor:
     """This class is used to store functions to extract audios from video,
@@ -234,8 +135,6 @@ class data_processor:
             start_time = float(start_time)
             end_time = float(end_time)
             
-            # ss = start_time.zfill(11).ljust(12, '0')[:12]
-            # ee = end_time.zfill(11).ljust(12, '0')[:12]
             ss = srt_format_timestamp(start_time)
             ee = srt_format_timestamp(end_time)
             
@@ -245,13 +144,6 @@ class data_processor:
             audio_output = f'{audio_output}/{name}.wav'
             ffmpeg_extract_audio(video_path,audio_output,start_time,end_time)
             
-    # def ffmpeg_extract_audio(self, video_input, audio_output, start_time, end_time):
- 
-    #     command = ['ffmpeg', '-ss',str(start_time), '-to', str(end_time), '-i', f'{video_input}', "-vn",
-    #                 '-c:a', 'pcm_s16le','-y', audio_output, '-loglevel', 'quiet']
-        
-    #     subprocess.run(command)
-        
 
     def extract_embeddings(self, save_folder:str=None) -> None:
         """From directory with character names as folder and their audio files,
@@ -341,8 +233,6 @@ class data_processor:
             start_time = float(start_time)
             end_time = float(end_time)
             
-            # ss = start_time.zfill(11).ljust(12, '0')[:12]
-            # ee = end_time.zfill(11).ljust(12, '0')[:12]
             ss = srt_format_timestamp(start_time)
             ee = srt_format_timestamp(end_time)
             
@@ -372,7 +262,6 @@ class data_processor:
         file = os.path.basename(video_path)
         filename, format = os.path.splitext(file)
         # should be already created in finder.py
-        # os.makedirs(f'{temp_folder}', exist_ok=True)
         log.info(f'Salving audio files at {temp_folder}')
 
         file_names = []
@@ -386,14 +275,8 @@ class data_processor:
             index = str(i).zfill(4)
             start_time = float(start_time)
             end_time = float(end_time)
-            
-            # ss = start_time.zfill(11).ljust(12, '0')[:12]
-            # ee = end_time.zfill(11).ljust(12, '0')[:12]
-            ss = srt_format_timestamp(start_time)
-            ee = srt_format_timestamp(end_time)
-            
+                        
             # make it simpler
-            # name = f'{index}_{ss}_{ee}_{text}'.replace(':', '.')
             name = f'{index}_{text}'
 
             audio_output = f'{temp_folder}/{name}.wav'
@@ -443,7 +326,6 @@ class data_processor:
             file = os.path.basename(pth)
             file, format = os.path.splitext(file)
             pth = os.path.join(temp_dir, self.voice_dir, pth)
-            # print(pth)
             try:
                 resampled_waveform = self.preprocess_audio(pth)
                     
@@ -558,15 +440,6 @@ def crop(annotation_file:str=None,
     """
    
         
-    # data = pd.read_csv(annotation_file)
-    # speechbrainのモデルを読み込む
-    # classifier = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb",
-    #                                             run_opts={"device": "cuda"},)
-    # video_pth = args.video_path
-    
-    # clip_audio_bycsv(args.annotate_map, video_pth, args.role_audios)
-    
-    # extract_pkl_feat(classifier, args.role_audios)
     
     classifier = load_model(model, device)
     processor = data_processor(classifier, model, device)
@@ -577,16 +450,15 @@ def crop(annotation_file:str=None,
     processor.extract_embeddings(output_path)
     
     
-def prepare_labeling(annotation_file:str=None,
-         save_folder:str="tmp",
-         video_path:str=None,
-         ):
+# def prepare_labeling(annotation_file:str=None,
+#          save_folder:str="tmp",
+#          video_path:str=None,
+#          ):
     
-    processor = data_processor(None)
-    # # 録音データを格納する
-    processor.extract_audios_for_labeling(annotation_file, video_path, save_folder, iscropping=True)
+#     processor = data_processor(None)
+#     # # 録音データを格納する
+#     processor.extract_audios_for_labeling(annotation_file, video_path, save_folder, iscropping=True)
     
-    # TODO: add a function like the predict_2_csv of the predict.py that add the column with the file paths
 
 def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False,
                       num_characters:int=4) -> str:

@@ -184,6 +184,8 @@ Improve the labeling part.
 
 Add whisper support for the transcription part.
 
+There is an error that when creating the dialogs, it only takes the character wroten, not the (可能) as well.
+
 ## Webui_dataset
 We should unify all the webui in only one, but we can develop them alone and then just merge.
 For creating dialogs the user needs to introduce the annotation file, character 1 (user role) and character 2 (system role).
@@ -211,7 +213,7 @@ path of the embeddings to predict the characters of the csv file.
 
 
 
-There is an error that when creating the dialogs, it only takes the character wroten, not the (可能) as well.
+
 
 
 

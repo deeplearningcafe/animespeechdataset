@@ -6,53 +6,8 @@ from tqdm import tqdm
 from .utils import time_to_seconds
 from ..common import log
 
-def copy_file_old(input_path:str=None, output_path:str=None):
-    
-    if not os.path.exists(output_path):
-        os.makedirs(output_path)
-    file = os.path.basename(input_path)
-    # .pkl
-    id_str = file[:-4]
-    index, start_time, end_time, text = id_str.split('_')
-    
-    new_filename = index + '.wav'
-    # ファイルをコピーして、名前を変更する
-    shutil.copy2(input_path, os.path.join(output_path, new_filename))
-    
-    copied_file = os.path.join(output_path, new_filename)
-    return copied_file
-    
-def character_audios_old(df_path:str=None, output_path:str=None, audios_path:str=None) -> list:
-    df = pd.read_csv(df_path, header=0)
-    audio_list = os.listdir(audios_path)
-    
-    filenames = df["filename"]
-    new_names = []
-    texts = []
-    
-    for file in filenames:
-        file_base = os.path.basename(file)
-        # .pkl
-        id_str = file_base[:-4]
-        index, start_time, end_time, text = id_str.split('_')
-        
-        for i in range(len(audio_list)):
-            file_base_audio = os.path.basename(audio_list[i])
-            # .wav
-            id_str = file_base_audio[:-4]
 
-            index_audio, start_time, end_time, _ = id_str.split('_')
-            
-            if index == index_audio:
-                new_file = copy_file(os.path.join(audios_path, audio_list[i]), output_path)
-                new_names.append(new_file)
-                texts.append(text)
     
-    df = pd.DataFrame({"filename": new_names, "text": texts})
-    df_out = os.path.join(output_path, "text.list")
-    df.to_csv(df_out, index=False)
-    log.info("CSV created!")
-    log.info("Completed")
 
 def copy_file(input_path:str=None, output_path:str=None, index:str=None, text:str=None) -> str:
     """Copies a given file to a given location and returns the new file path
@@ -193,12 +148,4 @@ def character_audios(csv_path:str=None, character:str=None, num_characters:int=4
 
     
     
-# def main():
-#     df_path = "datasets\wataoshi2_clair.csv"
-#     output_path = "audio\clair"
-#     audios_path = r"tmp\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 02 [WebRip 1080p HEVC-10bit AAC ASSx2]\voice"
-#     character_audios(df_path, output_path, audios_path)
 
-# if __name__ == "__main__":
-#     main()
-    

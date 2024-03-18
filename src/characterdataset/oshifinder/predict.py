@@ -124,7 +124,6 @@ class KNN_classifier:
         filename, format = os.path.splitext(file)
         
         temp_dir = f'{temp_folder}/{filename}'
-        # temp_embeds = os.path.join(temp_dir, 'embeddings')
         temp_embeds = f'{temp_dir}/embeddings'
 
         
@@ -155,7 +154,6 @@ class KNN_classifier:
         if not keep_unclassed:
             file_list = [file_list[i] for i in keep_index]
         
-        # log.info(len(file_list), len(preds), len(distances))
         assert ((len(file_list) == len(preds)) and (len(file_list) == len(distances))), "The lengths of the preds and the files list is not the same"
         # csvファイルに保存する
         # normalize path
@@ -168,8 +166,6 @@ class KNN_classifier:
         csv_filename = os.path.normpath(csv_filename)
         df = pd.DataFrame({"filename": file_list, "predicted_label": preds, "distance": distances})
         
-        # if not os.path.isdir(os.path.dirname(csv_filename)):
-        #     log.warning('the folder to save the csv does not exist')
         
         
         df.to_csv(csv_filename, index=False)

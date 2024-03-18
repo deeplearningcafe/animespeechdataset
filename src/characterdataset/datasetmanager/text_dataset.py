@@ -89,8 +89,6 @@ def str_2_csv(input_path:str=None, output_path:str=None, cropping:bool=False, nu
         if cropping:
             writer.writerow(['character', 'start_time', 'end_time', "text"])  # ヘッダーを書き込む
     
-            # log.info(len(dialogues))
-            # log.info(dialogues)
             for i in range(len(dialogues)):
                 if len(dialogues[i][2]) > num_characters:
                     blank = ['']

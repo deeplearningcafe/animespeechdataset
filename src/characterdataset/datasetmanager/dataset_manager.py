@@ -18,13 +18,6 @@ from .text_dataset import dialoges_from_csv as csv_2_dialoges
 from .text_dataset import segments_2_annotations
 from .audio_dataset import character_audios as csv_2_audios
 
-# log_filename = "common\logs\dataset_manager.log"
-# os.makedirs(os.path.dirname(log_filename), exist_ok=True)
-
-# logging.basicConfig(filename=log_filename, encoding='utf-8', level=logging.DEBUG, format="%(asctime)s %(levelname)-7s %(message)s")
-
-# log = logging.getLogger(__name__)
-
 
 
 
@@ -457,7 +450,6 @@ def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool
     if os.path.exists(audio_path):
         log.info(f"Extracted audio at {audio_path}")
     else:
-        # log.error(f"Could not extract audio at {audio_path}")
         raise ValueError(
             f"Could not extract audio at {audio_path}"
         )
@@ -475,15 +467,12 @@ def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool
     segments_2_annotations(segments, filename, num_characters, iscropping)
 
     log.info(f"Created annotation file from transcriptions at {filename}")
-    # except Exception as e:
-    #     log.error(f"Error when creating annotations from segments. {e}")
-    
+
     # delete the audio file
     try:
         os.remove(audio_path)
     except FileNotFoundError:
         pass
-    # log.warning(f"Could not remove the temp audio file {e}")
     
     return filename
 
@@ -624,15 +613,10 @@ class DatasetManager:
                     f"Provide a subtitle file"
                 )
             if not os.path.isfile(self.subtitles_file):
-                # log.warning('subtitles_file does not exist')
-                # return
                 raise ValueError(
                     f"The subtitles file at {self.subtitles_file} does not exists"
                 )
-                
-            # log.info("Starting to create subtitles file")
-            # str_2_csv(intput_path=self.subtitles_file, output_path=self.output_path)
-        
+                        
         elif self.dataset_type == "dialogues":
             # checking if input_srt is a file
             if self.annotation_file is None:
@@ -640,8 +624,6 @@ class DatasetManager:
                     f"Provide an annotation file"
                 )
             if not os.path.isfile(self.annotation_file):
-                # log.warning('annotation_file does not exist')
-                # return
                 raise ValueError(
                     f"The annotation file at {self.annotation_file} does not exists"
                 )
@@ -653,23 +635,13 @@ class DatasetManager:
                 log.warning('time_interval must be >= 1')
                 self.time_interval = 5
 
-                
-            # log.info("Starting to create dialogues file")
-
-            # dialoges_from_csv(csv_path=self.annotation_file, output_path=self.output_path,
-            #                 time_interval=self.time_interval, num_characters=self.num_characters,
-            #                 first_character=self.first_character, second_character=self.second_character)
-            
+                            
         elif self.dataset_type == "audios":
             if not os.path.isfile(self.annotation_file):
-                # log.warning('annotation_file does not exist')
-                # return
                 raise ValueError(
                     f"The annotation file at {self.annotation_file} does not exists"
                 )
             if not os.path.isdir(self.audios_path):
-                # log.warning(f'audios_path {self.audios_path} does not exist')
-                # return
                 raise ValueError(
                     f"The folder with audio files at {self.audios_path} does not exists"
                 )
@@ -679,26 +651,14 @@ class DatasetManager:
                 self.num_characters = 4
             
             if self.character == None:
-                # log.warning('character does not exist')
-                # return
                 raise ValueError(
                     "You must pass a character name"
-                )
-
-            # log.info("Starting to audio files")
-
-            # character_audios(csv_path=self.annotation_file, character=self.character,
-            #                 num_characters=self.num_characters, output_path=self.output_path,
-            #                 audios_path=self.audios_path)
-                
+                )                
             
         else:
-            # log.warning("That function does not exist.")
-            # return
             raise ValueError(
                     f"The dataset type {self.dataset_type} does not exists"
                 )
-        # log.info(f"The function {self.dataset_type} has been completed!")
         return "Success"
     
     def create_csv(self, 
@@ -726,7 +686,6 @@ class DatasetManager:
         checks = self.inputs_check()
         
         
-        # TODO: add min length to the subtitles as we have to label after
         if checks == "Success":
             log.info("Creating annotation file")
             filename = subtitle_2_csv(input_path=self.subtitles_file, output_path=self.output_path,
@@ -775,10 +734,8 @@ class DatasetManager:
         return f"Creados dialogos"
 
     def create_audio_files(self, 
-                        #    dataset_type:str="audios",
                          annotation_file:str=None, 
                          output_path:str=None,
-                        #  audios_path:str=None, 
                          num_characters:int=None,
                          character:str=None, 
                          ) -> str:
@@ -803,17 +760,10 @@ class DatasetManager:
         self.update_character(character)
 
 
-        # for the audios path, from the annotation file we should be able to get the folder
-        # file = os.path.basename(os.path.normpath(self.annotation_file))
-        # filename, format = os.path.splitext(file)
-        
-        # # the annotation file format is VIDEO-FILE-NAME_updated.csv so remove the updated
-        # *filename, _ = filename.split('_')
-        # # paste all the list together
-        # folder_name = "".join(filename)
+
 
         # just get the folder name of the prediction file, it is easier and as the name in the csv file 
-        # is getting errors, we changed it to preds for now.
+        # is getting errors, we changed it to just the name of the folder for now.
         folder_path = os.path.dirname(os.path.normpath(self.annotation_file))
         folder_name = os.path.basename(folder_path)
 
@@ -833,7 +783,7 @@ class DatasetManager:
     def transcribe_video(self, video_path:str=None, output_path:str=None, 
                          iscropping:bool=None, 
                          num_characters:int=None) -> tuple[str, str]:
-        """_summary_
+        """
         First convert the video to audio. Second transcribe the audio. Third create a csv file from the results.
         As nemo asr does not work in windows, we will use a api for the transcribing.
         
@@ -858,8 +808,6 @@ class DatasetManager:
         log.info("Starting transcription")
         # check if annotate_map is a file
         if not os.path.isfile(video_path):
-            # log.info(f'annotate_map {video_path} does not exist')
-            # return
             raise ValueError(
                     f"The annotation file at {self.annotation_file} does not exists"
                 )
@@ -871,14 +819,10 @@ class DatasetManager:
             os.mkdir(self.output_path)
             log.info(f'created folder at {self.output_path}')
         
-        # try: 
         filename = extract_subtitles(output_path=self.output_path,
         video_path=video_path, iscropping=iscropping,
         num_characters=self.num_characters,)
         
-        # except Exception as e:
-        #     log.error(f"Error when transcribing. {e}")
-        #     return "Error", None
         
         return "Transcrito audios!", filename
 
@@ -925,9 +869,6 @@ class DatasetManager:
         if character != None:
             self.character = character
         
-    # def update_crop(self, crop:bool=None):
-    #     if crop != None:
-    #         self.crop = crop
             
             
             
