@@ -154,7 +154,7 @@ python -m characterdataset.oshifinder.knn_choose
 - [ ] Add support for Whisper.  
 - [ ] Process entire folders, not just individual files.  
 - [ ] Add QLoRA script for finetunning LLM.  
-- [ ] Add the `n_neighbors` as parameter.  
+- [X] Add the `n_neighbors` as parameter.  
 
 
 

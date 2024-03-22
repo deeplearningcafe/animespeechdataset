@@ -215,6 +215,7 @@ def recognize(annotation_file:str=None,
          output_path:str=None,
          video_path:str=None,
          character_folder:str=None,
+         n_neighbors:int=4,
          model:str=None,
          device:str=None,
          keep_unclassed:bool=None) -> None:
@@ -228,7 +229,11 @@ def recognize(annotation_file:str=None,
         model (str, optional): _description_. Defaults to None.
         device (str, optional): _description_. Defaults to None.
     """
-    
+    log.info(f"Creating representations from annotations {annotation_file} "
+             f"and video {video_path} with output at {output_path} "
+             f"using character folder at {character_folder} "
+             f"with n_neighbors {n_neighbors}, {model} and {device} "
+             f"and keeping unclassed as {keep_unclassed}")
     classifier = load_model(model, device)
     
     processor = data_processor(classifier)
@@ -240,7 +245,7 @@ def recognize(annotation_file:str=None,
     processor.extract_embeddings_new(video_path, output_path)
     log.info("Embeddings created")
     
-    knn = KNN_classifier(character_folder, n_neighbors=4)
+    knn = KNN_classifier(character_folder, n_neighbors=n_neighbors)
     log.info(f"Starting predictions with output at {output_path}")
     knn.predict_2_csv(output_path, video_path, keep_unclassed=keep_unclassed)
 

@@ -126,6 +126,7 @@ class Finder:
         return "Characters embeddings have been created!"
         
     async def make_predictions(self,
+                    n_neighbors:int=4,
                     model:str=None,
                     device:bool=True,
                     keep_unclassed:bool=False) -> str:
@@ -182,6 +183,11 @@ class Finder:
             raise ValueError(
                     f"The folder with embeddings at {self.character_folder} does not exists"
                 )
+            
+        n_neighbors = int(n_neighbors)
+        if n_neighbors < 2:
+            log.warning(f"The k {n_neighbors} can't be used, using 4 instead")
+            n_neighbors = 4
         
         if device == True:
             device = "cuda"
@@ -193,6 +199,7 @@ class Finder:
         output_path=self.output_path,
         video_path=self.video_path,
         character_folder=self.character_folder,
+        n_neighbors=n_neighbors,
         model=model,
         device=device,
         keep_unclassed=keep_unclassed)

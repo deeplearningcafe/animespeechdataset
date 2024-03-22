@@ -159,7 +159,7 @@ python -m characterdataset.oshifinder.knn_choose
 - [ ] Whisperサポートを追加する。  
 - [ ] 一つのファイルだけじゃない、フォルダをすべての処理。  
 - [ ] QLoRAファインチューニングのスクリプトを追加する.
-- [ ] `n_neighbors`のパラメータを追加する.  
+- [X] `n_neighbors`のパラメータを追加する.  
 
 
 ## Author

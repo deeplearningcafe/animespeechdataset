@@ -268,9 +268,6 @@ def create_ui():
                     device = gr.Checkbox(
                         label="cuda", info="In case to use GPU.(Recommended)", value=True
                     )
-                    keep_unclassed = gr.Checkbox(
-                        label="Keep other characters", info="In case to keep lines of characters others than the desired characters", value=False
-                    )
 
 
         with gr.Row():
@@ -313,6 +310,20 @@ def create_ui():
 
         # For the predict given the subs
         with gr.Tab("Predict characters"):
+            with gr.Row():
+                with gr.Accordion("Advanced options", open=False):
+                    with gr.Row():
+                        keep_unclassed = gr.Checkbox(
+                            label="Keep other characters", info="In case to keep lines of characters others than the desired characters", value=False
+                        )
+                        n_neighbors = gr.Slider(
+                            label="Number of neighbors for KNN",
+                            info="Number of neighbors to use, should be at least the same number of characters to predict.",
+                            minimum=2,
+                            maximum=10,
+                            value=4,
+                            step=1,
+                        )
 
             with gr.Column(visible=True) as predict:                        
                 predict_button = gr.Button("Predict")
@@ -425,7 +436,7 @@ def create_ui():
         predict_button.click(
             csv_for_predictions, outputs=[result, annotation_file]
         ).then(finder.make_predictions,
-            inputs=[model, device, keep_unclassed],outputs=[result])
+            inputs=[n_neighbors, model, device, keep_unclassed],outputs=[result])
         
         # audios and dialogs
         first_character.change(
