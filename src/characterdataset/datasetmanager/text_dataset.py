@@ -209,9 +209,18 @@ def dialoges_from_csv(csv_path:str=None, output_path:str=None, time_interval:int
     if first_character != None:
         first_characters = first_character.split(",")
         first_characters = [character.strip() for character in first_characters]
+
+        # add (可能) to the characters
+        first_characters_kanou = ['（可能）' + character for character in first_characters]
+        first_characters.extend(first_characters_kanou)
+    
     if second_character != None:
         second_characters = second_character.split(",")
         second_characters = [character.strip() for character in second_characters]
+        
+        # add (可能) to the characters
+        second_characters_kanou = ['（可能）' + character for character in second_characters]
+        second_characters.extend(second_characters_kanou)
     
     if (first_character == None or len(first_character) < 1) and (second_character == None or len(second_character) < 1):
         first_characters = list(set(df.iloc[:, 1]))

@@ -82,6 +82,8 @@ This extracts all audios of a desired character and organizes them into a folder
 ├── pretrained_models
 ├── src
 │   ├── characterdataset
+│   │   ├── common
+│   │   ├── configs
 │   │   ├── datasetmanager
 │   │   ├── oshifinder
 ├── tests
@@ -109,7 +111,7 @@ conda create -n animespeech python=3.11
 conda activate animespeech
 ```
 
-Then install the required packages.
+Then install the required packages. In the case you don't have a nvidia gpu in your pc, then remove the `--index-url` line from the requirements file. As that line installs cuda software.
 ```bash
 pip install -r requirements.txt
 pip install -e .
@@ -148,7 +150,7 @@ python -m characterdataset.oshifinder.knn_choose
 
 ## TODO
 - [ ] Change classes attributes to function parameters when possible.  
-- [ ] When creating dialogues, look for (可能) with the character name.  
+- [X] When creating dialogues, look for (可能) with the character name.  
 - [ ] Add support for Whisper.  
 - [ ] Process entire folders, not just individual files.  
 - [ ] Add QLoRA script for finetunning LLM.  

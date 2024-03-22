@@ -216,7 +216,8 @@ def recognize(annotation_file:str=None,
          video_path:str=None,
          character_folder:str=None,
          model:str=None,
-         device:str=None,) -> None:
+         device:str=None,
+         keep_unclassed:bool=None) -> None:
     """Predicts the character that said each line in the subtitles
 
     Args:
@@ -241,7 +242,7 @@ def recognize(annotation_file:str=None,
     
     knn = KNN_classifier(character_folder, n_neighbors=4)
     log.info(f"Starting predictions with output at {output_path}")
-    knn.predict_2_csv(output_path, video_path, False)
+    knn.predict_2_csv(output_path, video_path, keep_unclassed=keep_unclassed)
 
 
     

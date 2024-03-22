@@ -65,11 +65,20 @@ def call_function(dataset_type:str, transcribe:bool=False, ) -> str:
     return result  
     
 
-def update_visibility(dataset_type:str) -> None:
+def update_visibility(dataset_type:str) -> tuple[gr.Column, gr.Column, gr.Row]:
+    """Changes the visibility of the different parts of the export dataset based on the type of 
+    dataset to export
+
+    Args:
+        dataset_type (str): type of dataset to export
+
+    Returns:
+        tuple[gr.Column, gr.Column, gr.Row]: changed visibility of components
+    """
     if dataset_type == DatasetManager.dataset_types[0]:
-        return gr.Column(visible=True), gr.Column(visible=False)
+        return gr.Column(visible=True), gr.Column(visible=False), gr.Row(visible=True)
     elif dataset_type == DatasetManager.dataset_types[1]:
-        return gr.Column(visible=False), gr.Column(visible=True) 
+        return gr.Column(visible=False), gr.Column(visible=True), gr.Row(visible=False)
 
 def load_df(csv_path: str=None) -> None:
     """Given a csv path, it reads it and creates a dataframe
@@ -130,7 +139,7 @@ def save_df(df: pd.DataFrame=None, csv_path: str=None) -> str:
         log.error(f"Could not remove the temp folder {e}")
         pass
         
-    return filename, "Base de datos actualizada!"
+    return filename, "Database have been updated!"
     
 def create_labeling_data(transcribe:bool=False) -> tuple:
     """It calls 3 function, the inputs should be already updated in their classes.
@@ -206,6 +215,8 @@ Input should be the annotations file.
 ├── pretrained_models
 ├── src
 │   ├── characterdataset
+│   │   ├── common
+│   │   ├── configs
 │   │   ├── datasetmanager
 │   │   ├── oshifinder
 ├── tests
@@ -253,10 +264,14 @@ def create_ui():
                         label="Type of the model to extract the embeddings.",
                         value=Finder.model_opts[0]
                     )
-                with gr.Column():
+                with gr.Row():
                     device = gr.Checkbox(
                         label="cuda", info="In case to use GPU.(Recommended)", value=True
                     )
+                    keep_unclassed = gr.Checkbox(
+                        label="Keep other characters", info="In case to keep lines of characters others than the desired characters", value=False
+                    )
+
 
         with gr.Row():
             annotation_file = gr.Textbox(label="Annotation file name.",
@@ -335,7 +350,7 @@ def create_ui():
                                 info="Name of the character to create the audio dataset.",
                             )
             
-            with gr.Row():
+            with gr.Row() as advaced_export:
                 with gr.Accordion("Opciones avanzadas", open=False):
                     with gr.Column():
                         time_interval = gr.Slider(
@@ -363,7 +378,7 @@ def create_ui():
         dataset_type.change(
             dataset_manager.update_dataset_type,
             inputs=[dataset_type],   
-        ).then(update_visibility, inputs=[dataset_type], outputs=[dialogs, audios])
+        ).then(update_visibility, inputs=[dataset_type], outputs=[dialogs, audios, advaced_export])
 
         
         subtitles_file.change(
@@ -410,7 +425,7 @@ def create_ui():
         predict_button.click(
             csv_for_predictions, outputs=[result, annotation_file]
         ).then(finder.make_predictions,
-            inputs=[model, device],outputs=[result])
+            inputs=[model, device, keep_unclassed],outputs=[result])
         
         # audios and dialogs
         first_character.change(

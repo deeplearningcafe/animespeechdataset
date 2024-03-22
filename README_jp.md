@@ -86,6 +86,8 @@ AnimeSpeechは、アニメの字幕から言語モデル（LLM）のトレーニ
 ├── pretrained_models
 ├── src
 │   ├── characterdataset
+│   │   ├── common
+│   │   ├── configs
 │   │   ├── datasetmanager
 │   │   ├── oshifinder
 ├── tests
@@ -112,7 +114,7 @@ conda create -n animespeech python=3.11
 conda activate animespeech
 ```
 
-その後、必要なパッケージをインストールします。
+その後、必要なパッケージをインストールします。もしPCにNVIDIA GPUがない場合は、要件ファイルから--index-url行を削除してください。その行はcudaソフトウェアをインストールします。
 ```bash
 pip install -r requirements.txt
 pip install -e .
@@ -153,7 +155,7 @@ python -m characterdataset.oshifinder.knn_choose
 
 ### TODO
 - [ ] 場合によって、クラスのアトリビュートを関数のパラメータを変える.  
-- [ ] 対話データセットを作る時に、キャラの名前と(可能)を使います。
+- [X] 対話データセットを作る時に、キャラの名前と(可能)を使います。
 - [ ] Whisperサポートを追加する。  
 - [ ] 一つのファイルだけじゃない、フォルダをすべての処理。  
 - [ ] QLoRAファインチューニングのスクリプトを追加する.

@@ -127,13 +127,15 @@ class Finder:
         
     async def make_predictions(self,
                     model:str=None,
-                    device:bool=None,) -> str:
+                    device:bool=True,
+                    keep_unclassed:bool=False) -> str:
         """Predicts the character that said each line in the subtitles
 
         Args:
             model (str, optional): _description_. Defaults to None.
-            device (bool, optional): _description_. Defaults to None.
-
+            device (bool, optional): _description_. Defaults to True.
+            keep_unclassed (bool, optional): _description_. Defaults to False.
+        
         Raises:
             ValueError: _description_
             ValueError: _description_
@@ -186,12 +188,14 @@ class Finder:
         else:
             device = "cpu"   
         
+        # the check of the model parameter is done inside the load_model function of predict.py
         recognize(annotation_file=self.annotation_file,
         output_path=self.output_path,
         video_path=self.video_path,
         character_folder=self.character_folder,
         model=model,
-        device=device,)
+        device=device,
+        keep_unclassed=keep_unclassed)
         
         
         return "Predictions have been completed!"
