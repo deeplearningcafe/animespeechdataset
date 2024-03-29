@@ -22,7 +22,12 @@ import argparse
 import os
 from characterdataset.common import log
 
-CONFIG_PATH = "train_llm\default_config.toml"
+# Get the absolute path of the directory where this script is located
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+CONFIG_FILE = "default_config.toml"
+CONFIG_PATH = os.path.join(current_dir, CONFIG_FILE)
+OUTPUT_PATH = r"data\outputs\train_llm"
 
 def find_all_linear_names(model):
     cls = bnb.nn.Linear4bit
@@ -100,10 +105,15 @@ def load_model(model_id:str, local_files:bool=False,) -> tuple[AutoModelForCausa
         trust_remote_code=True,
         local_files_only=local_files,
         torch_dtype=torch.float16,
+        cache_dir="pretrained_models/"
     )
 
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    tokenizer = AutoTokenizer.from_pretrained(model_id, cache_dir="pretrained_models/")
 
+    # check if the tokenizer has padding token
+    if tokenizer.pad_token == None:
+        tokenizer.pad_token = tokenizer.eos_token
+    
     return model, tokenizer
 
 def load_dataset_from_csv(df_path:str) -> Dataset:
@@ -126,7 +136,7 @@ def load_formatting_func(config):
             output_texts.append(text)
         return output_texts
     
-    formatting_func = formatting_prompts_func()
+    formatting_func = formatting_prompts_func
     return formatting_func
 
 
@@ -143,9 +153,9 @@ def train(config_path):
     modules = find_all_linear_names(model)
     # LoRAのパラメータ
     lora_config = LoraConfig(
-        rank=config.peft.rank,
-        alpha=config.peft.alpha,
-        dropout=config.peft.dropout,
+        r=config.peft.rank,
+        lora_alpha=config.peft.alpha,
+        lora_dropout=config.peft.dropout,
         target_modules=modules,
         bias="none",
         task_type=TaskType.CAUSAL_LM
@@ -153,7 +163,7 @@ def train(config_path):
 
 
     # load dataset
-    dataset = load_dataset_from_csv(config.train.dataset)
+    dataset = load_dataset_from_csv(config.dataset.dataset)
 
     # トレーナーの準備
     training_args = TrainingArguments(
@@ -163,7 +173,7 @@ def train(config_path):
             evaluation_strategy="no",
             save_strategy="steps",
             save_steps=config.train.save_steps,
-            output_dir=f"train_llm/lora_{config.dataset.character_name}",
+            output_dir=f"{OUTPUT_PATH}/{config.dataset.character_name}/lora_{config.train.base_model}",
             save_total_limit=config.train.save_total_limit,
             push_to_hub=False,
             warmup_ratio=config.train.warmup_ratio,
@@ -173,7 +183,7 @@ def train(config_path):
             gradient_accumulation_steps=config.train.gradient_accumulation_steps,
             max_grad_norm=config.train.max_grad_norm,
             optim=config.train.optimizer,
-            logging_dir="train_llm/logs"
+            logging_dir=f"{OUTPUT_PATH}/{config.dataset.character_name}/logs"
     )
 
     response_template = "ASSISTANT:"
@@ -214,6 +224,6 @@ if __name__ == "__main__":
         description='LLM instruction tuning'
     )
     
-    parser.add_argument('--config_file', default=None, type=str,
-        required=True, help='File with the configuration for training')
+    parser.add_argument('--config_file', default=CONFIG_PATH, type=str,
+        required=False, help='File with the configuration for training')
     

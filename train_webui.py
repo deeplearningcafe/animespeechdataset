@@ -2,9 +2,14 @@ import gradio as gr
 from characterdataset import configs
 from characterdataset.configs.config import save_global_config
 import json
+import os
 
 from characterdataset.train_llm import train
 CONFIG_PATH = r"src\characterdataset\train_llm\default_config.toml"
+# Get the absolute path of the directory where this script is located
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+CONFIG_PATH = os.path.join(current_dir, CONFIG_PATH)
 
 
 def update_config(
