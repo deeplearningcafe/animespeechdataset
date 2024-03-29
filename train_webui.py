@@ -3,8 +3,8 @@ from characterdataset import configs
 from characterdataset.configs.config import save_global_config
 import json
 
-from .train_conversational import train
-CONFIG_PATH = "train_llm\default_config.toml"
+from characterdataset.train_llm import train
+CONFIG_PATH = r"src\characterdataset\train_llm\default_config.toml"
 
 
 def update_config(
@@ -192,6 +192,8 @@ def create_ui():
             result = gr.Textbox()
             train_button = gr.Button("Train the LLM")
         
+        config_textbox = gr.Textbox(CONFIG_PATH, visible=False)
+        
         update.click(
             update_config,
             inputs=[
@@ -219,7 +221,7 @@ def create_ui():
 
         train_button.click(
             train,
-            inputs=[CONFIG_PATH],
+            inputs=[config_textbox],
             outputs=[result]
         )
 

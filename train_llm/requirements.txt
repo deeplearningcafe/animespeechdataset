@@ -1,7 +1,0 @@
-Peft>=0.10.0
-transformers>=4.39.1
-safetensors>=0.4.2
-datasets>=2.18.0
-trl>=0.8.1
-bitsandbytes>=0.43.0
-accelerate>=0.28.0
