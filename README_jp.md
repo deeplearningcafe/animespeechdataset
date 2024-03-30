@@ -12,6 +12,7 @@
 4. [機能](#機能)
     - [アノテーションの作成](#アノテーションの作成)
     - [データセットの作成](#データセットの作成)
+    - [ファインチューニング LLM 対話](#ファインチューニング-llm-対話)
 5. [ディレクトリ構造](#ディレクトリ構造)
 6. [使用方法](#使用方法)
 7. [ライセンス](#ライセンス)
@@ -21,6 +22,12 @@ AnimeSpeechは、アニメの字幕から言語モデル（LLM）のトレーニ
 
 動画からスピーカー認識は話者照合タスクと呼んでる、残念ながら今回は使えない技術です。今使ってる手法は動画から埋め込みを抽出して、`キャラ作成`の部分は字幕に人間がラベルをつけて、そのラベルされた埋め込みを基にして、KNNの学習データになります。
 新しい動画を予測する時に、ラベルの埋め込みと新しい埋め込みの距離を図って、ある閾値より小さいな距離ならそのキャラとして認識します。
+
+### 説明動画
+[<img src="images\サムネイル.png" width="600" height="300"/>](https://youtu.be/2SZ8dA5AgAg)
+
+[ブログ記事](https://aipracticecafe.site/detail/8)
+
 
 ## 必要条件
 - demoji==1.1.0
@@ -70,6 +77,9 @@ AnimeSpeechは、アニメの字幕から言語モデル（LLM）のトレーニ
 #### オーディオデータセット
 所望のキャラクターのすべてのオーディオを抽出し、TTSトレーニング用の対応するテキストとともにフォルダに整理します。
 
+#### ファインチューニング LLM 対話
+Hugging Face Transformers ライブラリを使用して会話型言語モデル（LMs）のトレーニングを容易にするために設計されたトレーニングスクリプトです。事前学習済みモデルの読み込み、データの準備、モデルのトレーニング、およびトレーニングログの保存機能を提供します。
+
 
 ## ディレクトリ構造
 ```
@@ -90,16 +100,22 @@ AnimeSpeechは、アニメの字幕から言語モデル（LLM）のトレーニ
 │   │   ├── configs
 │   │   ├── datasetmanager
 │   │   ├── oshifinder
+│   │   ├── train_llm
 ├── tests
 │   ├── test_dataset_manager.py
 │   ├── test_finder.py
+│   ├── test_train_conversational.py
 ├── webui_finder.py
+├── train_webui.py
 ```
 ### ファイルの説明
     -data は字幕とビデオファイルを保存し、予測もそこに保存されます
     -datasetmanagerは、字幕ファイルとテキスト部分を処理するサブパッケージです。
     -oshifinderは、埋め込みを作成し、予測を行うサブパッケージです。
-    -webui_finder.pyは、Gradioベースのインタフェースです。.
+    -train_llmは、QLoRA手法を用いて大規模言語モデルをファインチューニングします。
+    -webui_finder.pyは、Gradioベースのインタフェースです。
+    -train_webui.pyは、QLoRA学習のために、Gradioベースのインタフェースです。
+
 
 ## 使用方法
 ### インストール
@@ -153,12 +169,59 @@ python webui_finder.py
 python -m characterdataset.oshifinder.knn_choose
 ```
 
+
+### QLoRAのトレーニング
+会話型の言語モデルをトレーニングするには、トレーニングに必要なパラメーターを指定する構成ファイル（default_config.toml）が必要です。このファイルは、train_webui.py インターフェースを使用して更新することができます。トレーニングには、CMDを使用することもサポートされています。
+
+#### 構成
+```
+[peft]
+rank = 64
+alpha = 64
+dropout = 0.1
+bias = "none"
+
+[dataset]
+dataset = "YOUR-DATASET-CSV-PATH"
+character_name = "THE-CHARACTER-NAME-TO-LEARN"
+
+[train]
+base_model = "HUGGINGFACE-MODEL-NAME"
+max_steps = 80
+learning_rate = 1e-4
+per_device_train_batch_size = 16
+optimizer = "adamw_8bit"
+save_steps = 5
+logging_steps = 5
+output_dir = "output"
+save_total_limit = 10
+push_to_hub = false
+warmup_ratio = 0.05
+lr_scheduler_type = "constant"
+gradient_checkpointing = true
+gradient_accumulation_steps = 2
+max_grad_norm = 0.3
+save_only_model = true
+```
+QLoRAをトレーニングするためには、bitsandbytes、peft などの追加のパッケージが必要です。トレーニングには、以下のコマンドを使用します。
+```bash
+pip install -r requirements-train.txt
+```
+トレーニング用の WebUI を使用するには、次のコマンドを実行してください。
+```bash
+python train_webui.py
+```
+CMD を使用して実行するには、構成ファイルへのパスを引数としてモジュールを実行します（--config_file）。`config_file` が提供されない場合は、デフォルトで`train_llm`内の構成ファイルが使用されます。
+```bash
+python -m characterdataset.train_llm --config_file "YOUR-CONFIG-FILE"
+```
+
 ### TODO
 - [ ] 場合によって、クラスのアトリビュートを関数のパラメータを変える.  
 - [X] 対話データセットを作る時に、キャラの名前と(可能)を使います。
 - [ ] Whisperサポートを追加する。  
 - [ ] 一つのファイルだけじゃない、フォルダをすべての処理。  
-- [ ] QLoRAファインチューニングのスクリプトを追加する.
+- [X] QLoRAファインチューニングのスクリプトを追加する.
 - [X] `n_neighbors`のパラメータを追加する.  
 
 

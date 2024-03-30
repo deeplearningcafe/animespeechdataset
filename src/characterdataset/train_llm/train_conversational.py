@@ -211,20 +211,10 @@ def train(config_path):
 def main(args):
     
     # checking if config file exists
-    if not os.path.exists(args.config_file):
+    if not os.path.isfile(args.config_file):
         raise ValueError(
                     f"The config file at {args.config_file} does not exists"
                 )
     
-    train(args)
+    train(args.config_file)
     log.info(f"Train completed!")
-
-if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser(
-        description='LLM instruction tuning'
-    )
-    
-    parser.add_argument('--config_file', default=CONFIG_PATH, type=str,
-        required=False, help='File with the configuration for training')
-    

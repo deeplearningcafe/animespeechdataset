@@ -13,6 +13,7 @@ This project aims to facilitate the generation of datasets for training Language
 4. [Functionalities](#functionalities)
     - [Create Annotations](#Create-Annotations)
     - [Create Datasets](#Create-Datasets)
+    - [FineTune LLM Dialogues](#finetune-llm-dialogues)
 5. [Directory Structure](#directory-structure)
 6. [How to Use](#how-to-use)
 7. [License](#license)
@@ -21,6 +22,11 @@ This project aims to facilitate the generation of datasets for training Language
 `AnimeSpeech` is a project designed to generate datasets for training language models (LLMs) and text-to-speech (TTS) synthesis from anime subtitles. This project is aimed at making it easy to create the necessary data for training machine learning models using subtitles from anime videos. Specifically, it provides functionalities such as extracting conversation data and synthesizing character voices, which are useful for research and development in language modeling and speech synthesis.
 
 Speaker recognition from videos, known as speaker verification task, unfortunately has not been used in this case. The current approach involves extracting embeddings from videos, while the character creation part involves human labeling of subtitles. Based on these labeled embeddings, they serve as training data for KNN. When predicting from new videos, it measures the distance between the labeled embeddings and the new embeddings, recognizing them as characters if the distance is smaller than a certain threshold.
+
+### Explanation Video
+[<img src="images\サムネイル.png" width="600" height="300"/>](https://youtu.be/2SZ8dA5AgAg)
+
+[Blog post](https://aipracticecafe.site/detail/8)
 
 ## Requirements
 - demoji==1.1.0
@@ -67,6 +73,10 @@ This creates a conversational dataset suitable for training LLMs. Users can sele
 #### Audios Dataset
 This extracts all audios of a desired character and organizes them into a folder along with corresponding text for TTS training.
 
+### FineTune LLM Dialogues
+Training script designed to facilitate the training of conversational language models (LMs) using the Hugging Face Transformers library. It provides functionalities to load pre-trained models, prepare data, train models, and save the training logs.
+
+
 ## Directory Structure
 ```
 ├── data
@@ -86,16 +96,22 @@ This extracts all audios of a desired character and organizes them into a folder
 │   │   ├── configs
 │   │   ├── datasetmanager
 │   │   ├── oshifinder
+│   │   ├── train_llm
 ├── tests
 │   ├── test_dataset_manager.py
 │   ├── test_finder.py
+│   ├── test_train_conversational.py
 ├── webui_finder.py
+├── train_webui.py
 ```
 ### File description
     -data stores the subtitles and video files, the predictions get saved there as well.
     -datasetmanager sub-package that processes subtitles files and the text part.
     -oshifinder sub-package that creates embeddings and makes predictions.
+    -train_llm sub-package for finetuning LLM using QLoRA.
     -webui_finder.py gradio based interface.
+    -train_webui.py gradio based interface for training QLoRA.
+
 
 ## How to Use
 
@@ -148,12 +164,58 @@ To look for the best `n_neighbors`, just run:
 python -m characterdataset.oshifinder.knn_choose
 ```
 
+### Training QLoRA
+To train a conversational LM, a configuration file (`default_config.toml`) specifying the required parameters for training is required. This file can be updated using the `train_webui.py` interface. For training, using the CMD is also supported.
+
+#### Config
+```
+[peft]
+rank = 64
+alpha = 64
+dropout = 0.1
+bias = "none"
+
+[dataset]
+dataset = "YOUR-DATASET-CSV-PATH"
+character_name = "THE-CHARACTER-NAME-TO-LEARN"
+
+[train]
+base_model = "HUGGINGFACE-MODEL-NAME"
+max_steps = 80
+learning_rate = 1e-4
+per_device_train_batch_size = 16
+optimizer = "adamw_8bit"
+save_steps = 5
+logging_steps = 5
+output_dir = "output"
+save_total_limit = 10
+push_to_hub = false
+warmup_ratio = 0.05
+lr_scheduler_type = "constant"
+gradient_checkpointing = true
+gradient_accumulation_steps = 2
+max_grad_norm = 0.3
+save_only_model = true
+```
+For training QLoRA more packages are needed, bitsandbytes, peft, etc. In case of training use the following command.
+```bash
+pip install -r requirements-train.txt
+```
+To use the webui for training just run:
+```bash
+python train_webui.py
+```
+To run it using the CMD. Run the module with the path to the configuration file as an argument (--config_file), if no `config_file` is provided, by default the config file inside `train_llm` is used.
+```bash
+python -m characterdataset.train_llm --config_file "YOUR-CONFIG-FILE"
+```
+
 ## TODO
 - [ ] Change classes attributes to function parameters when possible.  
 - [X] When creating dialogues, look for (可能) with the character name.  
 - [ ] Add support for Whisper.  
 - [ ] Process entire folders, not just individual files.  
-- [ ] Add QLoRA script for finetunning LLM.  
+- [X] Add QLoRA script for finetunning LLM.  
 - [X] Add the `n_neighbors` as parameter.  
 
 
