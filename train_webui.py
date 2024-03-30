@@ -5,7 +5,7 @@ import json
 import os
 
 from characterdataset.train_llm import train
-CONFIG_PATH = r"src\characterdataset\train_llm\default_config.toml"
+CONFIG_PATH = "src/characterdataset/train_llm/default_config.toml"
 # Get the absolute path of the directory where this script is located
 current_dir = os.path.dirname(os.path.abspath(__file__))
 

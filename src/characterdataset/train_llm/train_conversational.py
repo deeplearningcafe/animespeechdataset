@@ -27,7 +27,8 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 
 CONFIG_FILE = "default_config.toml"
 CONFIG_PATH = os.path.join(current_dir, CONFIG_FILE)
-OUTPUT_PATH = r"data\outputs\train_llm"
+OUTPUT_PATH = "data/outputs/train_llm"
+CACHE_DIR = "pretrained_models/"
 
 def find_all_linear_names(model):
     cls = bnb.nn.Linear4bit

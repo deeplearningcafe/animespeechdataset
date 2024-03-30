@@ -26,6 +26,7 @@ src/characterdataset/DatasetManager.egg-info/
 src/characterdataset.egg-info
 tests/data/
 tests/__pycache__/
+tests/pretrained_models
 
 test_api.py
 src/characterdataset/common/texts.json

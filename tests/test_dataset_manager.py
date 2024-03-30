@@ -9,8 +9,8 @@ def dataset_manager_instance():
     dataset_manager = DatasetManager(
         dataset_type="dialogues",
         input_path="data/inputs/",
-        subtitles_file="data\inputs\Watashi no Oshi wa Akuyaku Reijou. - 04 「魔物の襲撃は油断大敵。」 (AT-X 1280x720 x264 AAC).srt",
-        annotation_file="tests\data\outputs\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2]\[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2].csv",
+        subtitles_file="data/inputs/Watashi no Oshi wa Akuyaku Reijou. - 04 「魔物の襲撃は油断大敵。」 (AT-X 1280x720 x264 AAC).srt",
+        annotation_file="tests/data/outputs/[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2]/[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2].csv",
         output_path="tests/data/outputs",
         num_characters=4,
         time_interval=5,
