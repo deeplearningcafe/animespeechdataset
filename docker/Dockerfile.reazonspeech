@@ -1,0 +1,48 @@
+ARG CUDA_VERSION="12.1.0"
+ARG CUDNN_VERSION="8"
+ARG UBUNTU_VERSION="20.04"
+ARG MAX_JOBS=4
+
+
+FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu20.04
+
+ENV PATH="/root/miniconda3/bin:${PATH}"
+
+ARG PYTHON_VERSION="3.11"
+ARG PYTORCH_VERSION="2.2.1"
+ARG CUDA="121"
+ARG TORCH_CUDA_ARCH_LIST="7.0 7.5 8.0 8.6 9.0+PTX"
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHON_VERSION=$PYTHON_VERSION
+ENV TORCH_CUDA_ARCH_LIST=$TORCH_CUDA_ARCH_LIST
+
+
+RUN apt-get update \
+    && apt-get install -y wget bzip2 ca-certificates curl git-lfs libsndfile1-dev libgl1 gcc g++ \
+    && rm -rf /var/lib/apt/lists/* \
+    && wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh \
+    && conda create -n "py${PYTHON_VERSION}" python="${PYTHON_VERSION}"
+
+ENV PATH="/root/miniconda3/envs/py${PYTHON_VERSION}/bin:${PATH}"
+
+WORKDIR /app/
+
+RUN git clone --depth=1 https://github.com/OpenAccess-AI-Collective/axolotl.git
+
+# Expose the port on which the application will run
+EXPOSE 8080
+
+RUN python3 -m pip install --upgrade pip && pip3 install packaging && \
+    python3 -m pip install --no-cache-dir -U torch==${PYTORCH_VERSION}+cu${CUDA} torchaudio==${PYTORCH_VERSION}+cu${CUDA} --extra-index-url https://download.pytorch.org/whl/cu$CUDA
+
+RUN pip3 install --no-cache-dir ReazonSpeech/pkg/nemo-asr --upgrade-strategy only-if-needed
+
+
+COPY docker/requirements_reazonspeech.txt /app
+
+RUN pip3 install --no-cache-dir -r requirements_reazonspeech.txt --upgrade-strategy only-if-needed

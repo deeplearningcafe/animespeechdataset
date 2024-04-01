@@ -1,0 +1,5 @@
+soundfile==0.12.1
+fastapi==0.110.0
+s3prl==0.4.15
+uvicorn==0.29.0
+python-multipart==0.0.9

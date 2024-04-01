@@ -1,0 +1,7 @@
+espnet==202402
+espnet_model_zoo==0.1.7
+soundfile==0.12.1
+fastapi==0.110.0
+s3prl==0.4.15
+uvicorn==0.29.0
+python-multipart==0.0.9

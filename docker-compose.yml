@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  animespeech:
+    image: animespeech
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: 'nvidia-docker'
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
