@@ -32,7 +32,7 @@ ENV PATH="/root/miniconda3/envs/py${PYTHON_VERSION}/bin:${PATH}"
 
 WORKDIR /app/
 
-RUN git clone --depth=1 https://github.com/OpenAccess-AI-Collective/axolotl.git
+RUN git clone --depth=1 https://github.com/reazon-research/ReazonSpeech.git
 
 # Expose the port on which the application will run
 EXPOSE 8080

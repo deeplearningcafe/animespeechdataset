@@ -30,14 +30,23 @@ RUN apt-get update \
 
 ENV PATH="/root/miniconda3/envs/py${PYTHON_VERSION}/bin:${PATH}"
 
-WORKDIR /app
+RUN mkdir /animespeech
 
 # Expose the port on which the application will run
-EXPOSE 8080
+EXPOSE 8001
+
+COPY docker/requirements_espnet.txt /animespeech/requirements_espnet.txt
+
+
+COPY src/characterdataset/api/embeddings_api.py /animespeech/
+
+WORKDIR /animespeech
 
 RUN python3 -m pip install --upgrade pip && pip3 install packaging && \
     python3 -m pip install --no-cache-dir -U torch==${PYTORCH_VERSION}+cu${CUDA} torchaudio==${PYTORCH_VERSION}+cu${CUDA} --extra-index-url https://download.pytorch.org/whl/cu$CUDA
 
-COPY docker/requirements_espnet.txt /app
 
 RUN pip3 install --no-cache-dir -r requirements_espnet.txt --upgrade-strategy only-if-needed
+
+CMD ["python", "embeddings_api.py"]
+# CMD ["uvicorn", "api.embeddings_api:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "8001"]

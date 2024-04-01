@@ -1,12 +1,15 @@
 version: '3.4'
 
 services:
-  animespeech:
-    image: animespeech
+  espnet:
+    image: espnet
     build:
       context: .
-      dockerfile: docker/Dockerfile
-    container_name: 'nvidia-docker'
+      dockerfile: docker/Dockerfile.espnet
+    # command: python embeddings_api.py
+    ports:
+      - "8001:8001"
+    container_name: 'espnet-animespeech'
     stdin_open: true
     tty: true
     volumes:
