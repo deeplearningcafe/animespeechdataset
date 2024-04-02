@@ -7,7 +7,7 @@ from .crop import data_processor
 import asyncio
 
 class Finder:
-    model_opts = ["speechbrain", "wavlm"]
+    model_opts = ["speechbrain", "wavlm", "espnet"]
     
     def __init__(self,
                  input_path:str=None,

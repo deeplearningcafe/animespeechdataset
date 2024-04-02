@@ -9,6 +9,7 @@ import torchaudio.transforms as T
 import torch.nn.functional as F
 import requests
 import json
+import asyncio
 
 from ..common import log
 from ..datasetmanager.text_dataset import segments_2_annotations
@@ -96,6 +97,8 @@ def load_model(model_name:str=None, device:str=None):
         model_dict = {"feature_extractor": feature_extractor, 
                       "model": model}
         return model_dict
+    elif model_name == "espnet":
+        return None
     else:
         raise ValueError(f"Model {model_name} is not included")
         
@@ -160,10 +163,34 @@ class data_processor:
             # これはリストを返り値
             voice_files = get_filename(dir)
             name = os.path.basename(os.path.normpath(dir))
+            new_dir = os.path.join(save_folder, 'embeddings', name)
+            os.makedirs(new_dir, exist_ok=True)
             
+            # if self.model_type == "espnet":
+            #     batch_size = 8
+            #     num_batches = (len(voice_files) + batch_size - 1) // batch_size
+
+            #     for i in tqdm(range(num_batches), f'extract {name} audio embeddings ,convert .wav to .pkl'):
+            #         start_idx = i * batch_size
+            #         end_idx = min((i + 1) * batch_size, len(voice_files))
+            #         batch_paths = voice_files[start_idx:end_idx]
+            #         batch_files = [file for file, pth in batch_files]
+            #         batch_paths = [pth for file, pth in batch_files]
+
+            #     try:
+            #         embeddings = self.request_embeddings(batch_paths)
+            #         for i, file in enumerate(batch_files):
+            #             with open(f"{new_dir}/{file}.pkl", "wb") as f:
+            #                 pickle.dump(embeddings[i], f)
+                
+            #     except Exception as e:
+            #         # here we want to continue saving other embeddings despite one failing
+            #         log.error(f"Error when saving the embeddings. {e}")
+            #         continue
+
+                
+            # else:
             for file, pth in tqdm(voice_files, f'extract {name} audio embeddings ,convert .wav to .pkl'):
-                new_dir = os.path.join(save_folder, 'embeddings', name)
-                os.makedirs(new_dir, exist_ok=True)
                 try:
                     resampled_waveform = self.preprocess_audio(pth)
                     if self.model_type == "wavlm":
@@ -171,9 +198,13 @@ class data_processor:
                         inputs = inputs.to(self.device)
                         embeddings = self.classifier["model"](**inputs).embeddings
                         embeddings = F.normalize(embeddings.squeeze(1), p=2, dim=1)
-                    else:  
+                    elif self.model_type == "speechbrain":  
                         embeddings = self.classifier.encode_batch(resampled_waveform)
-                    
+                    else:
+                        # as it is supposed to used batchs, we need to make the input a list
+                        embeddings = self.request_embeddings([pth]) # [192]
+                        embeddings = torch.tensor(embeddings, dtype=torch.float32)
+                        
                     # 埋め込みを保存する
                     with open(f"{new_dir}/{file}.pkl", "wb") as f:
                         pickle.dump(embeddings.detach().cpu(), f)
@@ -330,7 +361,7 @@ class data_processor:
                 resampled_waveform = self.preprocess_audio(pth)
                     
                 embeddings = self.classifier.encode_batch(resampled_waveform)
-
+                # print(embeddings.shape) torch.Size([1, 1, 192])
 
                 # 埋め込みを保存する
                 with open(f"{new_dir}/{file}.pkl", "wb") as f:
@@ -381,6 +412,59 @@ class data_processor:
             return data
         else:
             log.warning(f"Bad request {response.status_code}")
+
+    def request_embeddings(self, audio_paths: list[str]) -> dict:
+        """Sends a request to the api to transcribe the audio
+
+        Args:
+            audio_path (str, optional): path of the audio file, should be normalized. Defaults to None.
+
+        Returns:
+            dict: dictionary in json format containing the segments and their timings.
+        """
+        url = 'http://localhost:8001/api/media-file'
+        # curl -X 'POST' \
+        #   'http://localhost:8001/api/media-file' \
+        #   -H 'accept: application/json' \
+        #   -H 'Content-Type: multipart/form-data' \
+        #   -F 'files=@0023_00.03.09.380_00.03.12.550_私の名前覚えていらっしゃいますか.wav;type=audio/wav' \
+        #   -F 'files=@0024_00.03.12.550_00.03.17.060_んっ…。バカにしていますのレイ=テイラー!.wav;type=audio/wav'
+        headers = {
+            'accept': 'application/json',
+            # requests won't add a boundary if this header is set when you pass files=
+            # 'Content-Type': 'multipart/form-data',
+        }
+        try:
+            # we have a problem when reading files because of the \0
+            # files = {
+            #     'file': (audio_path, open(audio_path, 'rb'), 'audio/wav'),
+            # }
+            files = []
+            for audio in audio_paths:
+                file_tmp = ('files', (audio, open(audio, 'rb'), 'audio/wav'))
+                files.append(file_tmp)
+            # files = [
+            # ('files', ('0023_00.03.09.380_00.03.12.550_私の名前覚えていらっしゃいますか.wav', open('0023_00.03.09.380_00.03.12.550_私の名前覚えていらっしゃいますか.wav', 'rb'), 'audio/wav')),
+            # ('files', ('0024_00.03.12.550_00.03.17.060_んっ…。バカにしていますのレイ=テイラー!.wav', open('0024_00.03.12.550_00.03.17.060_んっ…。バカにしていますのレイ=テイラー!.wav', 'rb'), 'audio/wav')),
+            # ]
+        except Exception as e:
+            print(f"When opening files for request {e}")
+
+        response = requests.post(url, headers=headers, files=files)
+
+        if response.status_code == 200:
+            # reponse is like: {"data":[{"embedding": []}, {"embedding": []}]
+            response_json = response.content.decode("utf-8")
+            response_json = json.loads(response_json)
+            data = []
+            for embedding in response_json["data"]:
+                # print(embedding["embedding"])
+                # the embedding is a list of floats with lenght 192
+                data.append(embedding["embedding"])
+            return data
+        else:
+            log.warning(f"Bad request {response.status_code}")
+
 
 
 

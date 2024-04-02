@@ -17,7 +17,6 @@ dataset.py
 recognize.py
 emotion.py
 check_embeds.py
-check_knn.py
 webui_dataset.py
 memos.md
 
@@ -31,3 +30,4 @@ tests/pretrained_models
 test_api.py
 src/characterdataset/common/texts.json
 .pytest_cache/
+tools/

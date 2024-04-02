@@ -27,7 +27,9 @@ class KNN_classifier:
         self.knn_cls = KNeighborsClassifier(n_neighbors=n_neighbors, metric='cosine')
         
         # self.embeddings -> [batch_size, 1, hidden_dim]
-        self.knn_cls.fit(self.embeddings.squeeze(1), self.labels)
+        # in the case of espnet -> [batch_size, hidden_dim]
+        # self.knn_cls.fit(self.embeddings.squeeze(1), self.labels)
+        self.knn_cls.fit(self.embeddings, self.labels)
         
         self.threshold_certain = threshold_certain
         self.threshold_doubt = threshold_doubt
@@ -72,7 +74,7 @@ class KNN_classifier:
                 with open(embeddings_path, 'rb') as fp:
                     embedding = pickle.load(fp)
                 fp.close()
-                
+                # print(embedding.shape) torch.Size([1, 1, 192])
                 # 前作ったリストに格納する
                 if dim == 0:
                     embeddings_cls = embedding
@@ -82,7 +84,7 @@ class KNN_classifier:
                     embeddings_cls = np.vstack((embeddings_cls, embedding))
 
                 labels.append(role)
-                
+        # print(embeddings_cls.shape) (239, 1, 192)
         return embeddings_cls, labels
 
     def predict_class(self, embedding: torch.Tensor) -> list[str, float]:
