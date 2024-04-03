@@ -28,6 +28,9 @@ class KNN_classifier:
         
         # self.embeddings -> [batch_size, 1, hidden_dim]
         # in the case of espnet -> [batch_size, hidden_dim]
+        if len(self.embeddings.shape) == 3:
+            # it is a numpy array but we can use squeeze
+            self.embeddings = self.embeddings.squeeze(1)
         # self.knn_cls.fit(self.embeddings.squeeze(1), self.labels)
         self.knn_cls.fit(self.embeddings, self.labels)
         
@@ -85,6 +88,7 @@ class KNN_classifier:
 
                 labels.append(role)
         # print(embeddings_cls.shape) (239, 1, 192)
+        log.info(f"Fetched embeddings with shape {embeddings_cls.shape}")
         return embeddings_cls, labels
 
     def predict_class(self, embedding: torch.Tensor) -> list[str, float]:
@@ -136,7 +140,8 @@ class KNN_classifier:
             with open(path, 'rb') as fp:
                 embedding = pickle.load(fp)
             fp.close()
-            embedding = embedding.squeeze(0)
+            if len(embedding.shape) == 3:
+                embedding = embedding.squeeze(0)
             
             name, dist = self.predict_class(embedding)
             if not keep_unclassed:
@@ -244,7 +249,11 @@ def recognize(annotation_file:str=None,
     log.info("Audios extracted")
     
     # # 埋め込みを生成する
-    processor.extract_embeddings_new(video_path, output_path)
+    if model == "espnet":
+        result = processor.request_embeddings_creation_new(video_path, output_path)
+        log.info(result)
+    else:
+        processor.extract_embeddings_new(video_path, output_path)
     log.info("Embeddings created")
     
     knn = KNN_classifier(character_folder, n_neighbors=n_neighbors)

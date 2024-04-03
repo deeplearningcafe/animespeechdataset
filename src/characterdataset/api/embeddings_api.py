@@ -3,6 +3,7 @@ from fastapi.responses import FileResponse, Response
 import uvicorn
 from typing import List
 from pydantic import BaseModel, Field
+import gc
 
 import torch
 import torchaudio
@@ -164,6 +165,47 @@ def extract_embeddings(model, save_folder:str) -> None:
     # log.info("録音データから埋め込みを作成しました。")
     return "録音データから埋め込みを作成しました。"
 
+def extract_embeddings_predict(model, video_path:str, temp_folder:str="tmp") -> None:
+    """From directory with character names as folder and their audio files,
+    extract embeddings and save them in the same character folder under embeddings
+
+    Args:
+        save_folder (str, optional): _description_. Defaults to None.
+    """
+    voice_dir = "voice"
+    # 録音データから埋め込みを作る
+    file = os.path.basename(video_path)
+    filename, format = os.path.splitext(file)
+
+    temp_dir = f'{temp_folder}/{filename}'
+
+    # これはリストを返り値
+    voice_files = os.listdir(os.path.join(temp_dir, voice_dir))
+    new_dir = os.path.join(temp_dir, 'embeddings')
+    os.makedirs(new_dir, exist_ok=True)
+    
+    # 埋め込みを作成する
+    for pth in tqdm(voice_files, f'extract {filename} audio features ,convert .wav to .pkl'):
+        file = os.path.basename(pth)
+        file, format = os.path.splitext(file)
+        pth = os.path.join(temp_dir, voice_dir, pth)
+        try:
+            resampled_waveform = preprocess_audio(pth)
+                
+            embeddings = model(resampled_waveform) # [1, 192]
+            embeddings = F.normalize(embeddings, p=2, dim=1)
+
+            # 埋め込みを保存する
+            with open(f"{new_dir}/{file}.pkl", "wb") as f:
+                pickle.dump(embeddings.detach().cpu(), f)
+        except Exception as e:
+            # here we want to continue saving other embeddings despite one failing
+            log.error(f"Error when saving the new embeddings. {e}")
+            continue
+
+
+    return "録音データから埋め込みを作成しました。"
+
 def main():
     # add logger
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -271,6 +313,27 @@ def main():
         """
         model = load_model("espnet/voxcelebs12_ecapa_wavlm_joint", "cuda")
         result = extract_embeddings(model, character_folder)
+        
+        del model
+        gc.collect()
+        torch.cuda.empty_cache()
+
+        return Response(content=result)
+    
+    @app.post(
+    path="/api/embeddings-predict",
+    response_class=Response,
+    )
+    async def create_embeddings_predict(video_path:str, temp_folder:str="tmp"):
+        """
+        Receive File, store to disk & return it
+        """
+        model = load_model("espnet/voxcelebs12_ecapa_wavlm_joint", "cuda")
+        result = extract_embeddings_predict(model, video_path, temp_folder)
+        
+        del model
+        gc.collect()
+        torch.cuda.empty_cache()
 
         return Response(content=result)
     uvicorn.run(

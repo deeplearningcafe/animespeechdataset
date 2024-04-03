@@ -497,6 +497,37 @@ class data_processor:
             log.error(f"Bad request {response.status_code}")
 
 
+    def request_embeddings_creation_new(self, video_path:str, temp_folder:str="tmp") -> dict:
+        """Sends a request to the api to transcribe the audio
+
+        Args:
+            audio_path (str, optional): path of the audio file, should be normalized. Defaults to None.
+
+        Returns:
+            dict: dictionary in json format containing the segments and their timings.
+        """
+        url = 'http://localhost:8001/api/embeddings-predict'
+        # curl -X 'POST' \
+        # 'http://localhost:8001/api/embeddings?character_folder=data%2Fcharacter_embedds' \
+        # -H 'accept: */*' \
+        # -d ''
+        headers = {
+            'accept': '*/*',
+            'content-type': 'application/x-www-form-urlencoded',
+        }
+        params = {
+            'video_path': str(video_path),
+            'temp_folder': str(temp_folder),
+        }
+        response = requests.post(url, headers=headers, params=params)
+
+        if response.status_code == 200:
+            # reponse is like: {"data":[{"embedding": []}, {"embedding": []}]
+            response_content = response.content.decode("utf-8")
+            # response_json = json.loads(response_json)
+            return response_content
+        else:
+            log.error(f"Bad request {response.status_code}")
 
 
 
