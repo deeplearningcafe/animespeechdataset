@@ -160,9 +160,9 @@ def extract_embeddings(model, save_folder:str) -> None:
                 # here we want to continue saving other embeddings despite one failing
                 log.error(f"Error when saving the embeddings. {e}")
                 continue
-        log.info("Extracted embeddings from {name}")
-    log.info("録音データから埋め込みを作成しました。")
-    return "Completed"
+        log.info(f"Extracted embeddings from {name}")
+    # log.info("録音データから埋め込みを作成しました。")
+    return "録音データから埋め込みを作成しました。"
 
 def main():
     # add logger

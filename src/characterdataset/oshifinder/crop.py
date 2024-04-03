@@ -484,17 +484,17 @@ class data_processor:
             'content-type': 'application/x-www-form-urlencoded',
         }
         params = {
-            'character_folder': 'data/character_embedds',
+            'character_folder': str(character_folder),
         }
         response = requests.post(url, headers=headers, params=params)
 
         if response.status_code == 200:
             # reponse is like: {"data":[{"embedding": []}, {"embedding": []}]
-            response_json = response.content.decode("utf-8")
-            response_json = json.loads(response_json)
-            return response_json
+            response_content = response.content.decode("utf-8")
+            # response_json = json.loads(response_json)
+            return response_content
         else:
-            log.warning(f"Bad request {response.status_code}")
+            log.error(f"Bad request {response.status_code}")
 
 
 
@@ -561,7 +561,8 @@ def crop(annotation_file:str=None,
     
     # 埋め込みを生成する
     if model == "espnet":
-        processor.request_embeddings_creation(output_path)
+        result = processor.request_embeddings_creation(output_path)
+        log.info(result)
     else:
         processor.extract_embeddings(output_path)
     
