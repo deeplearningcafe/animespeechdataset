@@ -11,6 +11,10 @@ import torch.nn.functional as F
 import pickle
 from tqdm import tqdm
 
+from ..common import log
+# import logging
+# logging.getLogger("espnet2").setLevel(logging.WARNING)
+
 import os
 import numpy as np
 from espnet2.bin.spk_inference import Speech2Embedding
@@ -18,11 +22,9 @@ from ..oshifinder.utils import (
     get_subdir,
     get_filename,
 )
-from ..common import log
-import logging
+
 # from ..oshifinder.crop import crop
 
-logging.getLogger("espnet2").setLevel(logging.WARNING)
 
 
 class Embedding(BaseModel):
@@ -91,7 +93,7 @@ def preprocess_audio(audio_path:str=None) -> torch.Tensor:
     return resampled_waveform
 
 
-def extract_embeddings(model, save_folder:str=None) -> None:
+def extract_embeddings(model, save_folder:str) -> None:
     """From directory with character names as folder and their audio files,
     extract embeddings and save them in the same character folder under embeddings
 
@@ -158,11 +160,39 @@ def extract_embeddings(model, save_folder:str=None) -> None:
                 # here we want to continue saving other embeddings despite one failing
                 log.error(f"Error when saving the embeddings. {e}")
                 continue
+        log.info("Extracted embeddings from {name}")
     log.info("録音データから埋め込みを作成しました。")
     return "Completed"
 
 def main():
+    # add logger
     current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Define the absolute path to the log file
+    # log_file_path = os.path.join(current_dir, "embeddings_api.log")
+
+    # logging.basicConfig(filename=log_file_path, encoding='utf-8', level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
+    # logging.getLogger("espnet2").setLevel(logging.WARNING)
+
+    # logger = logging.getLogger(__name__)
+    
+    # logger = logging.getLogger(__name__)
+    # logger.setLevel(logging.INFO)
+
+    # # configure the handler and formatter as needed
+    # api_handler = logging.FileHandler(f"{__name__}.log", mode='w')
+    # papi_formatter = logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s")
+
+    # # add formatter to the handler
+    # api_handler.setFormatter(papi_formatter)
+    # # add handler to the logger
+    # logger.addHandler(api_handler)
+
+    # logger.info(f"Testing the custom logger for module {__name__}...")
+
+
+    
+    # current_dir = os.path.dirname(os.path.abspath(__file__))
 
     tmp_file_dir = "/tmp/example-files"
     tmp_file_dir = os.path.join(current_dir, tmp_file_dir)
