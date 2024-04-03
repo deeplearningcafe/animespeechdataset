@@ -38,7 +38,7 @@ EXPOSE 8001
 COPY docker/requirements_espnet.txt /animespeech/requirements_espnet.txt
 
 
-COPY src/characterdataset/api/embeddings_api.py /animespeech/
+# COPY src/characterdataset/api/embeddings_api.py /animespeech/
 
 WORKDIR /animespeech
 
@@ -48,5 +48,5 @@ RUN python3 -m pip install --upgrade pip && pip3 install packaging && \
 
 RUN pip3 install --no-cache-dir -r requirements_espnet.txt --upgrade-strategy only-if-needed
 
-CMD ["python", "embeddings_api.py"]
+CMD ["python", "-m", "src.characterdataset.api"]
 # CMD ["uvicorn", "api.embeddings_api:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "8001"]

@@ -13,7 +13,16 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ./:/app
+      # this copies the whole current directory into the app folder inside docker.
+      # - ./:/app
+      # - type: volume
+      #   source: ./data/
+      #   target: /animespeech/data
+      # - type: volume
+      #   source: ./src/
+      #   target: /animespeech/src
+      - ./data/:/animespeech/data
+      - ./src/:/animespeech/src
 
     deploy:
       resources:
@@ -22,3 +31,7 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+
+volumes:
+  data:
+  src:

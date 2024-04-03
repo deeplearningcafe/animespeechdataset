@@ -1,19 +1,28 @@
-from fastapi import FastAPI, HTTPException, Query, Request, status, UploadFile
+from fastapi import FastAPI, UploadFile
 from fastapi.responses import FileResponse, Response
 import uvicorn
-from fastapi.encoders import jsonable_encoder
-from fastapi.responses import JSONResponse
-from typing import List, Union
+from typing import List
 from pydantic import BaseModel, Field
 
 import torch
 import torchaudio
 import torchaudio.transforms as T
 import torch.nn.functional as F
+import pickle
+from tqdm import tqdm
 
 import os
 import numpy as np
 from espnet2.bin.spk_inference import Speech2Embedding
+from ..oshifinder.utils import (
+    get_subdir,
+    get_filename,
+)
+from ..common import log
+import logging
+# from ..oshifinder.crop import crop
+
+logging.getLogger("espnet2").setLevel(logging.WARNING)
 
 
 class Embedding(BaseModel):
@@ -25,7 +34,8 @@ class EmbeddingResponse(BaseModel):
     data: List[Embedding]
 
 
-def extract_embeddings(audio_paths:list[str], model):
+
+def extract_embeddings_api(audio_paths:list[str], model):
     embeddings = []
     for audio_path in audio_paths:
         with torch.no_grad():
@@ -81,7 +91,77 @@ def preprocess_audio(audio_path:str=None) -> torch.Tensor:
     return resampled_waveform
 
 
-if __name__ == "__main__":
+def extract_embeddings(model, save_folder:str=None) -> None:
+    """From directory with character names as folder and their audio files,
+    extract embeddings and save them in the same character folder under embeddings
+
+    Args:
+        save_folder (str, optional): _description_. Defaults to None.
+    """
+    
+    # これはキャラの名前をとってる
+    sub_dirs = get_subdir(f'{save_folder}/voice')
+    
+    for dir in sub_dirs:
+        # これはリストを返り値
+        voice_files = get_filename(dir)
+        name = os.path.basename(os.path.normpath(dir))
+        new_dir = os.path.join(save_folder, 'embeddings', name)
+        os.makedirs(new_dir, exist_ok=True)
+        
+        # if self.model_type == "espnet":
+        #     batch_size = 8
+        #     num_batches = (len(voice_files) + batch_size - 1) // batch_size
+
+        #     for i in tqdm(range(num_batches), f'extract {name} audio embeddings ,convert .wav to .pkl'):
+        #         start_idx = i * batch_size
+        #         end_idx = min((i + 1) * batch_size, len(voice_files))
+        #         batch_paths = voice_files[start_idx:end_idx]
+        #         batch_files = [file for file, pth in batch_files]
+        #         batch_paths = [pth for file, pth in batch_files]
+
+        #     try:
+        #         embeddings = self.request_embeddings(batch_paths)
+        #         for i, file in enumerate(batch_files):
+        #             with open(f"{new_dir}/{file}.pkl", "wb") as f:
+        #                 pickle.dump(embeddings[i], f)
+            
+        #     except Exception as e:
+        #         # here we want to continue saving other embeddings despite one failing
+        #         log.error(f"Error when saving the embeddings. {e}")
+        #         continue
+
+            
+        # else:
+        for file, pth in tqdm(voice_files, f'extract {name} audio embeddings ,convert .wav to .pkl'):
+            try:
+                resampled_waveform = preprocess_audio(pth)
+                # if self.model_type == "wavlm":
+                #     inputs = self.classifier["feature_extractor"](resampled_waveform, padding=True, return_tensors="pt", sampling_rate=16000)
+                #     inputs = inputs.to(self.device)
+                #     embeddings = self.classifier["model"](**inputs).embeddings
+                #     embeddings = F.normalize(embeddings.squeeze(1), p=2, dim=1)
+                # elif self.model_type == "speechbrain":  
+                #     embeddings = self.classifier.encode_batch(resampled_waveform)
+                # else:
+                # as it is supposed to used batchs, we need to make the input a list
+                # embeddings = request_embeddings([pth]) # [192]
+                embeddings = model(resampled_waveform) # [1, 192]
+                embeddings = F.normalize(embeddings, p=2, dim=1)
+                # embedding = embedding.squeeze(0)
+                # embeddings = torch.tensor(embeddings, dtype=torch.float32)
+                    
+                # 埋め込みを保存する
+                with open(f"{new_dir}/{file}.pkl", "wb") as f:
+                    pickle.dump(embeddings.detach().cpu(), f)
+            except Exception as e:
+                # here we want to continue saving other embeddings despite one failing
+                log.error(f"Error when saving the embeddings. {e}")
+                continue
+    log.info("録音データから埋め込みを作成しました。")
+    return "Completed"
+
+def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     tmp_file_dir = "/tmp/example-files"
@@ -119,7 +199,7 @@ if __name__ == "__main__":
         # audio = preprocess_audio()
         
         model = load_model("espnet/voxcelebs12_ecapa_wavlm_joint", "cuda")
-        result = extract_embeddings(audios_processing, model)
+        result = extract_embeddings_api(audios_processing, model)
         # result = result.to("cpu")
         # print(f"Received file named {file.filename} containing {len(file_bytes)} bytes. ")
 
@@ -151,7 +231,18 @@ if __name__ == "__main__":
             return FileResponse(disk_file.name, media_type=file.content_type)
 
 
+    @app.post(
+    path="/api/embeddings",
+    response_class=Response,
+    )
+    async def create_embeddings(character_folder: str):
+        """
+        Receive File, store to disk & return it
+        """
+        model = load_model("espnet/voxcelebs12_ecapa_wavlm_joint", "cuda")
+        result = extract_embeddings(model, character_folder)
 
+        return Response(content=result)
     uvicorn.run(
         app, port=8001, host="0.0.0.0", log_level="debug"
     )

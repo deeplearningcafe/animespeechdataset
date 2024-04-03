@@ -12,7 +12,7 @@ import json
 import asyncio
 
 from ..common import log
-from ..datasetmanager.text_dataset import segments_2_annotations
+# from ..datasetmanager.text_dataset import segments_2_annotations
 
 from .utils import (ffmpeg_extract_audio,
                     make_filename_safe,
@@ -465,7 +465,36 @@ class data_processor:
         else:
             log.warning(f"Bad request {response.status_code}")
 
+    def request_embeddings_creation(self, character_folder: str) -> dict:
+        """Sends a request to the api to transcribe the audio
 
+        Args:
+            audio_path (str, optional): path of the audio file, should be normalized. Defaults to None.
+
+        Returns:
+            dict: dictionary in json format containing the segments and their timings.
+        """
+        url = 'http://localhost:8001/api/embeddings'
+        # curl -X 'POST' \
+        # 'http://localhost:8001/api/embeddings?character_folder=data%2Fcharacter_embedds' \
+        # -H 'accept: */*' \
+        # -d ''
+        headers = {
+            'accept': '*/*',
+            'content-type': 'application/x-www-form-urlencoded',
+        }
+        params = {
+            'character_folder': 'data/character_embedds',
+        }
+        response = requests.post(url, headers=headers, params=params)
+
+        if response.status_code == 200:
+            # reponse is like: {"data":[{"embedding": []}, {"embedding": []}]
+            response_json = response.content.decode("utf-8")
+            response_json = json.loads(response_json)
+            return response_json
+        else:
+            log.warning(f"Bad request {response.status_code}")
 
 
 
@@ -531,7 +560,10 @@ def crop(annotation_file:str=None,
     processor.extract_audios_by_csv(annotation_file, video_path, output_path)
     
     # 埋め込みを生成する
-    processor.extract_embeddings(output_path)
+    if model == "espnet":
+        processor.request_embeddings_creation(output_path)
+    else:
+        processor.extract_embeddings(output_path)
     
     
 # def prepare_labeling(annotation_file:str=None,
@@ -544,45 +576,45 @@ def crop(annotation_file:str=None,
 #     processor.extract_audios_for_labeling(annotation_file, video_path, save_folder, iscropping=True)
     
 
-def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False,
-                      num_characters:int=4) -> str:
-    """First convert the video to audio. Second transcribe the audio. Third create a csv file from the results.
-    As nemo asr does not work in windows, we will use a api for the transcribing.
+# def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False,
+#                       num_characters:int=4) -> str:
+#     """First convert the video to audio. Second transcribe the audio. Third create a csv file from the results.
+#     As nemo asr does not work in windows, we will use a api for the transcribing.
     
-    Args:
-        video_path (str, optional): _description_. Defaults to None.
-        output_path (str, optional): _description_. Defaults to None.
-        iscropping (bool, optional): _description_. Defaults to False.
+#     Args:
+#         video_path (str, optional): _description_. Defaults to None.
+#         output_path (str, optional): _description_. Defaults to None.
+#         iscropping (bool, optional): _description_. Defaults to False.
 
-    Returns:
-        str: _description_
-    """
-    # 1. Convert video to audio
-    # the audio file will be deleted after
-    audio_path = f"{output_path}/temp.wav"
-    ffmpeg_video_2_audio(video_path, audio_path)
+#     Returns:
+#         str: _description_
+#     """
+#     # 1. Convert video to audio
+#     # the audio file will be deleted after
+#     audio_path = f"{output_path}/temp.wav"
+#     ffmpeg_video_2_audio(video_path, audio_path)
     
-    # 2. Transcribe audio, here we call the api, the response is a json file with a list of segments
-    segments = data_processor.request_transcription(audio_path)
+#     # 2. Transcribe audio, here we call the api, the response is a json file with a list of segments
+#     segments = data_processor.request_transcription(audio_path)
     
-    # 3. Create a csv from the segments
-    file = os.path.basename(video_path)
-    filename, format = os.path.splitext(file)
+#     # 3. Create a csv from the segments
+#     file = os.path.basename(video_path)
+#     filename, format = os.path.splitext(file)
     
-    filename = f"{output_path}/{filename}.csv"
+#     filename = f"{output_path}/{filename}.csv"
     
-    try:
-        segments_2_annotations(segments, filename, num_characters, iscropping)
-    except Exception as e:
-        log.error(f"Error when creating annotations from segments. {e}")
+#     try:
+#         segments_2_annotations(segments, filename, num_characters, iscropping)
+#     except Exception as e:
+#         log.error(f"Error when creating annotations from segments. {e}")
     
-    # delete the audio file
-    try:
-        os.remove(audio_path)
-    except:
-        log.warning(f"Could not remove the temp audio file {e}")
+#     # delete the audio file
+#     try:
+#         os.remove(audio_path)
+#     except:
+#         log.warning(f"Could not remove the temp audio file {e}")
     
-    return filename
+#     return filename
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
