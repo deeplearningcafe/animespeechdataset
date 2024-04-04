@@ -9,73 +9,15 @@ import torchaudio.transforms as T
 import torch.nn.functional as F
 import requests
 import json
-import asyncio
+import gc
 
 from ..common import log
-# from ..datasetmanager.text_dataset import segments_2_annotations
 
 from .utils import (ffmpeg_extract_audio,
                     make_filename_safe,
                     get_subdir,
                     get_filename,
-                    srt_format_timestamp,
-                    ffmpeg_video_2_audio)
-
-def clip_audio_bycsv(annotate_csv,video_pth,role_audios):
-        annotate_csv = annotate_csv
-        video_pth = video_pth
-        role_audios = role_audios
-        srt_data = pd.read_csv(annotate_csv).iloc[:,:4]
-        srt_data = srt_data.dropna()
-        srt_list = srt_data.values.tolist()
-        for index, (person,start_time,end_time, subtitle) in enumerate(tqdm(srt_list[:], 'video clip by csv file start')):
-            audio_output = f'{role_audios}/voice/{person}'
-            os.makedirs(audio_output, exist_ok=True)
-            index = str(index).zfill(4)
-            text = make_filename_safe(subtitle)
-            start_time = float(start_time)
-            end_time = float(end_time)
-            
-            ss = srt_format_timestamp(start_time)
-            ee = srt_format_timestamp(end_time)
-            
-            
-            name = f'{index}_{ss}_{ee}_{text}'.replace(':', '.')
-
-            audio_output = f'{audio_output}/{name}.wav'
-            ffmpeg_extract_audio(video_pth,audio_output,start_time,end_time)
-            
-def extract_pkl_feat(audio_extractor, role_audios):
-    
-    sub_dirs = get_subdir(f'{role_audios}/voice')
-    
-    for dir in sub_dirs[:]:
-        # これはリストを返り値
-        voice_files = get_filename(dir)
-        name = os.path.basename(os.path.normpath(dir))
-        for file, pth in tqdm(voice_files, f'extract {name} audio features ,convert .wav to .pkl'):
-            new_dir = os.path.join(role_audios, 'embeddings', name)
-            os.makedirs(new_dir, exist_ok=True)
-            try:
-                # サンプリングレートは16khzであるべき
-                signal, fs = torchaudio.load(pth)
-                # 録音の前処理
-                signal_mono = torch.mean(signal, dim=0)
-                # change freq
-                resample_rate = 16000
-                resampler = T.Resample(fs, resample_rate, dtype=signal_mono.dtype)
-                resampled_waveform = resampler(signal_mono)
-
-                
-                embeddings = audio_extractor.encode_batch(resampled_waveform)
-
-                # 埋め込みを保存する
-                with open(f"{new_dir}/{file}.pkl", "wb") as f:
-                    pickle.dump(embeddings.detach().cpu(), f)
-            except:
-                continue
-    
-    log.info("録音データから埋め込みを作成しました。")
+                    srt_format_timestamp,)
     
 
 def load_model(model_name:str=None, device:str=None):
@@ -179,6 +121,9 @@ class data_processor:
 
             #     try:
             #         embeddings = self.request_embeddings(batch_paths)
+                      # embedding = embedding.squeeze(0)
+                      # embeddings = torch.tensor(embeddings, dtype=torch.float32)
+
             #         for i, file in enumerate(batch_files):
             #             with open(f"{new_dir}/{file}.pkl", "wb") as f:
             #                 pickle.dump(embeddings[i], f)
@@ -293,7 +238,7 @@ class data_processor:
         file = os.path.basename(video_path)
         filename, format = os.path.splitext(file)
         # should be already created in finder.py
-        log.info(f'Salving audio files at {temp_folder}')
+        log.info(f'Saving audio files at {temp_folder}')
 
         file_names = []
         num_trials = 3
@@ -466,13 +411,13 @@ class data_processor:
             log.warning(f"Bad request {response.status_code}")
 
     def request_embeddings_creation(self, character_folder: str) -> dict:
-        """Sends a request to the api to transcribe the audio
+        """Sends a request to the api to create embeddings of the characters
 
         Args:
-            audio_path (str, optional): path of the audio file, should be normalized. Defaults to None.
+            character_folder (str, optional): path of the directory with the audios of each character, should be normalized. Defaults to None.
 
         Returns:
-            dict: dictionary in json format containing the segments and their timings.
+            str: a string with the result
         """
         url = 'http://localhost:8001/api/embeddings'
         # curl -X 'POST' \
@@ -489,22 +434,22 @@ class data_processor:
         response = requests.post(url, headers=headers, params=params)
 
         if response.status_code == 200:
-            # reponse is like: {"data":[{"embedding": []}, {"embedding": []}]
             response_content = response.content.decode("utf-8")
-            # response_json = json.loads(response_json)
             return response_content
         else:
             log.error(f"Bad request {response.status_code}")
+            response.raise_for_status()
 
 
     def request_embeddings_creation_new(self, video_path:str, temp_folder:str="tmp") -> dict:
-        """Sends a request to the api to transcribe the audio
+        """Sends a request to the api to create embeddings for prediction
 
         Args:
-            audio_path (str, optional): path of the audio file, should be normalized. Defaults to None.
+            video_path (str, optional): path of the video file, should be normalized. Defaults to None.
+            temp_folder (str, optional): path of the directory to store the embeddings, should be normalized. Defaults to None.
 
         Returns:
-            dict: dictionary in json format containing the segments and their timings.
+            str: a string with the result
         """
         url = 'http://localhost:8001/api/embeddings-predict'
         # curl -X 'POST' \
@@ -522,12 +467,11 @@ class data_processor:
         response = requests.post(url, headers=headers, params=params)
 
         if response.status_code == 200:
-            # reponse is like: {"data":[{"embedding": []}, {"embedding": []}]
             response_content = response.content.decode("utf-8")
-            # response_json = json.loads(response_json)
             return response_content
         else:
             log.error(f"Bad request {response.status_code}")
+            response.raise_for_status()
 
 
 
@@ -596,57 +540,16 @@ def crop(annotation_file:str=None,
         log.info(result)
     else:
         processor.extract_embeddings(output_path)
+        
+        # delete the model to release memory
+        try:
+            del classifier
+            gc.collect()
+            torch.cuda.empty_cache()
+        except:
+            log.warning(f"Couldn't delete the {model} model")
     
     
-# def prepare_labeling(annotation_file:str=None,
-#          save_folder:str="tmp",
-#          video_path:str=None,
-#          ):
-    
-#     processor = data_processor(None)
-#     # # 録音データを格納する
-#     processor.extract_audios_for_labeling(annotation_file, video_path, save_folder, iscropping=True)
-    
-
-# def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool=False,
-#                       num_characters:int=4) -> str:
-#     """First convert the video to audio. Second transcribe the audio. Third create a csv file from the results.
-#     As nemo asr does not work in windows, we will use a api for the transcribing.
-    
-#     Args:
-#         video_path (str, optional): _description_. Defaults to None.
-#         output_path (str, optional): _description_. Defaults to None.
-#         iscropping (bool, optional): _description_. Defaults to False.
-
-#     Returns:
-#         str: _description_
-#     """
-#     # 1. Convert video to audio
-#     # the audio file will be deleted after
-#     audio_path = f"{output_path}/temp.wav"
-#     ffmpeg_video_2_audio(video_path, audio_path)
-    
-#     # 2. Transcribe audio, here we call the api, the response is a json file with a list of segments
-#     segments = data_processor.request_transcription(audio_path)
-    
-#     # 3. Create a csv from the segments
-#     file = os.path.basename(video_path)
-#     filename, format = os.path.splitext(file)
-    
-#     filename = f"{output_path}/{filename}.csv"
-    
-#     try:
-#         segments_2_annotations(segments, filename, num_characters, iscropping)
-#     except Exception as e:
-#         log.error(f"Error when creating annotations from segments. {e}")
-    
-#     # delete the audio file
-#     try:
-#         os.remove(audio_path)
-#     except:
-#         log.warning(f"Could not remove the temp audio file {e}")
-    
-#     return filename
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(

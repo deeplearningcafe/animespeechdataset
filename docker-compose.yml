@@ -23,6 +23,7 @@ services:
       #   target: /animespeech/src
       - ./data/:/animespeech/data
       - ./src/:/animespeech/src
+      - ./tests/:/animespeech/tests
 
     deploy:
       resources:
@@ -35,3 +36,4 @@ services:
 volumes:
   data:
   src:
+  tests:

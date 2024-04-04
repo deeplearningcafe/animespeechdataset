@@ -112,47 +112,12 @@ def extract_embeddings(model, save_folder:str) -> None:
         new_dir = os.path.join(save_folder, 'embeddings', name)
         os.makedirs(new_dir, exist_ok=True)
         
-        # if self.model_type == "espnet":
-        #     batch_size = 8
-        #     num_batches = (len(voice_files) + batch_size - 1) // batch_size
-
-        #     for i in tqdm(range(num_batches), f'extract {name} audio embeddings ,convert .wav to .pkl'):
-        #         start_idx = i * batch_size
-        #         end_idx = min((i + 1) * batch_size, len(voice_files))
-        #         batch_paths = voice_files[start_idx:end_idx]
-        #         batch_files = [file for file, pth in batch_files]
-        #         batch_paths = [pth for file, pth in batch_files]
-
-        #     try:
-        #         embeddings = self.request_embeddings(batch_paths)
-        #         for i, file in enumerate(batch_files):
-        #             with open(f"{new_dir}/{file}.pkl", "wb") as f:
-        #                 pickle.dump(embeddings[i], f)
-            
-        #     except Exception as e:
-        #         # here we want to continue saving other embeddings despite one failing
-        #         log.error(f"Error when saving the embeddings. {e}")
-        #         continue
-
-            
-        # else:
         for file, pth in tqdm(voice_files, f'extract {name} audio embeddings ,convert .wav to .pkl'):
             try:
                 resampled_waveform = preprocess_audio(pth)
-                # if self.model_type == "wavlm":
-                #     inputs = self.classifier["feature_extractor"](resampled_waveform, padding=True, return_tensors="pt", sampling_rate=16000)
-                #     inputs = inputs.to(self.device)
-                #     embeddings = self.classifier["model"](**inputs).embeddings
-                #     embeddings = F.normalize(embeddings.squeeze(1), p=2, dim=1)
-                # elif self.model_type == "speechbrain":  
-                #     embeddings = self.classifier.encode_batch(resampled_waveform)
-                # else:
-                # as it is supposed to used batchs, we need to make the input a list
-                # embeddings = request_embeddings([pth]) # [192]
+
                 embeddings = model(resampled_waveform) # [1, 192]
                 embeddings = F.normalize(embeddings, p=2, dim=1)
-                # embedding = embedding.squeeze(0)
-                # embeddings = torch.tensor(embeddings, dtype=torch.float32)
                     
                 # 埋め込みを保存する
                 with open(f"{new_dir}/{file}.pkl", "wb") as f:
@@ -209,32 +174,7 @@ def extract_embeddings_predict(model, video_path:str, temp_folder:str="tmp") -> 
 def main():
     # add logger
     current_dir = os.path.dirname(os.path.abspath(__file__))
-
-    # Define the absolute path to the log file
-    # log_file_path = os.path.join(current_dir, "embeddings_api.log")
-
-    # logging.basicConfig(filename=log_file_path, encoding='utf-8', level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
-    # logging.getLogger("espnet2").setLevel(logging.WARNING)
-
-    # logger = logging.getLogger(__name__)
     
-    # logger = logging.getLogger(__name__)
-    # logger.setLevel(logging.INFO)
-
-    # # configure the handler and formatter as needed
-    # api_handler = logging.FileHandler(f"{__name__}.log", mode='w')
-    # papi_formatter = logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s")
-
-    # # add formatter to the handler
-    # api_handler.setFormatter(papi_formatter)
-    # # add handler to the logger
-    # logger.addHandler(api_handler)
-
-    # logger.info(f"Testing the custom logger for module {__name__}...")
-
-
-    
-    # current_dir = os.path.dirname(os.path.abspath(__file__))
 
     tmp_file_dir = "/tmp/example-files"
     tmp_file_dir = os.path.join(current_dir, tmp_file_dir)
@@ -264,43 +204,15 @@ def main():
                 
         audio_paths = os.listdir(tmp_file_dir)
         audio_paths = [os.path.join(tmp_file_dir, audio) for audio in audio_paths]
-        # print(audio_paths)
         print(audios_processing)
-        # audio, fs = librosa.load(audios_processing[0])
-        # print(audio)
-        # audio = preprocess_audio()
-        
+
         model = load_model("espnet/voxcelebs12_ecapa_wavlm_joint", "cuda")
         result = extract_embeddings_api(audios_processing, model)
-        # result = result.to("cpu")
-        # print(f"Received file named {file.filename} containing {len(file_bytes)} bytes. ")
 
-        # return FileResponse(disk_file.name, media_type=file.content_type)
-        # return Response(content=result)
-        # return result
-            
+        # here we should delete the tmp files
         torch.cuda.empty_cache()
         # reponse is like: Data[{"embedding": []}, {"embedding": []}]
         return EmbeddingResponse(data=result)
-
-
-    @app.post(
-    path="/api/test-file",
-    response_class=FileResponse,
-    )
-    async def post_media_file(file: UploadFile):
-        """
-        Receive File, store to disk & return it
-        """
-        # Write file to disk. This simulates some business logic that results in a file sotred on disk
-        with open(os.path.join(tmp_file_dir, file.filename), 'wb') as disk_file:
-            file_bytes = await file.read()
-
-            disk_file.write(file_bytes)
-
-            print(f"Received file named {file.filename} containing {len(file_bytes)} bytes. ")
-
-            return FileResponse(disk_file.name, media_type=file.content_type)
 
 
     @app.post(
@@ -309,14 +221,22 @@ def main():
     )
     async def create_embeddings(character_folder: str):
         """
-        Receive File, store to disk & return it
+        Receive a folder path were the voices of the characters are stored, and extract their embeddings
+        Args:
+            character_folder (str, optional): path of the directory with the audios of each character, should be normalized. Defaults to None.
+
+        Returns:
+            str: a string with the result
         """
         model = load_model("espnet/voxcelebs12_ecapa_wavlm_joint", "cuda")
         result = extract_embeddings(model, character_folder)
         
-        del model
-        gc.collect()
-        torch.cuda.empty_cache()
+        try:
+            del model
+            gc.collect()
+            torch.cuda.empty_cache()
+        except:
+            log.warning("Couldn't delete the espnet model")
 
         return Response(content=result)
     
@@ -326,16 +246,28 @@ def main():
     )
     async def create_embeddings_predict(video_path:str, temp_folder:str="tmp"):
         """
-        Receive File, store to disk & return it
+        Sends a request to the api to create embeddings for prediction
+
+        Args:
+            video_path (str, optional): path of the video file, should be normalized. Defaults to None.
+            temp_folder (str, optional): path of the directory to store the embeddings, should be normalized. Defaults to None.
+
+        Returns:
+            str: a string with the result
         """
         model = load_model("espnet/voxcelebs12_ecapa_wavlm_joint", "cuda")
         result = extract_embeddings_predict(model, video_path, temp_folder)
         
-        del model
-        gc.collect()
-        torch.cuda.empty_cache()
+        # delete the model to release memory
+        try:
+            del model
+            gc.collect()
+            torch.cuda.empty_cache()
+        except:
+            log.warning("Couldn't delete the espnet model")
 
         return Response(content=result)
+    
     uvicorn.run(
         app, port=8001, host="0.0.0.0", log_level="debug"
     )

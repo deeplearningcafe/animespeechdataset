@@ -6,7 +6,7 @@ import pandas as pd
 import torch
 from tqdm import tqdm
 import argparse
-
+import gc
 
 from .crop import data_processor, load_model
 from ..common import log
@@ -31,7 +31,7 @@ class KNN_classifier:
         if len(self.embeddings.shape) == 3:
             # it is a numpy array but we can use squeeze
             self.embeddings = self.embeddings.squeeze(1)
-        # self.knn_cls.fit(self.embeddings.squeeze(1), self.labels)
+
         self.knn_cls.fit(self.embeddings, self.labels)
         
         self.threshold_certain = threshold_certain
@@ -87,7 +87,7 @@ class KNN_classifier:
                     embeddings_cls = np.vstack((embeddings_cls, embedding))
 
                 labels.append(role)
-        # print(embeddings_cls.shape) (239, 1, 192)
+
         log.info(f"Fetched embeddings with shape {embeddings_cls.shape}")
         return embeddings_cls, labels
 
@@ -159,12 +159,8 @@ class KNN_classifier:
         
         assert ((len(file_list) == len(preds)) and (len(file_list) == len(distances))), "The lengths of the preds and the files list is not the same"
         # csvファイルに保存する
-        # normalize path
-        # csv_filename = f"{filename}_preds.csv"
-        # csv_filename = f"preds.csv"
         csv_filename = f"{filename}.csv"
         
-        # csv_filename = os.path.join(temp_dir, csv_filename)
         csv_filename =  f'{temp_dir}/{csv_filename}'
         csv_filename = os.path.normpath(csv_filename)
         df = pd.DataFrame({"filename": file_list, "predicted_label": preds, "distance": distances})
@@ -254,6 +250,14 @@ def recognize(annotation_file:str=None,
         log.info(result)
     else:
         processor.extract_embeddings_new(video_path, output_path)
+        # delete the model to release memory
+        try:
+            del classifier
+            gc.collect()
+            torch.cuda.empty_cache()
+        except:
+            log.warning(f"Couldn't delete the {model} model")
+            
     log.info("Embeddings created")
     
     knn = KNN_classifier(character_folder, n_neighbors=n_neighbors)
