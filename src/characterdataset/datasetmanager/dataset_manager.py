@@ -833,7 +833,8 @@ class DatasetManager:
         
     def update_subtitles_file(self, subtitles_file:str=None):
         if subtitles_file != None:
-            self.subtitles_file = os.path.join(self.input_path, subtitles_file)
+            # self.subtitles_file = os.path.join(self.input_path, subtitles_file)
+            self.subtitles_file = f"{self.input_path}/{subtitles_file}"
         
     def update_output_path(self, output_path:str=None):
         if output_path != None:
@@ -841,7 +842,8 @@ class DatasetManager:
 
     def update_annotation_file(self, annotation_file:str=None):
         if annotation_file != None:
-            self.annotation_file = os.path.join(self.output_path, annotation_file)
+            # self.annotation_file = os.path.join(self.output_path, annotation_file)
+            self.annotation_file = f"{self.output_path}/{annotation_file}"
     
     def update_time_interval(self, time_interval:int=None):
         if time_interval != None:
@@ -861,7 +863,8 @@ class DatasetManager:
 
     def update_audios_path(self, audios_path:str=None):
         if audios_path != None:
-            self.audios_path = os.path.join(self.output_path, audios_path)
+            # self.audios_path = os.path.join(self.output_path, audios_path)
+            self.audios_path = f"{self.output_path}/{audios_path}"
 
     def update_character(self, character:str=None):
         if character != None:

@@ -13,7 +13,7 @@ def finder_instance():
         input_path="data/inputs/",
         annotation_file="tests/data/outputs/Watashi no Oshi wa Akuyaku Reijou. - 04 「魔物の襲撃は油断大敵。」 (AT-X 1280x720 x264 AAC).csv",
         output_path="tests/data/outputs",
-        video_path="data/inputs/[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2].mkv",
+        video_path="data/inputs/videos/[LoliHouse] Watashi no Oshi wa Akuyaku Reijou - 04 [WebRip 1080p HEVC-10bit AAC ASSx2].mkv",
         output_path_labeling="tests/data/outputs/tmp",
         character_folder="tests/data/character_embedds"
     )

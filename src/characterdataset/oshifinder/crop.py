@@ -105,7 +105,8 @@ class data_processor:
             # これはリストを返り値
             voice_files = get_filename(dir)
             name = os.path.basename(os.path.normpath(dir))
-            new_dir = os.path.join(save_folder, 'embeddings', name)
+            # new_dir = os.path.join(save_folder, 'embeddings', name)
+            new_dir = f"{save_folder}/embeddings/{name}"
             os.makedirs(new_dir, exist_ok=True)
             
             # if self.model_type == "espnet":
@@ -292,16 +293,18 @@ class data_processor:
         temp_dir = f'{temp_folder}/{filename}'
 
         # これはリストを返り値
-        voice_files = os.listdir(os.path.join(temp_dir, self.voice_dir))
-
+        # voice_files = os.listdir(os.path.join(temp_dir, self.voice_dir))
+        voice_files = os.listdir(f"{temp_dir}/{self.voice_dir}")
         
         # 埋め込みを作成する
         for pth in tqdm(voice_files, f'extract {filename} audio features ,convert .wav to .pkl'):
-            new_dir = os.path.join(temp_dir, 'embeddings')
+            # new_dir = os.path.join(temp_dir, 'embeddings')
+            new_dir = f"{temp_dir}/embeddings"
             os.makedirs(new_dir, exist_ok=True)
             file = os.path.basename(pth)
             file, format = os.path.splitext(file)
-            pth = os.path.join(temp_dir, self.voice_dir, pth)
+            # pth = os.path.join(temp_dir, self.voice_dir, pth)
+            pth = f"{temp_dir}/{self.voice_dir}/{pth}"
             try:
                 resampled_waveform = self.preprocess_audio(pth)
                     

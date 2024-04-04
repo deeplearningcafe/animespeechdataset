@@ -211,7 +211,9 @@ class Finder:
         
     def update_video_path(self, video_path:str=None):
         if video_path != None:
-            self.video_path = os.path.join(self.input_path, video_path)
+            # self.video_path = os.path.join(self.input_path, video_path)
+            self.video_path = f"{self.input_path}/{video_path}"
+
         
         
     def update_output_path(self, output_path:str=None):
