@@ -61,6 +61,8 @@ This functionality involves processing subtitles and video to generate annotatio
 #### Character Creation
 Users can label the data to create representations of desired characters. The converted subtitles are transformed into tabular data similar to an Excel sheet. For predicting new data, we need the embeddings of the characters so, this process needs to be done at least once.
 
+Now 3 models are available `SpeechBrain`, `WavLM` and `Espnet`. The most powerful one is `Espnet`, this model is used inside a Docker container, details in [Docker](#docker).
+
 #### Character Prediction
 This function predicts the character speaking each line. It requires pre-created representations (embeddings) of desired characters and predicts characters only for those with representations.
 
@@ -137,6 +139,23 @@ To use the webui just run:
 ```bash
 python webui_finder.py
 ```
+### Docker
+Embedding of audio is a crucial part. The quality of this embedding affects the quality of the dataset. If the accuracy of predictions increases, it will also make annotation corrections easier. Therefore, I would prefer to use the best-performing model if possible. Espnet-SPK provides a powerful model for conversational data. However, Espnet's package uses slightly older libraries, such as Python 3.10 and Torch 2.1.2. Conversely, Speechbrain and Transformers libraries are compatible with newer versions of Torch, so I felt it unnecessary to downgrade all environments. Therefore, Espnet can be used with Docker containers. Using volumes, Espnet's output is stored in the host folder. The API requires only simple commands.
+
+If you wish to use Docker, execute the following command:
+```bash
+docker compose up -d
+```
+As it is wasteful to recreate it every time, you will need to download Espnet's conversational model each time. Therefore, if you do not want to delete the image and container, you can pause it. To pause, execute the following command:
+
+```bash
+docker compose stop
+```
+To resume usage, execute the following command:
+```bash
+docker compose start
+```
+
 ### Creating character representations
 1. Introduce the video name and the subtitles name, both placed in `data/inputs`. In the case of not having the subtitles, then use the transcribe checkbox.
 2. Create reprentations(embeddings) of the desired characters, to load the dataset just use the `load df` button. 
