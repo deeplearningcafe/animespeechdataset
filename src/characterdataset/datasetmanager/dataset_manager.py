@@ -13,7 +13,7 @@ from ..common import log
 
 from .text_dataset import str_2_csv as subtitle_2_csv
 from .text_dataset import dialoges_from_csv as csv_2_dialoges
-from .text_dataset import segments_2_annotations
+from .text_dataset import segments_2_annotations, create_cleaning, update_predictions
 from .audio_dataset import character_audios as csv_2_audios
 
 
@@ -824,7 +824,30 @@ class DatasetManager:
         
         return "Audios have been transcribed!", filename
 
-    
+    def create_cleaning_file(self, predict_path:str):
+        log.info("Starting transcription")
+        # check if annotate_map is a file
+        if not os.path.isfile(predict_path):
+            raise ValueError(
+                    f"The prediction file at {predict_path} does not exists"
+                )
+        df = create_cleaning(predict_path)
+        
+        folder_path = os.path.dirname(predict_path)
+        cleaning_name = f"{folder_path}/cleaning.csv"
+        df.to_csv(cleaning_name, index=False)
+        log.info(f"CSV created at {cleaning_name} with {len(df)} elements!")
+
+        return "Cleaning file created!", cleaning_name
+
+    def change_predictions_files(self, predict_path:str):
+        
+        folder_path = os.path.dirname(predict_path)
+        cleaning_name = f"{folder_path}/cleaning.csv"
+        
+        updated_preds = update_predictions(predict_path, cleaning_name)
+        
+        return "Updated predictions file", updated_preds
     
 
     def update_dataset_type(self, dataset_type:str=None):

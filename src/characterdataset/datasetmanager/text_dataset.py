@@ -292,3 +292,106 @@ def segments_2_annotations(segments: list[dict], file_path:str=None, num_charact
     df.to_csv(file_path, index=False)
     log.info(f"CSV created at {file_path} with {len(df)} elements!")
     log.info("Completed")
+    
+    
+def create_cleaning(csv_path:str) -> pd.DataFrame:
+    # dfを読み込む
+    df = pd.read_csv(csv_path, header=0)
+    # キャラのいないサンプルを排除します
+    df = df.dropna()
+    df = df.reset_index(drop=True)
+    
+    # 色んなリストを初期化する
+    names = []
+    texts = []
+    
+    for i in tqdm(range(len(df)), "generate text from title"):
+        # キャラの名前がいない場合、NANとしてある。
+        file_name = df.iloc[i, 0]
+        
+        file = os.path.basename(file_name)
+        # format is .pkl so 4 letters
+        id_str = file[:-4]
+        index, start_time, end_time, text = id_str.split('_')
+        
+        # 短い文章を無視する
+        texts.append(text)
+        names.append(file)
+                            
+    # dfの処理をします
+    df["text"] = texts
+    df["filename"] = names
+    df = df[["filename", "text", "predicted_label", "distance"]]
+    log.info(df.head())
+    return df
+
+def update_predictions(prediction_path:str, cleaning_path:str) -> pd.DataFrame:
+    # dfを読み込む
+    df = pd.read_csv(cleaning_path, header=0)
+    # キャラのいないサンプルを排除します
+    df = df.dropna()
+    df = df.reset_index(drop=True)
+    
+    predictions = pd.read_csv(prediction_path, header=0)
+    # キャラのいないサンプルを排除します
+    predictions = predictions.dropna()
+    predictions = predictions.reset_index(drop=True)
+    folder_path = os.path.dirname(cleaning_path)
+    
+    # 色んなリストを初期化する
+    embeddings_files = os.listdir(f"{folder_path}/embeddings")
+    voice_files = os.listdir(f"{folder_path}/voice")
+    prediction_files = predictions["filename"]
+    # for i in range(len(prediction_files)):
+    #     prediction_files[i] = os.path.normpath(prediction_files[i])
+    prediction_files = prediction_files.map(lambda p: os.path.normpath(p))
+    keep_idx = []
+    
+    for i in tqdm(range(len(df)), "generate text from title"):
+        # キャラの名前がいない場合、NANとしてある。
+        file_name_embeds = df.iloc[i, 0]
+        text = df.iloc[i, 1]
+        
+        file = os.path.basename(file_name_embeds)
+        filename, format = os.path.splitext(file)
+        file_name_audio = f"{filename}.wav"
+        
+        # format is .pkl so 4 letters
+        id_str = file[:-4]
+        index, start_time, end_time, text_old = id_str.split('_')
+        
+        name = f'{index}_{start_time}_{end_time}_{text}'.replace(':', '.')
+        
+        # embeddings
+        embeds_name = f'{name}.pkl'
+        if file_name_embeds in embeddings_files:
+            file_name_embeds_complete = f"{folder_path}/embeddings/{file_name_embeds}"
+            embeds_name = f"{folder_path}/embeddings/{embeds_name}"
+            # if file_name_embeds_complete != embeds_name:
+            os.rename(file_name_embeds_complete, embeds_name)
+            # log.info(f"Changed file {file_name_embeds} to {embeds_name}")
+            # update the filename in predictions, it is a pandas series not a list
+            # index = prediction_files.index(file_name_embeds)
+            # print(os.path.normpath(file_name_embeds_complete))
+            # print(prediction_files[0:2])
+            idx = prediction_files[prediction_files==os.path.normpath(file_name_embeds_complete)].index[0]
+            predictions.iloc[idx, 0] = embeds_name
+            keep_idx.append(idx)
+            
+        # audios
+        voice_name = f'{name}.wav'
+        if file_name_audio in voice_files:
+            file_name_audio_complete = f"{folder_path}/voice/{file_name_audio}"
+            voice_name = f"{folder_path}/voice/{voice_name}"
+            # if file_name_audio_complete != voice_name:
+            os.rename(file_name_audio_complete, voice_name)
+            # log.info(f"Changed file {file_name_audio} to {voice_name}")
+
+
+    predictions_file = os.path.basename(prediction_path)
+    predictions_filename, format = os.path.splitext(predictions_file)
+    predictions_name = f"{folder_path}/{predictions_filename}_cleaned.csv"
+    predictions = predictions[predictions.index.isin(keep_idx)]
+    predictions.to_csv(predictions_name, index=False)
+    log.info(f"CSV created at {predictions_name} with {len(predictions)} elements!")
+    return predictions_name

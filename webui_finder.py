@@ -327,6 +327,26 @@ def create_ui():
 
             with gr.Column(visible=True) as predict:                        
                 predict_button = gr.Button("Predict")
+            with gr.Row():    
+                with gr.Column(visible=True) as labeling:
+                    with gr.Accordion(label="Clean dataset", open=False):
+                        with gr.Row():
+                            with gr.Column(min_width=640):
+                                load_clean_file = gr.Button("Create file with texts and predictions")
+                                # dataframe = gr.DataFrame(interactive=True, row_count=100)
+                                
+                        # with gr.Row():        
+                        #     with gr.Column():
+                        #         path_audio = gr.Textbox(label="Name of the audio file", info="You can copy it from the dataframe")
+                        #         audio_button = gr.Button("Load the audio")
+                        #     with gr.Column():
+                        #         audio_data = gr.Audio(
+                        #                 label="Audio",
+                        #             )
+                                                
+                        with gr.Row():
+                            udpate_preds = gr.Button("Update predictions")    
+
         
         # For creating dialogs and audio datasets
         with gr.Tab("Export for training"):
@@ -437,6 +457,16 @@ def create_ui():
             csv_for_predictions, outputs=[result, annotation_file]
         ).then(finder.make_predictions,
             inputs=[n_neighbors, model, device, keep_unclassed],outputs=[result])
+        
+        load_clean_file.click(
+            dataset_manager.create_cleaning_file, inputs=[annotation_file],
+            outputs=[result, annotation_file]
+        )
+        
+        udpate_preds.click(
+            dataset_manager.change_predictions_files, inputs=[annotation_file],
+            outputs=[result, annotation_file]
+        )
         
         # audios and dialogs
         first_character.change(
