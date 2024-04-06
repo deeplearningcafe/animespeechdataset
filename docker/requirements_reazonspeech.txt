@@ -1,3 +1,4 @@
+Cython==3.0.10
 soundfile==0.12.1
 fastapi==0.110.0
 s3prl==0.4.15

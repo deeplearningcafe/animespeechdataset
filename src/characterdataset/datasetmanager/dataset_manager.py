@@ -398,7 +398,7 @@ def character_audios(csv_path:str=None, character:str=None, num_characters:int=4
 
 
 def request_transcription(audio_path:str=None) -> dict:
-    url = 'http://127.0.0.1:8001/api/media-file'
+    url = 'http://127.0.0.1:8080/api/media-file'
     #    curl -X 'POST' \
     #   'http://127.0.0.1:8001/api/media-file' \
     #   -H 'accept: application/json' \
@@ -424,6 +424,33 @@ def request_transcription(audio_path:str=None) -> dict:
         response_json = response.content.decode("utf-8")
         data = json.loads(response_json)
         return data
+    else:
+        log.warning(f"Bad request {response.status_code}")
+
+def request_transcription_inplace(audio_path: str, filename: str, num_characters: int, iscropping: bool) -> str:
+    url = 'http://127.0.0.1:8080/api/transcribe-folder'
+    #    curl -X 'POST' \
+    #   'http://127.0.0.1:8001/api/media-file' \
+    #   -H 'accept: application/json' \
+    #   -H 'Content-Type: multipart/form-data' \
+    #   -F 'file=@output.wav;type=audio/wav'
+    headers = {
+            'accept': '*/*',
+            'content-type': 'application/x-www-form-urlencoded',
+        }
+    params = {
+        'audio_path': str(audio_path),
+        'filename': str(filename),
+        'num_characters': int(num_characters),
+        'iscropping': bool(iscropping),
+    }
+
+    response = requests.post(url, headers=headers, params=params)
+
+    if response.status_code == 200:
+        # it is a bytes object so first decode, then we change to json
+        response_content = response.content.decode("utf-8")
+        return response_content
     else:
         log.warning(f"Bad request {response.status_code}")
 
@@ -453,7 +480,7 @@ def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool
         )
     
     # 2. Transcribe audio, here we call the api, the response is a json file with a list of segments
-    segments = request_transcription(os.path.normpath(audio_path))
+    # segments = request_transcription(os.path.normpath(audio_path))
     
     # 3. Create a csv from the segments
     file = os.path.basename(video_path)
@@ -462,7 +489,8 @@ def extract_subtitles(video_path:str=None, output_path:str=None, iscropping:bool
     filename = f"{output_path}/{filename}.csv"
     
     # try:
-    segments_2_annotations(segments, filename, num_characters, iscropping)
+    # segments_2_annotations(segments, filename, num_characters, iscropping)
+    result = request_transcription_inplace(audio_path, filename, num_characters, iscropping)
 
     log.info(f"Created annotation file from transcriptions at {filename}")
 
@@ -807,7 +835,7 @@ class DatasetManager:
         # check if annotate_map is a file
         if not os.path.isfile(video_path):
             raise ValueError(
-                    f"The annotation file at {self.annotation_file} does not exists"
+                    f"The video file at {video_path} does not exists"
                 )
 
         # check if role_audios is a folder
@@ -824,7 +852,17 @@ class DatasetManager:
         
         return "Audios have been transcribed!", filename
 
-    def create_cleaning_file(self, predict_path:str):
+    def create_cleaning_file(self, predict_path:str) -> tuple[str, str]:
+        """ Creates a file for updating the text of the predictions.
+        Args:
+            predict_path (str): _description_
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            tuple[str, str]: _description_
+        """
         log.info("Starting transcription")
         # check if annotate_map is a file
         if not os.path.isfile(predict_path):

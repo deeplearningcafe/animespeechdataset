@@ -168,8 +168,12 @@ def create_labeling_data(transcribe:bool=False) -> tuple:
     
     return result, annotation_file, df
 
-def csv_for_predictions() -> str:
-    result = dataset_manager.create_csv(crop=False)
+def csv_for_predictions(transcribe:bool=False) -> str:
+    if transcribe:
+        log.info("Transcribing video")
+        result = dataset_manager.transcribe_video(video_path=finder.video_path, iscropping=False)
+    else:
+        result = dataset_manager.create_csv(crop=False)
     return result
 
 
@@ -454,7 +458,7 @@ def create_ui():
         )
         
         predict_button.click(
-            csv_for_predictions, outputs=[result, annotation_file]
+            csv_for_predictions, inputs=[transcribe], outputs=[result, annotation_file]
         ).then(finder.make_predictions,
             inputs=[n_neighbors, model, device, keep_unclassed],outputs=[result])
         

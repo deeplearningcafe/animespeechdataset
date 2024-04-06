@@ -171,13 +171,17 @@ def extract_embeddings_predict(model, video_path:str, temp_folder:str="tmp") -> 
 
     return "録音データから埋め込みを作成しました。"
 
-def main():
+def espnet_api():
     # add logger
     current_dir = os.path.dirname(os.path.abspath(__file__))
     
 
     tmp_file_dir = "/tmp/example-files"
     tmp_file_dir = os.path.join(current_dir, tmp_file_dir)
+    try:
+        shutil.rmtree(tmp_file_dir)
+    except:
+        print("Couldn't remove the tmp folder")
     os.makedirs(tmp_file_dir, exist_ok=True)
 
     app = FastAPI()

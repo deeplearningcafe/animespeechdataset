@@ -295,6 +295,16 @@ def segments_2_annotations(segments: list[dict], file_path:str=None, num_charact
     
     
 def create_cleaning(csv_path:str) -> pd.DataFrame:
+    """Creates a dataframe from the predictions csv, the columns are file name(not path),
+    the text, the predicted label and the distance.
+
+    Args:
+        csv_path (str): path of the predictions csv file
+
+    Returns:
+        pd.DataFrame: dataframe removing the whole path of the embeddings files and creating a
+        column for the text.
+    """
     # dfを読み込む
     df = pd.read_csv(csv_path, header=0)
     # キャラのいないサンプルを排除します
@@ -325,7 +335,17 @@ def create_cleaning(csv_path:str) -> pd.DataFrame:
     log.info(df.head())
     return df
 
-def update_predictions(prediction_path:str, cleaning_path:str) -> pd.DataFrame:
+def update_predictions(prediction_path:str, cleaning_path:str) -> str:
+    """ From the cleaning csv file, updates the filenames of the audios and the embeddings. To match the updated
+    names, a new prediction file is created, with the filenames updated.
+
+    Args:
+        prediction_path (str): path to the original prediction csv.
+        cleaning_path (str): path to the file with the cleaned texts.
+
+    Returns:
+        str: file path of the resulting predictions csv.
+    """
     # dfを読み込む
     df = pd.read_csv(cleaning_path, header=0)
     # キャラのいないサンプルを排除します

@@ -24,7 +24,29 @@ services:
       - ./data/:/animespeech/data
       - ./src/:/animespeech/src
       - ./tests/:/animespeech/tests
-
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+  asr:
+    image: reazonspeech
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.reazonspeech
+    # command: python embeddings_api.py
+    ports:
+      - "8080:8080"
+    container_name: 'reazonspeech-animespeech'
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./data/:/animespeech/data
+      - ./src/:/animespeech/src
+      - ./tests/:/animespeech/tests
+      
     deploy:
       resources:
         reservations:
