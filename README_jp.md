@@ -177,7 +177,7 @@ docker compose start
 
 1. 予測ファイルを`Annnotations`のテキストボックスに貼り付け、`Create file with texts and predictions`のボタンを使用します。すると `cleaning.csv`ファイルが生成されます。
 2. `cleaning.csv`ファイルを使用して、音声を聞きながらテキストを修正します。
-3. 修正した`cleaning.csv`ファイルを`Annnotations`のテキストボックスに貼り付け、`Update predictions`のボタンを使用します。すると `PREDICTION-FILE_cleaned.csv`ファイルが生成されます。また、埋め込みや音声ファイルの名前も変更されます。
+3. `cleaning.csv`ファイルを修正した後に、予測ファイルを`Annnotations`のテキストボックスに貼り付け、`Update predictions`のボタンを使用します。すると `PREDICTION-FILE_cleaned.csv`ファイルが生成されます。また、埋め込みや音声ファイルの名前も変更されます。
 
 ### オーディオとダイアログデータセットを作成する
 1. 予測結果ファイルを入力してください。格納されているフォルダを含めますが、`data/outputs`パートは含めません。
@@ -190,7 +190,7 @@ docker compose start
 予測ファイルを修正した後、その埋め込みを学習データセットとして使用できます。新しいデータをラベル付き埋め込みデータセットに追加すると、予測の精度が向上するはずです。距離を考慮して、近隣のデータから離れたサンプルを使用したいのですが、そのようなサンプルはモデルにとって`難しい`と見なされるため、学習データとして価値が高いです。
 
 
-1. 修正した予測ファイルを`Annotations`のテキストボックスに貼り付け、"Create characters"タブで、`Add new data`を展開します。
+1. 修正した予測ファイルを`Annotations`のテキストボックスに貼り付け、`Create characters`タブで、`Add new data`を展開します。
 2. 最低限の距離を設定した後、0.4以上の値は疑わしいとされていますので、0.2は十分であると考えます。`Add new embeddings to the labeled data`ボタンを使用してください。埋め込みファイルは自動的に`Character embeddings`フォルダにコピーされます。
 
 
@@ -200,9 +200,13 @@ docker compose start
 音声認識のために、Dockerイメージを作成しました。このコンテナはファイル名から音声認識の処理を行います。そして、生成された`Annnotations`ファイルはホストのディレクトリに保存されます。。`Volumes`を使ってるおかげで、コンテナはホストの`data/outputs`でファイルを保存します。APIにファイルを送信する必要がないため、プログラムの処理速度が向上します。
 
 ### KNNのために、適切なKを探す
-一番良い `n_neighbors`を探すために、以下のコマンドを実行してください。:
+一番良い `n_neighbors`を探すために、以下のコマンドを実行してください。
 ```bash
-python -m characterdataset.oshifinder.knn_choose
+python ./tools/knn_choose.py
+```
+キャラの埋め込みをグラフ化することが出来ます。以下のコマンドを実行してください。
+```bash
+python ./tools/check_knn.py
 ```
 
 

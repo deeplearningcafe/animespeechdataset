@@ -30,4 +30,3 @@ tests/pretrained_models
 test_api.py
 src/characterdataset/common/texts.json
 .pytest_cache/
-tools/

@@ -6,10 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from characterdataset.configs import load_global_config
 
-
-def run():
-    config = load_global_config()
-
+def fetch_embeddings(config):
     audio_embds_dir = os.path.join(config.finder.character_embedds, "embeddings")
     embeddings = None
     labels = []
@@ -44,20 +41,32 @@ def run():
     print(embeddings_cls.shape, len(labels))
 
 
+
+    if len(embeddings_cls.shape) == 3:
+        # it is a numpy array but we can use squeeze
+        embeddings_cls = embeddings_cls.squeeze(1)
+        
+    return embeddings_cls, labels
+
+def run():
+    config = load_global_config()
+
+    embeddings_cls, labels = fetch_embeddings(config)
     # 探索するクラスタ数の範囲を設定
     range_clusters = range(2, 10)
 
     best_score = 0
     best_k = 2
     scores = []
-
+    distortions = []
     for k in range_clusters:
         kmeans = KMeans(n_clusters=k, n_init="auto", random_state=0)
-        labels = kmeans.fit_predict(embeddings_cls.squeeze(1))
+        labels = kmeans.fit_predict(embeddings_cls)
+        distortions.append(kmeans.inertia_) 
         
 
         # シルエットスコアを計算
-        score = silhouette_score(embeddings_cls.squeeze(1), labels)
+        score = silhouette_score(embeddings_cls, labels)
         scores.append(score)
         
         # ベストスコアの更新
@@ -76,6 +85,14 @@ def run():
     plt.ylabel('Silhouette Score')
     plt.title('Silhouette Score for Different Number of Clusters')
     plt.show()
+    
+    # elbow method
+    plt.plot(range_clusters,distortions,marker='o')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('Distortion')
+    plt.show()
+    
+
 
 if __name__ == "__main__":
     run()

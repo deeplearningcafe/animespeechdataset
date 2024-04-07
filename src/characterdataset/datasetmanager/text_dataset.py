@@ -315,7 +315,7 @@ def create_cleaning(csv_path:str) -> pd.DataFrame:
     names = []
     texts = []
     
-    for i in tqdm(range(len(df)), "generate text from title"):
+    for i in tqdm(range(len(df)), "generate cleaning file"):
         # キャラの名前がいない場合、NANとしてある。
         file_name = df.iloc[i, 0]
         
@@ -368,7 +368,7 @@ def update_predictions(prediction_path:str, cleaning_path:str) -> str:
     prediction_files = prediction_files.map(lambda p: os.path.normpath(p))
     keep_idx = []
     
-    for i in tqdm(range(len(df)), "generate text from title"):
+    for i in tqdm(range(len(df)), "update predictions from cleaning file"):
         # キャラの名前がいない場合、NANとしてある。
         file_name_embeds = df.iloc[i, 0]
         text = df.iloc[i, 1]

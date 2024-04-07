@@ -174,7 +174,7 @@ Since predictions are not perfect, it is recommended to correct annotations. How
 
 1. Paste the prediction file into the text box of `Annnotations`and use the `Create file with texts and predictions`button. This will generate a file named `cleaning.csv`.
 2. Use the `cleaning.csv`file to listen to the audio while correcting the text.
-3. Paste the corrected `cleaning.csv` file into the text box of `Annnotations`and use the `Update predictions` button. This will generate a file named `PREDICTION-FILE_cleaned.csv`. Additionally, the names of embeddings and audio files will also be changed.
+3. After correcting the `cleaning.csv` file, paste the prediction file into the text box of `Annnotations`and use the `Update predictions` button. This will generate a file named `PREDICTION-FILE_cleaned.csv`. Additionally, the names of embeddings and audio files will also be changed.
 
 ### Create audio and dialogs datasets
 1. Introduce the prediction results file, the folder in which is stored should be included, but not the `data/outputs` part.
@@ -186,7 +186,7 @@ Since predictions are not perfect, it is recommended to correct annotations. How
 ### Adding New Labeled Data
 After modifying the prediction file, the embeddings can be used as part of the training dataset. Adding this new data to the labeled embedding dataset should improve prediction accuracy. We want to use samples that are far from neighboring data based on distance, as these samples are considered 'difficult' for the model and thus have high value as training data.
 
-1. Paste the modified prediction file into the text box under `Annotations`. In the `Create characters` tab, expand Add new data.
+1. Paste the modified prediction file into the text box under `Annotations`. In the `Create characters` tab, expand `Add new data`.
 2. After setting a minimum distance, we suggest a threshold of 0.2, as samples with distances above 0.4 are considered doubtful. Click on `Add new embeddings to the labeled data`. The embedding files will be automatically copied to the `Character embeddings` folder.
 
 ### Transcribe
@@ -197,7 +197,11 @@ For speech recognition, we have created a Docker image. This container performs 
 ### Check best K for KKN
 To look for the best `n_neighbors`, just run:
 ```bash
-python -m characterdataset.oshifinder.knn_choose
+python ./tools/knn_choose.py
+```
+You can also plot the embeddings of the characters. Run the following command.
+```bash
+python ./tools/check_knn.py
 ```
 
 ### Training QLoRA
