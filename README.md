@@ -91,9 +91,11 @@ Training script designed to facilitate the training of conversational language m
 │   │   │   ├── preds.csv
 │   │   │   ├── voice
 │   │   │   ├── embeddings
+├── docker
 ├── pretrained_models
 ├── src
 │   ├── characterdataset
+│   │   ├── api
 │   │   ├── common
 │   │   ├── configs
 │   │   ├── datasetmanager
@@ -140,7 +142,7 @@ To use the webui just run:
 python webui_finder.py
 ```
 ### Docker
-Embedding of audio is a crucial part. The quality of this embedding affects the quality of the dataset. If the accuracy of predictions increases, it will also make annotation corrections easier. Therefore, I would prefer to use the best-performing model if possible. Espnet-SPK provides a powerful model for conversational data. However, Espnet's package uses slightly older libraries, such as Python 3.10 and Torch 2.1.2. Conversely, Speechbrain and Transformers libraries are compatible with newer versions of Torch, so I felt it unnecessary to downgrade all environments. Therefore, Espnet can be used with Docker containers. Using volumes, Espnet's output is stored in the host folder. The API requires only simple commands.
+Embedding of audio is a crucial part. The quality of this embedding affects the quality of the dataset. If the accuracy of predictions increases, it will also make annotation corrections easier. Therefore, I would prefer to use the best-performing model if possible. `Espnet-SPK` provides a powerful model for conversational data. However, Espnet's package uses slightly older libraries, such as `Python 3.10` and `Torch 2.1.2`. Conversely, `Speechbrain` and `Transformers` libraries are compatible with newer versions of `Torch`, so I felt it unnecessary to downgrade all environments. Therefore, Espnet can be used with Docker containers. Using volumes, Espnet's output is stored in the host folder. The API requires only simple commands.
 
 If you wish to use Docker, execute the following command:
 ```bash
@@ -167,6 +169,13 @@ docker compose start
 1. Introduce the video name and the subtitles name, both placed in `data/inputs`. In the case of not having the subtitles, then use the transcribe checkbox.
 2. Use the `Predict characters` button, the annotation file path will be displayed at the annotation file textbox. The result file will be stored in a folder with the same name as the video file.
 
+### Correction of Character Predictions
+Since predictions are not perfect, it is recommended to correct annotations. However, this task can be quite tedious. To make it a bit easier, we have provided the following steps:
+
+1. Paste the prediction file into the text box of `Annnotations`and use the `Create file with texts and predictions`button. This will generate a file named `cleaning.csv`.
+2. Use the `cleaning.csv`file to listen to the audio while correcting the text.
+3. Paste the corrected `cleaning.csv` file into the text box of `Annnotations`and use the `Update predictions` button. This will generate a file named `PREDICTION-FILE_cleaned.csv`. Additionally, the names of embeddings and audio files will also be changed.
+
 ### Create audio and dialogs datasets
 1. Introduce the prediction results file, the folder in which is stored should be included, but not the `data/outputs` part.
 2. Select in the `Export for training` tab the type of dataset to create, `dialogues` or `audios`.
@@ -176,6 +185,8 @@ docker compose start
 
 ### Transcribe
 For speech recognition, we are using the nemo model released by reazonspeech. However, this module cannot be used directly on Windows. There are no issues when using WSL2. Therefore, we have included a simple script asr_api.py using FastAPI for speech recognition.
+
+For speech recognition, we have created a Docker image. This container performs speech recognition processing based on the file names. The generated `Annnotations` file is then saved to the host directory. Thanks to the use of volumes, the container saves files in the host's `data/outputs` directory. Since there is no need to send files to an API, the processing speed of the program is improved.
 
 ### Check best K for KKN
 To look for the best `n_neighbors`, just run:

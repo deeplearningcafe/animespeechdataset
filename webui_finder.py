@@ -168,7 +168,16 @@ def create_labeling_data(transcribe:bool=False) -> tuple:
     
     return result, annotation_file, df
 
-def csv_for_predictions(transcribe:bool=False) -> str:
+def csv_for_predictions(transcribe:bool=False) -> tuple[str, str]:
+    """ Create an annotations file given the video path and the transcribe parameter
+    if true use asr to generate subtitles and then the annotation file.
+
+    Args:
+        transcribe (bool, optional): if use asr to create subtitles file. Defaults to False.
+
+    Returns:
+        tuple[str, str]: result and annotation file path
+    """
     if transcribe:
         log.info("Transcribing video")
         result = dataset_manager.transcribe_video(video_path=finder.video_path, iscropping=False)

@@ -98,7 +98,7 @@ def reazonspeech_api():
     )
     async def extract_subtitles(file: UploadFile):
         """
-        Receive File, store to disk & return it
+        Receive File, store to disk, then it transcribes it returning the segmentations objects.
         """
         print(file.filename)
         # Write file to disk. This simulates some business logic that results in a file sotred on disk
@@ -126,12 +126,13 @@ def reazonspeech_api():
     )
     async def transcribe_folder(audio_path: str, filename: str, num_characters: int, iscropping: bool):
         """
-        Receive a audio path were the voices of the characters are stored, and extract their embeddings.
-        As we don't have the subtitles, the whole video is converted to one audio file, so we don't need
-        the folder, just with that video file is enough.
+        Receive a audio path and extract the subtitles with their times, from there use the segments_2_annotations
+        function to create the annotations file.
         Args:
-            character_folder (str, optional): path of the directory with the audios of each character, should be normalized. Defaults to None.
-
+            audio_path (str): path of the audio file to transcribe.
+            file_path (str, optional): path for saving the annotations csv. Defaults to None.
+            num_characters (int, optional): min number of characters to use the phrase. Defaults to 4.
+            iscropping (bool, optional): if true add a column for labeling characters. Defaults to False.
         Returns:
             str: a string with the result
         """

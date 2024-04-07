@@ -362,8 +362,9 @@ def update_predictions(prediction_path:str, cleaning_path:str) -> str:
     embeddings_files = os.listdir(f"{folder_path}/embeddings")
     voice_files = os.listdir(f"{folder_path}/voice")
     prediction_files = predictions["filename"]
-    # for i in range(len(prediction_files)):
-    #     prediction_files[i] = os.path.normpath(prediction_files[i])
+
+    # normalize all the paths in the pandas series to be able to compare with the original 
+    # embeddings file
     prediction_files = prediction_files.map(lambda p: os.path.normpath(p))
     keep_idx = []
     
@@ -380,6 +381,7 @@ def update_predictions(prediction_path:str, cleaning_path:str) -> str:
         id_str = file[:-4]
         index, start_time, end_time, text_old = id_str.split('_')
         
+        # udpate name of file changing only the text part
         name = f'{index}_{start_time}_{end_time}_{text}'.replace(':', '.')
         
         # embeddings
@@ -387,13 +389,11 @@ def update_predictions(prediction_path:str, cleaning_path:str) -> str:
         if file_name_embeds in embeddings_files:
             file_name_embeds_complete = f"{folder_path}/embeddings/{file_name_embeds}"
             embeds_name = f"{folder_path}/embeddings/{embeds_name}"
-            # if file_name_embeds_complete != embeds_name:
+            # if same name it shouldn't be a problem so no need to check
             os.rename(file_name_embeds_complete, embeds_name)
-            # log.info(f"Changed file {file_name_embeds} to {embeds_name}")
-            # update the filename in predictions, it is a pandas series not a list
-            # index = prediction_files.index(file_name_embeds)
-            # print(os.path.normpath(file_name_embeds_complete))
-            # print(prediction_files[0:2])
+            
+            # looks for the index of embeddings file that has been renamed to rename also the
+            # predictions filepath
             idx = prediction_files[prediction_files==os.path.normpath(file_name_embeds_complete)].index[0]
             predictions.iloc[idx, 0] = embeds_name
             keep_idx.append(idx)
