@@ -319,7 +319,19 @@ def create_ui():
                     with gr.Accordion(label="Create representations", open=False):
                         with gr.Row():
                             embedds_button = gr.Button("Create representations(embeddings) of the characters")
-                
+                    
+                    with gr.Accordion(label="Add new data", open=False):
+                        with gr.Row():
+                            distance_th = gr.Slider(
+                                label="Minimum distance to use embeddings",
+                                info="If the distance with the nearest neighbor is higher than the th use that sample",
+                                minimum=0.0,
+                                maximum=0.4,
+                                value=0.2,
+                                step=0.05,
+                            )
+                            add_embeddings_button = gr.Button("Add new embeddings to the labeled data")
+
 
         # For the predict given the subs
         with gr.Tab("Predict characters"):
@@ -346,17 +358,7 @@ def create_ui():
                         with gr.Row():
                             with gr.Column(min_width=640):
                                 load_clean_file = gr.Button("Create file with texts and predictions")
-                                # dataframe = gr.DataFrame(interactive=True, row_count=100)
-                                
-                        # with gr.Row():        
-                        #     with gr.Column():
-                        #         path_audio = gr.Textbox(label="Name of the audio file", info="You can copy it from the dataframe")
-                        #         audio_button = gr.Button("Load the audio")
-                        #     with gr.Column():
-                        #         audio_data = gr.Audio(
-                        #                 label="Audio",
-                        #             )
-                                                
+
                         with gr.Row():
                             udpate_preds = gr.Button("Update predictions")    
 
@@ -479,6 +481,11 @@ def create_ui():
         udpate_preds.click(
             dataset_manager.change_predictions_files, inputs=[annotation_file],
             outputs=[result, annotation_file]
+        )
+        
+        add_embeddings_button.click(
+            finder.add_character_embeddings, inputs=[annotation_file, distance_th],
+            outputs=[result]
         )
         
         # audios and dialogs

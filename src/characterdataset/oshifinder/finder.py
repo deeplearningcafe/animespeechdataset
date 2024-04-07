@@ -5,6 +5,9 @@ from ..common import log
 from .predict import recognize
 from .crop import data_processor
 import asyncio
+import pandas as pd
+import shutil
+from tqdm import tqdm
 
 class Finder:
     model_opts = ["speechbrain", "wavlm", "espnet"]
@@ -207,6 +210,54 @@ class Finder:
         
         return "Predictions have been completed!"
     
+    
+    def add_character_embeddings(self, predictions_path:str, minimum_distance:float=0.2) -> tuple[str, str]:
+        """From the cleaned prediction file, copies the embeddings to their character folders.
+        It takes the samples with distance higher than a threshold, as the predictions should have been already
+        cleaned, we are adding informative samples to the labeled data which should improve predictions accuracy.
+        Args:
+            predictions_path (str): _description_
+            minimum_distance (float): use embeddings with distance higher than this th. Defaults to 0.2
+
+        Returns:
+            tuple[str, str]: _description_
+        """
+        # dfを読み込む
+        df = pd.read_csv(predictions_path, header=0)
+        # キャラのいないサンプルを排除します
+        df = df.dropna()
+        df = df.reset_index(drop=True)
+        
+        # add the embeddings folder
+        character_embeddings = f"{self.character_folder}/embeddings"
+        
+        # これはサブフォルダの名前をリストに格納する
+        character_names = []
+        for item in os.listdir(character_embeddings):
+            if os.path.isdir(os.path.join(character_embeddings, item)):
+                character_names.append(item)
+        log.info(f"The characters embeddings are {character_names}")
+
+        
+        for i in tqdm(range(len(df)), "generate text from title"):
+            distance = df.iloc[i, 2]
+            
+            if distance > minimum_distance:
+                embedding_path = df.iloc[i, 0]
+                # this is the embeddings .pkl
+                filename = os.path.basename(embedding_path)
+                
+                predicted_label = df.iloc[i, 1]
+                # （可能）は既にいないはずけど、もしあったら使えないようにします
+                for character in character_names:
+                    if predicted_label == character:
+                        save_path = f'{character_embeddings}/{character}/{filename}'
+                        log.info(f"Adding file {filename} to {character} folder")
+                        # should include error handling
+                        shutil.copy2(embedding_path, save_path)
+                        continue
+        
+        return "Copied embedding files to the character embeddings folders"
         
         
     def update_video_path(self, video_path:str=None):

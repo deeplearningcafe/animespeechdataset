@@ -886,7 +886,7 @@ class DatasetManager:
         updated_preds = update_predictions(predict_path, cleaning_name)
         
         return "Updated predictions file", updated_preds
-    
+
 
     def update_dataset_type(self, dataset_type:str=None):
         if dataset_type != None:

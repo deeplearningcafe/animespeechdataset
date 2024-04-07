@@ -183,6 +183,12 @@ Since predictions are not perfect, it is recommended to correct annotations. How
 4. For the `dialogues` you can choose the maximum time interval to consider 2 lines as a conversation, default is 5 seconds.
 5. Click the `Transform` button.
 
+### Adding New Labeled Data
+After modifying the prediction file, the embeddings can be used as part of the training dataset. Adding this new data to the labeled embedding dataset should improve prediction accuracy. We want to use samples that are far from neighboring data based on distance, as these samples are considered 'difficult' for the model and thus have high value as training data.
+
+1. Paste the modified prediction file into the text box under `Annotations`. In the `Create characters` tab, expand Add new data.
+2. After setting a minimum distance, we suggest a threshold of 0.2, as samples with distances above 0.4 are considered doubtful. Click on `Add new embeddings to the labeled data`. The embedding files will be automatically copied to the `Character embeddings` folder.
+
 ### Transcribe
 For speech recognition, we are using the nemo model released by reazonspeech. However, this module cannot be used directly on Windows. There are no issues when using WSL2. Therefore, we have included a simple script asr_api.py using FastAPI for speech recognition.
 

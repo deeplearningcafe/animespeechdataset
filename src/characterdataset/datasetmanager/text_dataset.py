@@ -372,6 +372,7 @@ def update_predictions(prediction_path:str, cleaning_path:str) -> str:
         # キャラの名前がいない場合、NANとしてある。
         file_name_embeds = df.iloc[i, 0]
         text = df.iloc[i, 1]
+        character_label = df.iloc[i, 2]
         
         file = os.path.basename(file_name_embeds)
         filename, format = os.path.splitext(file)
@@ -396,6 +397,8 @@ def update_predictions(prediction_path:str, cleaning_path:str) -> str:
             # predictions filepath
             idx = prediction_files[prediction_files==os.path.normpath(file_name_embeds_complete)].index[0]
             predictions.iloc[idx, 0] = embeds_name
+            # update the character label as well
+            predictions.iloc[idx, 1] = character_label
             keep_idx.append(idx)
             
         # audios
