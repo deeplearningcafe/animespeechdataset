@@ -131,7 +131,8 @@ class KNN_classifier:
         
         # files names
         file_names = os.listdir(os.path.join(temp_embeds))
-        file_list = [os.path.join(temp_embeds, embeddings_path) for embeddings_path in file_names]
+        # file_list = [os.path.join(temp_embeds, embeddings_path) for embeddings_path in file_names]
+        file_list = [f"{temp_embeds}/{embeddings_path}" for embeddings_path in file_names]
 
         keep_index = []
         preds = []
@@ -169,6 +170,7 @@ class KNN_classifier:
         
         df.to_csv(csv_filename, index=False)
         log.info(f"csvを保存しました{csv_filename}！")
+        return csv_filename
         
 
 
@@ -262,7 +264,9 @@ def recognize(annotation_file:str=None,
     
     knn = KNN_classifier(character_folder, n_neighbors=n_neighbors)
     log.info(f"Starting predictions with output at {output_path}")
-    knn.predict_2_csv(output_path, video_path, keep_unclassed=keep_unclassed)
+    output_file = knn.predict_2_csv(output_path, video_path, keep_unclassed=keep_unclassed)
+    
+    return output_file
 
 
     

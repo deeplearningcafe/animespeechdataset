@@ -90,14 +90,14 @@ def str_2_csv(input_path:str=None, output_path:str=None, cropping:bool=False, nu
             writer.writerow(['character', 'start_time', 'end_time', "text"])  # ヘッダーを書き込む
     
             for i in range(len(dialogues)):
-                if len(dialogues[i][2]) > num_characters:
+                if len(dialogues[i][2]) > num_characters and (dialogues[i][1] - dialogues[i][0]) > 0.5:
                     blank = ['']
                     blank.extend(dialogues[i])
                     writer.writerow(blank)  # 行を書き込む
         else:
             writer.writerow(['start_time', 'end_time', "text"])  # ヘッダーを書き込む
             for i in range(len(dialogues)):
-                if len(dialogues[i][2]) > num_characters:
+                if len(dialogues[i][2]) > num_characters and (dialogues[i][1] - dialogues[i][0]) > 0.5:
                         writer.writerow(dialogues[i])  # 行を書き込む
         
     log.info(f'CSVファイル "{csv_filename}" にデータを保存しました。')
@@ -147,7 +147,7 @@ def clean_csv(csv_path:str=None, num_characters:int=4) -> pd.DataFrame:
     # dfを読み込む
     df = pd.read_csv(csv_path, header=0)
     # キャラのいないサンプルを排除します
-    df = df.dropna()
+    # df = df.dropna()
     df = df.reset_index(drop=True)
     
     # 色んなリストを初期化する
@@ -354,7 +354,10 @@ def update_predictions(prediction_path:str, cleaning_path:str) -> str:
     
     predictions = pd.read_csv(prediction_path, header=0)
     # キャラのいないサンプルを排除します
-    predictions = predictions.dropna()
+    # predictions = predictions.dropna() we want to keep the unclassed
+    no_class_idx = predictions.isna().any(axis=1)
+    no_class_idx = predictions[no_class_idx].index
+    log.info(no_class_idx)
     predictions = predictions.reset_index(drop=True)
     folder_path = os.path.dirname(cleaning_path)
     
@@ -410,7 +413,8 @@ def update_predictions(prediction_path:str, cleaning_path:str) -> str:
             os.rename(file_name_audio_complete, voice_name)
             # log.info(f"Changed file {file_name_audio} to {voice_name}")
 
-
+    # add the unclassed to save them
+    keep_idx.extend(no_class_idx)
     predictions_file = os.path.basename(prediction_path)
     predictions_filename, format = os.path.splitext(predictions_file)
     predictions_name = f"{folder_path}/{predictions_filename}_cleaned.csv"

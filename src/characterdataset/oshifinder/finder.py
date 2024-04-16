@@ -198,17 +198,17 @@ class Finder:
             device = "cpu"   
         
         # the check of the model parameter is done inside the load_model function of predict.py
-        recognize(annotation_file=self.annotation_file,
-        output_path=self.output_path,
-        video_path=self.video_path,
-        character_folder=self.character_folder,
-        n_neighbors=n_neighbors,
-        model=model,
-        device=device,
-        keep_unclassed=keep_unclassed)
+        output_filename = recognize(annotation_file=self.annotation_file,
+            output_path=self.output_path,
+            video_path=self.video_path,
+            character_folder=self.character_folder,
+            n_neighbors=n_neighbors,
+            model=model,
+            device=device,
+            keep_unclassed=keep_unclassed)
         
         
-        return "Predictions have been completed!"
+        return "Predictions have been completed!", output_filename
     
     
     def add_character_embeddings(self, predictions_path:str, minimum_distance:float=0.2) -> tuple[str, str]:
@@ -222,6 +222,8 @@ class Finder:
         Returns:
             tuple[str, str]: _description_
         """
+        
+        predictions_path = f"{self.output_path}/{predictions_path}"
         # dfを読み込む
         df = pd.read_csv(predictions_path, header=0)
         # キャラのいないサンプルを排除します

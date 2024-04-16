@@ -397,7 +397,7 @@ def create_ui():
                             )
             
             with gr.Row() as advaced_export:
-                with gr.Accordion("Opciones avanzadas", open=False):
+                with gr.Accordion("Advanced options", open=False):
                     with gr.Column():
                         time_interval = gr.Slider(
                             minimum=1,
@@ -471,7 +471,7 @@ def create_ui():
         predict_button.click(
             csv_for_predictions, inputs=[transcribe], outputs=[result, annotation_file]
         ).then(finder.make_predictions,
-            inputs=[n_neighbors, model, device, keep_unclassed],outputs=[result])
+            inputs=[n_neighbors, model, device, keep_unclassed],outputs=[result, annotation_file])
         
         load_clean_file.click(
             dataset_manager.create_cleaning_file, inputs=[annotation_file],

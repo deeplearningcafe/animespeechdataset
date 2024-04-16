@@ -2,6 +2,7 @@ import os
 import shutil
 import pandas as pd
 from tqdm import tqdm
+import csv
 
 from .utils import time_to_seconds
 from ..common import log
@@ -28,7 +29,8 @@ def copy_file(input_path:str=None, output_path:str=None, index:str=None, text:st
     # ファイルをコピーして、名前を変更する
     shutil.copy2(input_path, os.path.join(output_path, new_filename))
     
-    copied_file = os.path.join(output_path, new_filename)
+    # copied_file = os.path.join(output_path, new_filename)
+    copied_file = f"{output_path}/{new_filename}"
     return copied_file
 
 def audio_dataset_from_csv(csv_path:str=None, character:str=None, num_characters:int=4) -> pd.DataFrame:
@@ -141,8 +143,16 @@ def character_audios(csv_path:str=None, character:str=None, num_characters:int=4
     log.info(f"All file copied at {audio_output_path}")
     
     df = pd.DataFrame({"filename": new_names, "text": texts})
-    df_out = os.path.join(output_path, "text.list")
-    df.to_csv(df_out, index=False)
+    df_out = f"{output_path}/text_{character}.list"
+    if os.path.isfile(df_out):
+        # instead of creating we append to the existing one
+        with open(df_out, mode='a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            for i in tqdm(range(len(df)), "append to text.list file"):
+                writer.writerow(df.iloc[i, :])
+        f.close()   
+    else:
+        df.to_csv(df_out, index=False)
     log.info(f"CSV created at {df_out} with {len(df)} elements!")
     # log.info("Completed")
 

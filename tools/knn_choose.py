@@ -5,6 +5,7 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 from characterdataset.configs import load_global_config
+from characterdataset.common import log
 
 def fetch_embeddings(config):
     audio_embds_dir = os.path.join(config.finder.character_embedds, "embeddings")
@@ -38,7 +39,7 @@ def fetch_embeddings(config):
             
             labels.append(role)
 
-    print(embeddings_cls.shape, len(labels))
+    log.info(embeddings_cls.shape, len(labels))
 
 
 
@@ -74,8 +75,8 @@ def run():
             best_score = score
             best_k = k
 
-    print("Best k:", best_k)
-    print("Best silhouette score:", best_score)
+    log.info("Best k:", best_k)
+    log.info("Best silhouette score:", best_score)
 
 
     # シルエットスコアのプロット

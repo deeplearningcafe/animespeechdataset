@@ -879,7 +879,8 @@ class DatasetManager:
         return "Cleaning file created!", cleaning_name
 
     def change_predictions_files(self, predict_path:str):
-        
+        # add the data/outputs to the predict_path
+        predict_path = f"{self.output_path}/{predict_path}"
         folder_path = os.path.dirname(predict_path)
         cleaning_name = f"{folder_path}/cleaning.csv"
         
